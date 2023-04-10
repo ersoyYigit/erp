@@ -18,7 +18,10 @@ namespace ArdaManager.Application.Enums
         [Description(@"Images\Persons")]
         Person,
         
-        [Description(@"Images\Moldss")]
+        [Description(@"Images\Molds")]
         Mold,
+
+        [Description(@"Images\Docs")]
+        Doc,
     }
 }
