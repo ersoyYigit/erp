@@ -1,0 +1,102 @@
+﻿@page "/inventory/racks"
+@attribute [Authorize(Policy = Permissions.Warehouses.View)]
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Warehouses> _localizer
+@using ArdaManager.Application.Features.Racks.Queries.GetAll
+
+<style>
+    .mud-table-container {
+        overflow: auto;
+    }
+</style>
+
+<HeroTitle Title="@_localizer["Racks"]" Description="@_localizer["Manage Racks."]" />
+@if (!_loaded)
+{
+    <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+}
+else
+{
+    <MudTable Hover="true" Elevation="25" Items="_rackList" Dense="true" Bordered="true" Striped="true" Filter="new Func<GetAllRacksResponse, bool>(Search)" @bind-rack="_rack">
+        <ToolBarContent>
+            <div class="justify-center mud-text-align-center">
+                @if (_canCreateRacks)
+                {
+                    <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" Color="Color.Primary" OnClick="(() => InvokeModal())" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">@_localizer["Create"]</MudButton>
+                    <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" OnClick="GetRacksAsync" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">@_localizer["Reload"]</MudButton>
+
+                }
+                else
+                {
+                    <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" OnClick="GetRacksAsync" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">@_localizer["Reload"]</MudButton>
+
+                }
+            </div>
+            <MudSpacer />
+            @if (_canSearchRacks)
+            {
+                <MudTextField @bind-Value="_searchString" Immediate="true" Placeholder="@_localizer["Search for Racks"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0 mb-3"></MudTextField>
+            }
+        </ToolBarContent>
+        <HeaderContent>
+            
+            <MudTh><MudTableSortLabel SortBy="new Func<GetAllRacksResponse, object>(x => x.Code)">@_localizer["Code"]</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<GetAllRacksResponse, object>(x => x.Name)">@_localizer["Name"]</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<GetAllRacksResponse, object>(x => x.Section)">@_localizer["Kısım"]</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<GetAllRacksResponse, object>(x => x.SectionCode)">@_localizer["Kısım Kodu"]</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<GetAllRacksResponse, object>(x => x.WarehouseName)">@_localizer["WarehouseName"]</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<GetAllRacksResponse, object>(x => x.Description)">@_localizer["Description"]</MudTableSortLabel></MudTh>
+            
+            <MudTh Style="text-align:right">@_localizer["Actions"]</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Code">
+                <MudHighlighter Text="@context.Code" HighlightedText="@_searchString" />
+            </MudTd>
+            <MudTd DataLabel="Name">
+                <MudHighlighter Text="@context.Name" HighlightedText="@_searchString" />
+            </MudTd>
+            <MudTd DataLabel="Section">
+                <MudHighlighter Text="@context.Section" HighlightedText="@_searchString" />
+            </MudTd>
+            <MudTd DataLabel="SectionCode">
+                <MudHighlighter Text="@context.SectionCode" HighlightedText="@_searchString" />
+            </MudTd>
+            
+            <MudTd DataLabel="Warehouse">
+                <MudHighlighter Text="@context.WarehouseName" HighlightedText="@_searchString" />
+            </MudTd>
+            <MudTd DataLabel="Description">
+                <MudHighlighter Text="@context.Description" HighlightedText="@_searchString" />
+            </MudTd>
+            <MudTd DataLabel="Actions" Style="text-align: right">
+                @if (_canEditRacks || _canDeleteRacks)
+                    {
+                        @if (_canEditRacks)
+                        {
+                            <MudIconButton Elevation="10"  Color="Color.Primary" @onclick="@(() => InvokeModal(@context.Id))" Icon="@Icons.Material.Filled.Edit" ></MudIconButton>
+                        }
+                        @if (_canDeleteRacks)
+                        {
+                            <MudIconButton Elevation="10"  Color="Color.Error" @onclick="@(() => Delete(@context.Id))" Icon="@Icons.Material.Filled.Delete"></MudIconButton>
+                        }
+                    }
+                    else
+                    {
+                    <MudButton Variant="MudBlazor.Variant.Filled"
+                               DisableElevation="true"
+                               StartIcon="@Icons.Material.Filled.DoNotTouch"
+                               IconColor="Color.Secondary"
+                               Size="Size.Small"
+                               Color="Color.Surface">
+                        @_localizer["No Allowed Actions"]
+                    </MudButton>
+                    }
+            </MudTd>
+        </RowTemplate>
+        <FooterContent>
+        </FooterContent>
+        <PagerContent>
+            <TablePager />
+        </PagerContent>
+    </MudTable>
+}

@@ -1,0 +1,12 @@
+D:\Dev\ArdaManager\src\Shared\bin\Release\net6.0\ArdaManager.Shared.deps.json
+D:\Dev\ArdaManager\src\Shared\bin\Release\net6.0\ArdaManager.Shared.dll
+D:\Dev\ArdaManager\src\Shared\bin\Release\net6.0\ArdaManager.Shared.pdb
+D:\Dev\ArdaManager\src\Shared\obj\Release\net6.0\Shared.csproj.AssemblyReference.cache
+D:\Dev\ArdaManager\src\Shared\obj\Release\net6.0\Shared.GeneratedMSBuildEditorConfig.editorconfig
+D:\Dev\ArdaManager\src\Shared\obj\Release\net6.0\Shared.AssemblyInfoInputs.cache
+D:\Dev\ArdaManager\src\Shared\obj\Release\net6.0\Shared.AssemblyInfo.cs
+D:\Dev\ArdaManager\src\Shared\obj\Release\net6.0\Shared.csproj.CoreCompileInputs.cache
+D:\Dev\ArdaManager\src\Shared\obj\Release\net6.0\ArdaManager.Shared.dll
+D:\Dev\ArdaManager\src\Shared\obj\Release\net6.0\refint\ArdaManager.Shared.dll
+D:\Dev\ArdaManager\src\Shared\obj\Release\net6.0\ArdaManager.Shared.pdb
+D:\Dev\ArdaManager\src\Shared\obj\Release\net6.0\ref\ArdaManager.Shared.dll

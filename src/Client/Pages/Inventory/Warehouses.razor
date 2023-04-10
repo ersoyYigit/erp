@@ -1,0 +1,95 @@
+﻿@page "/inventory/warehouses"
+@attribute [Authorize(Policy = Permissions.Warehouses.View)]
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Warehouses> _localizer
+@using ArdaManager.Application.Features.Warehouses.Queries.GetAll
+
+<style>
+    .mud-table-container {
+        overflow: auto;
+    }
+</style>
+
+<HeroTitle Title="@_localizer["Warehouses"]" Description="@_localizer["Manage Warehouses."]" />
+@if (!_loaded)
+{
+    <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+}
+else
+{
+    <MudTable Hover="true" Elevation="25" Items="_warehouseList" Dense="true" Bordered="true" Striped="true" Filter="new Func<GetAllWarehousesResponse, bool>(Search)" @bind-warehouse="_warehouse">
+        <ToolBarContent>
+            <div class="justify-center mud-text-align-center">
+                @if (_canCreateWarehouses)
+                {
+                    <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" Color="Color.Primary" OnClick="(() => InvokeModal())" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">@_localizer["Create"]</MudButton>
+                    <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" OnClick="GetWarehousesAsync" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">@_localizer["Reload"]</MudButton>
+
+                }
+                else
+                {
+                    <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" OnClick="GetWarehousesAsync" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">@_localizer["Reload"]</MudButton>
+
+                }
+            </div>
+            <MudSpacer />
+            @if (_canSearchWarehouses)
+            {
+                <MudTextField @bind-Value="_searchString" Immediate="true" Placeholder="@_localizer["Search for Warehouses"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0 mb-3"></MudTextField>
+            }
+        </ToolBarContent>
+        <HeaderContent>
+            
+            <MudTh><MudTableSortLabel SortBy="new Func<GetAllWarehousesResponse, object>(x => x.Code)">@_localizer["Code"]</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<GetAllWarehousesResponse, object>(x => x.Name)">@_localizer["Name"]</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<GetAllWarehousesResponse, object>(x => x.RackCount)">@_localizer["RackCount"]</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<GetAllWarehousesResponse, object>(x => x.Description)">@_localizer["Description"]</MudTableSortLabel></MudTh>
+            
+            <MudTh Style="text-align:right">@_localizer["Actions"]</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Code">
+                <MudHighlighter Text="@context.Code" HighlightedText="@_searchString" />
+            </MudTd>
+            <MudTd DataLabel="Name">
+                <MudHighlighter Text="@context.Name" HighlightedText="@_searchString" />
+            </MudTd>
+            <MudTd DataLabel="Rack Count">
+                <MudHighlighter Text="@context.RackCount.ToString()" HighlightedText="@_searchString" />
+            </MudTd>
+            <MudTd DataLabel="Description">
+                <MudHighlighter Text="@context.Description" HighlightedText="@_searchString" />
+            </MudTd>
+            <MudTd DataLabel="Actions" Style="text-align: right">
+                @if (_canEditWarehouses || _canDeleteWarehouses)
+                    {
+                    <MudMenu Label="@_localizer["Actions"]" Variant="MudBlazor.Variant.Filled" DisableElevation="true" EndIcon="@Icons.Filled.KeyboardArrowDown" IconColor="Color.Secondary" Direction="Direction.Left" OffsetX="true">
+                        @if (_canEditWarehouses)
+                            {
+                            <MudMenuItem @onclick="@(() => InvokeModal(@context.Id))">@_localizer["Edit"]</MudMenuItem>
+                            }
+                        @if (_canDeleteWarehouses)
+                            {
+                            <MudMenuItem @onclick="@(() => Delete(@context.Id))">@_localizer["Delete"]</MudMenuItem>
+                            }
+                    </MudMenu>
+                    }
+                    else
+                    {
+                    <MudButton Variant="MudBlazor.Variant.Filled"
+                               DisableElevation="true"
+                               StartIcon="@Icons.Material.Filled.DoNotTouch"
+                               IconColor="Color.Secondary"
+                               Size="Size.Small"
+                               Color="Color.Surface">
+                        @_localizer["No Allowed Actions"]
+                    </MudButton>
+                    }
+            </MudTd>
+        </RowTemplate>
+        <FooterContent>
+        </FooterContent>
+        <PagerContent>
+            <TablePager />
+        </PagerContent>
+    </MudTable>
+}

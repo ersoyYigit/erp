@@ -1,0 +1,163 @@
+﻿@using ArdaManager.Application.Features.Currencies.Queries;
+@using ArdaManager.Application.Features.MeasurementUnits.Queries.GetAll;
+@using ArdaManager.Application.Features.Taxes.Queries;
+
+
+<EditForm Model="@UpsertPurchaseOrderModel" OnValidSubmit="SaveAsync">
+    <FluentValidationValidator @ref="_fluentValidationValidator" />
+    <MudDialog>
+        <TitleContent>
+            @{
+                if (UpsertPurchaseOrderModel.Id == 0)
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.Add" Class="mr-3 mb-n1" />
+                        Yeni Satın alma teklifi oluştur
+                    </MudText>
+                }
+                else
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.Update" Class="mr-3 mb-n1" />
+                        Satın alma teklifi güncelle
+                    </MudText>
+                }
+            }
+        </TitleContent>
+        <DialogContent>
+            <MudPaper Elevation="3">
+                <MudContainer MaxWidth="@MaxWidth.ExtraLarge">
+
+                    <MudGrid>
+                        <MudItem xs="12" md="6">
+                            <MudTextField T="string" For="@(() => UpsertPurchaseOrderModel.DocNo)" @bind-Value="UpsertPurchaseOrderModel.DocNo" Label="Doküman No" />
+                        </MudItem>
+                        <MudItem xs="12" md="6">
+                            <MudDatePicker For="@(() => UpsertPurchaseOrderModel.DocDate)" @bind-Date="UpsertPurchaseOrderModel.DocDate" Label="Doküman Tarihi" />
+                        </MudItem>
+                        <MudItem xs="12" md="6">
+                            <MudTextField For="@(() => UpsertPurchaseOrderModel.Description)" @bind-Value="UpsertPurchaseOrderModel.Description" Label="Açıklama" />
+                        </MudItem>
+
+                        <MudItem xs="12" md="6">
+                            <MudTextField For="@(() => UpsertPurchaseOrderModel.RequesterDepartment)" @bind-Value="UpsertPurchaseOrderModel.RequesterDepartment" Label="Departman" />
+                        </MudItem>
+                        <MudItem xs="12" md="6">
+                            <MudTextField T="string" Label="İlgili Sipariş" ReadOnly="true" />
+                        </MudItem>
+                        <MudItem xs="12" md="6">
+                            <MudSelect T="int" ToStringFunc="@(id => _currencies.FirstOrDefault(c => c.Id == id)?.Code ?? string.Empty)" @bind-Value="UpsertPurchaseOrderModel.CurrencyId" SelectedValuesChanged="CurrencyChanged" Dense="false">
+                                @foreach (GetAllCurrenciesResponse item in _currencies)
+                                {
+                                    <MudSelectItem Value="@item.Id">@item.Code</MudSelectItem>
+                                }
+                            </MudSelect>
+                        </MudItem>
+
+
+                        <MudItem xs="12" md="6">
+                            <MudTextField @bind-Value="@UpsertPurchaseOrderModel.CompanyName" Placeholder="Firma Seçin" OnKeyDown="@(async (KeyboardEventArgs e) => await OpenCompanyDialogOnF4Code(e, UpsertPurchaseOrderModel))" AdornmentIcon="@Icons.Material.Outlined.ManageSearch" Adornment="MudBlazor.Adornment.End" OnAdornmentClick="(async () => await OpenCompanySearchDialog(UpsertPurchaseOrderModel.CompanyName, UpsertPurchaseOrderModel))" />
+                        </MudItem>
+                        @if (UpsertPurchaseOrderModel.Id == 0)
+                        {
+
+                            <MudItem xs="12" md="6">
+                                <MudTextField @bind-Value="@UpsertPurchaseOrderModel.PrevDocNo" Placeholder="Teklif Seçin"
+                                          OnKeyDown="@(async (KeyboardEventArgs e) => await OpenRequestPickerDialogOnF4Code(e, UpsertPurchaseOrderModel))" AdornmentIcon="@Icons.Material.Outlined.ManageSearch" Adornment="MudBlazor.Adornment.End"
+                                          OnAdornmentClick="(async () => await OpenRequestPickerDialog(UpsertPurchaseOrderModel.PrevDocNo, UpsertPurchaseOrderModel))" />
+                            </MudItem>
+                        }
+                    </MudGrid>
+                </MudContainer>
+            </MudPaper>
+            <MudTable Items="@UpsertPurchaseOrderModel.PurchaseOrderRowResponse" Hover="true" Dense="true" Class="minimize-table">
+                @*
+                <ColGroup>
+
+                <col style="width: 12%;">
+                <col style="width: 27%;">
+                <col style="width: 12%;">
+                <col style="width: 8%;">
+                <col style="width: 13%;">
+                <col style="width: 16%;">
+                <col style="width: 8%;">
+                </ColGroup>
+                *@
+                <HeaderContent>
+
+                    <MudTh>Ürün Kodu</MudTh>
+                    <MudTh>Ürün Adı</MudTh>
+                    <MudTh>Miktar</MudTh>
+                    <MudTh>Birim</MudTh>
+                    <MudTh>Fiyat</MudTh>
+                    <MudTh>Para Birimi</MudTh>
+                    <MudTh>Kur</MudTh>
+                    <MudTh>Vergi Dilimi</MudTh>
+                    <MudTh>Açıklama</MudTh>
+                    <MudTh>Aksiyonlar</MudTh>
+                </HeaderContent>
+                <RowTemplate Context="rowCtx">
+                    <MudTd>
+                        <MudTextField Required="true" RequiredError="Ürün Kodu Gereklidir!" @bind-Value="@rowCtx.ProductCode" OnKeyDown="@(async (KeyboardEventArgs e) => await OpenProductSearchDialogOnF4Code(e, rowCtx))" AdornmentIcon="@Icons.Material.Outlined.ManageSearch" Adornment="MudBlazor.Adornment.End" OnAdornmentClick="(async () => await OpenSearchDialog(rowCtx.ProductCode, rowCtx))" />
+                    </MudTd>
+                    <MudTd>
+                        <MudTextField Required="true" RequiredError="Ürün Adı Gereklidir!" @bind-Value="@rowCtx.ProductName" OnKeyDown="@(async (KeyboardEventArgs e) => await OpenProductSearchDialogOnF4Name(e, rowCtx))" AdornmentIcon="@Icons.Material.Outlined.ManageSearch" Adornment="MudBlazor.Adornment.End" OnAdornmentClick="(async () => await OpenSearchDialog(rowCtx.ProductName, rowCtx))" />
+                    </MudTd>
+                    <MudTd>
+                        <MudNumericField Required="true" RequiredError="Miktar Gereklidir!" @bind-Value="@rowCtx.Quantity" Format="N4" HideSpinButtons="true" />
+                    </MudTd>
+                    <MudTd>
+                        <MudSelect T="int" ToStringFunc="@(id => _measurementUnits.FirstOrDefault(c => c.Id == id)?.Code ?? string.Empty)" @bind-Value="rowCtx.MeasurementUnitId" Dense="false">
+                            @foreach (GetAllMeasurementUnitsResponse item in _measurementUnits.Where(x => rowCtx.MeasurementUnitSystem == null || x.System == rowCtx.MeasurementUnitSystem))
+                            {
+                                <MudSelectItem Value="@item.Id">@item.Code</MudSelectItem>
+                            }
+                        </MudSelect>
+                    </MudTd>
+
+                    <MudTd>
+                        <MudNumericField Required="true" RequiredError="Fiyat Gereklidir!" @bind-Value="@rowCtx.Price" Format="N4" HideSpinButtons="true" />
+                    </MudTd>
+                    <MudTd>
+                        <MudSelect T="int" ToStringFunc="@(id => _currencies.FirstOrDefault(c => c.Id == id)?.Code ?? string.Empty)" @bind-Value="rowCtx.CurrencyId" Dense="false" ReadOnly="true">
+                            @foreach (GetAllCurrenciesResponse item in _currencies)
+                            {
+                                <MudSelectItem Value="@item.Id">@item.Code</MudSelectItem>
+                            }
+                        </MudSelect>
+                    </MudTd>
+                    <MudTd>
+                        <MudNumericField Required="true" RequiredError="Kur Gereklidir!" @bind-Value="@rowCtx.ExchangeRate" Format="N4" HideSpinButtons="true" />
+                    </MudTd>
+                    <MudTd>
+                        <MudSelect T="int" ToStringFunc="@(id => _taxes.FirstOrDefault(c => c.Id == id)?.Code ?? string.Empty)" @bind-Value="rowCtx.TaxId" Dense="false">
+                            @foreach (GetAllTaxesResponse item in _taxes)
+                            {
+                                <MudSelectItem Value="@item.Id">@item.Code</MudSelectItem>
+                            }
+                        </MudSelect>
+                    </MudTd>
+                    <MudTd>
+                        <MudTextField @bind-Value="@rowCtx.Description" OnBlur="@OnDescriptionFieldBlur" />
+                    </MudTd>
+
+                    <MudTd>
+                        <MudIconButton Icon="@Icons.Material.Filled.Delete" OnClick="@(async () => await DeleteRow(rowCtx))" tabindex="-1" />
+                    </MudTd>
+                </RowTemplate>
+            </MudTable>
+            <MudButton Class="table-add-button" Variant="MudBlazor.Variant.Outlined" StartIcon="@Icons.Material.Filled.Add" Disabled="@(!Validated)" OnClick="AddRow" FullWidth="true" Color="Color.Primary">Satır Ekle</MudButton>
+        </DialogContent>
+        <DialogActions>
+            <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" OnClick="Cancel">İptal</MudButton>
+            @if (UpsertPurchaseOrderModel.Id != 0)
+            {
+                <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" ButtonType="MudBlazor.ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Secondary">Güncelle</MudButton>
+            }
+            else
+            {
+                <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" ButtonType="MudBlazor.ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Success">Kaydet</MudButton>
+            }
+        </DialogActions>
+    </MudDialog>
+</EditForm>

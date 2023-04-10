@@ -1,0 +1,155 @@
+﻿@using ArdaManager.Application.Features.MeasurementUnits.Queries.GetAll;
+@using ArdaManager.Application.Responses.Identity;
+@using ArdaManager.Domain.Enums.Doc;
+@using ArdaManager.Domain.Entities.Transactions.WarehouseDocs;
+@using ArdaManager.Application.Features.Docs.WarehouseReceipts.Queries.GetAll;
+@inject Microsoft.Extensions.Localization.IStringLocalizer<AddEditWarehouseExitReceiptModal> _localizer
+
+<EditForm Model="@AddEditWarehouseExitReceiptModel" OnValidSubmit="SaveAsync">
+    <FluentValidationValidator @ref="_fluentValidationValidator" />
+    <MudDialog>
+        <TitleContent>
+            @{
+                if (AddEditWarehouseExitReceiptModel.Id == 0)
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.Add" Class="mr-3 mb-n1" />
+                        @_localizer["Yeni Depo Fişi ekle"]
+                    </MudText>
+                }
+                else
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.Update" Class="mr-3 mb-n1" />
+                        @_localizer["Depo Fişi Düzenle"]
+                    </MudText>
+                }
+            }
+        </TitleContent>
+        <DialogContent>
+
+            <MudContainer Style="overflow-y: scroll; padding-bottom: 13px;" MaxWidth="MaxWidth.ExtraExtraLarge">
+                <MudGrid>
+
+                    <MudItem xs="12" md="6">
+                        <MudTextField T="string" For="@(() => AddEditWarehouseExitReceiptModel.DocNo)" @bind-Value="AddEditWarehouseExitReceiptModel.DocNo" Label="@_localizer["Doküman No"]" />
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudDatePicker @bind-Date="AddEditWarehouseExitReceiptModel.DocDate" Label="@_localizer["Doküman Tarihi"]" />
+                    </MudItem>
+
+
+                   
+                    <MudItem xs="12" md="6">
+                        @if (isLoading)
+                        {
+                            <MudProgressCircular Color="Color.Primary" Indeterminate="true" Class="my-7" />
+                        }
+                        else
+                        {
+                            <MudAutocomplete T="int" Label="@_localizer["Depo"]" For="@(() => AddEditWarehouseExitReceiptModel.WarehouseId)" @bind-Value="AddEditWarehouseExitReceiptModel.WarehouseId"
+                                         SearchFunc="@SearchWarehouses" ToStringFunc="@(i => _warehouses.FirstOrDefault(b => b.Id == i)?.Name ?? string.Empty)"
+                                         OffsetY="true" />
+                        }
+                    </MudItem>
+                    @if (AddEditWarehouseExitReceiptModel.WarehouseId == null || AddEditWarehouseExitReceiptModel.WarehouseId == 0)
+                    {
+                        <MudItem xs="12" md="4">
+                            <MudButton Disabled="true" Elevation="10" Variant="MudBlazor.Variant.Filled" Color="Color.Primary" @onclick="@(() => AddNewRow())" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">@_localizer["Satır Ekle"]</MudButton>
+                        </MudItem>
+                    }
+                    else
+                    {
+                        <MudItem xs="12" md="4">
+                            <MudButton Elevation="10" Variant="MudBlazor.Variant.Filled" Color="Color.Primary" @onclick="@(() => AddNewRow())" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">@_localizer["Satır Ekle"]</MudButton>
+                        </MudItem>
+                    }
+
+                </MudGrid>
+
+                <MudPaper Style="max-height:45vh;min-height:45vh; overflow:scroll; padding-bottom: 13px; padding-top: 15px;" Id="rowContainer" Elevation="25">
+                    @if (isLoading)
+                    {
+                        <MudProgressCircular Color="Color.Primary" Indeterminate="true" Class="my-7" />
+                    }
+                    else
+                    {
+                        <MudTable Items="@AddEditWarehouseExitReceiptModel.WarehouseReceiptRowsDto" @ref="_rowItemsTable" Dense="true" Hover="true" Class="receipt-rows">
+
+                            <ColGroup>
+                                <col style="width:37%;" />
+                                <col style="width:17%;" />
+                                <col style="width:16%;" />
+                                <col style="width:20%;" />
+                                <col style="width:10%;" />
+                            </ColGroup>
+                            <HeaderContent>
+                                <MudTh><MudTableSortLabel T="WarehouseReceiptRowsDto">@_localizer["Ürün"]</MudTableSortLabel></MudTh>
+                                <MudTh><MudTableSortLabel T="WarehouseReceiptRowsDto">@_localizer["Adet"]</MudTableSortLabel></MudTh>
+                                <MudTh><MudTableSortLabel T="WarehouseReceiptRowsDto">@_localizer["Birim"]</MudTableSortLabel></MudTh>
+                                <MudTh><MudTableSortLabel T="WarehouseReceiptRowsDto">@_localizer["Raf"]</MudTableSortLabel></MudTh>
+                                <MudTh Style="text-align:right">@_localizer["Eylemler"]</MudTh>
+
+                            </HeaderContent>
+                            <RowTemplate Context="ctx">
+                                <MudTd DataLabel="Name" Style="reset-padding-bt">
+                                    <MudAutocomplete T="int" For="@(() => ctx.ProductId)" @bind-Value="ctx.ProductId" Margin="Margin.Dense"
+                                                 ResetValueOnEmptyText="true" SearchFunc="@SearchProducts" ToStringFunc="@(id => _productsData.FirstOrDefault(c => c.Id == id)?.CodeAndName ?? string.Empty)"
+                                                 OffsetY="true" AdornmentIcon="@Icons.Material.Filled.Search" AdornmentColor="Color.Primary"
+                                                 Validation="@(new Func<string, IEnumerable<string>>(ValidateProducts))" />
+                                </MudTd>
+                                <MudTd DataLabel="Quantity" Style="reset-padding-bt" Margin="Margin.Dense">
+                                    <MudNumericField T="decimal" @bind-Value="@ctx.Quantity" />
+                                </MudTd>
+                                <MudTd DataLabel="MeasurementUnitCode" Style="reset-padding-bt">
+                                    @*
+
+                                <MudAutocomplete T="int" For="@(() => ctx.MeasurementUnitId)" @bind-Value="ctx.MeasurementUnitId" Margin="Margin.Dense"
+                                ResetValueOnEmptyText="true" SearchFunc="@SearchMeasurementUnits" ToStringFunc="@(id => _measurementUnits.FirstOrDefault(c => c.Id == id)?.Code ?? string.Empty)"
+                                OffsetY="true" AdornmentIcon="@Icons.Material.Filled.Search" AdornmentColor="Color.Primary"
+                                Validation="@(new Func<string, IEnumerable<string>>(ValidateMeasurementUnit))" />
+                                *@
+
+                                    <MudSelect T="int" Label="@_localizer["Ölçü Birimi"]" ToStringFunc="@(id => _measurementUnits.FirstOrDefault(c => c.Id == id)?.Code ?? string.Empty)" @bind-Value="ctx.MeasurementUnitId">
+                                        @foreach (GetAllMeasurementUnitsResponse item in _measurementUnits.Where(x => x.System ==
+                                    (_measurementUnits.Where(m => m.Id ==
+                                    (_productsData.Where(p => p.Id == ctx.ProductId).First().MeasurementUnitId)).First().System
+                                    )
+                                    )
+                                    )
+                                        {
+                                            <MudSelectItem Value="@item.Id">@item.Name</MudSelectItem>
+                                        }
+                                    </MudSelect>
+                                </MudTd>
+                                <MudTd DataLabel="RackCode" Style="reset-padding-bt">
+                                    <MudAutocomplete T="int" For="@(() => ctx.RackId)" @bind-Value="ctx.RackId"
+                                                 ResetValueOnEmptyText="true" SearchFunc="@SearchRacks" ToStringFunc="@(id => _rackList.FirstOrDefault(c => c.Id == id)?.Name ?? string.Empty)"
+                                                 OffsetY="true" AdornmentIcon="@Icons.Material.Filled.Search" AdornmentColor="Color.Primary"
+                                                 Validation="@(new Func<string, IEnumerable<string>>(ValidateRacks))" />
+                                </MudTd>
+                                <MudTd>
+                                    <MudButton @onclick="@(() => Delete(ctx))" Color="Color.Error">@_localizer["Sil"]</MudButton>
+                                </MudTd>
+                            </RowTemplate>
+
+                        </MudTable>
+                    }
+                </MudPaper>
+
+            </MudContainer>
+
+        </DialogContent>
+        <DialogActions>
+            <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" OnClick="Cancel">@_localizer["Cancel"]</MudButton>
+            @if (AddEditWarehouseExitReceiptModel.Id != 0)
+            {
+                <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" ButtonType="MudBlazor.ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Secondary">@_localizer["Güncelle"]</MudButton>
+            }
+            else
+            {
+                <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" ButtonType="MudBlazor.ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Success">@_localizer["Kaydet"]</MudButton>
+            }
+        </DialogActions>
+    </MudDialog>
+</EditForm>

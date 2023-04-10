@@ -1,0 +1,12 @@
+D:\Dev\ArdaManager\src\Domain\bin\Release\net6.0\ArdaManager.Domain.deps.json
+D:\Dev\ArdaManager\src\Domain\bin\Release\net6.0\ArdaManager.Domain.dll
+D:\Dev\ArdaManager\src\Domain\bin\Release\net6.0\ArdaManager.Domain.pdb
+D:\Dev\ArdaManager\src\Domain\obj\Release\net6.0\Domain.csproj.AssemblyReference.cache
+D:\Dev\ArdaManager\src\Domain\obj\Release\net6.0\Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\Dev\ArdaManager\src\Domain\obj\Release\net6.0\Domain.AssemblyInfoInputs.cache
+D:\Dev\ArdaManager\src\Domain\obj\Release\net6.0\Domain.AssemblyInfo.cs
+D:\Dev\ArdaManager\src\Domain\obj\Release\net6.0\Domain.csproj.CoreCompileInputs.cache
+D:\Dev\ArdaManager\src\Domain\obj\Release\net6.0\ArdaManager.Domain.dll
+D:\Dev\ArdaManager\src\Domain\obj\Release\net6.0\refint\ArdaManager.Domain.dll
+D:\Dev\ArdaManager\src\Domain\obj\Release\net6.0\ArdaManager.Domain.pdb
+D:\Dev\ArdaManager\src\Domain\obj\Release\net6.0\ref\ArdaManager.Domain.dll

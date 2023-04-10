@@ -1,0 +1,19 @@
+﻿@using MudBlazor
+@using ArdaManager.Application.Features.MeasurementUnits.Queries.GetAll;
+
+
+
+    <MudNumericField T="decimal" @bind-Value="Value" Class="numeric-field" Adornment="MudBlazor.Adornment.End" AdornmentText=" ">
+        <MudSelect T="int" @bind-Value="SelectedMeasuremenUnitId" Variant="MudBlazor.Variant.Text" Class="unit-select" Dense="true">
+            @foreach (GetAllMeasurementUnitsResponse unit in MeasuremenUnits)
+            {
+                <MudSelectItem Value="@unit.Id">@unit.Code</MudSelectItem>
+            }
+        </MudSelect>
+    </MudNumericField>
+
+@code {
+    [Parameter] public decimal Value { get; set; }
+    [Parameter] public int SelectedMeasuremenUnitId { get; set; }
+    [Parameter] public List<GetAllMeasurementUnitsResponse> MeasuremenUnits { get; set; } = new List<GetAllMeasurementUnitsResponse>();
+}

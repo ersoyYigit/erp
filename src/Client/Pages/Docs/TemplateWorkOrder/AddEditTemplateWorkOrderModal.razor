@@ -1,0 +1,196 @@
+﻿@using ArdaManager.Application.Responses.Identity;
+@using ArdaManager.Domain.Enums.Doc;
+@inject Microsoft.Extensions.Localization.IStringLocalizer<AddEditTemplateWorkOrderModal> _localizer
+
+@using Radzen
+@using Radzen.Blazor
+
+<EditForm Model="@AddEditTemplateWorkOrderModel" OnValidSubmit="SaveAsync">
+    <FluentValidationValidator @ref="_fluentValidationValidator" />
+    <MudDialog>
+        <TitleContent>
+            @{
+                if (AddEditTemplateWorkOrderModel.Id == 0)
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.Add" Class="mr-3 mb-n1" />
+                        @_localizer["Yeni Kalıp İş Emri ekle"]
+                    </MudText>
+                }
+                else
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.Update" Class="mr-3 mb-n1" />
+                        @_localizer["Kalıp İş Emri Düzenle"]
+                    </MudText>
+                }
+            }
+        </TitleContent>
+        <DialogContent>
+             <MudContainer Style="max-height: 600px; overflow-y: scroll">
+                <MudGrid>
+
+                    <MudItem xs="12" md="6">
+                        <MudTextField T="string" For="@(() => AddEditTemplateWorkOrderModel.DocNo)" @bind-Value="AddEditTemplateWorkOrderModel.DocNo" Label="@_localizer["Doküman No"]" />
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudDatePicker @bind-Date="AddEditTemplateWorkOrderModel.DocDate" Label="@_localizer["Doküman Tarihi"]" />
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudSelect T="string" @bind-Value="AddEditTemplateWorkOrderModel.ResponseUserId" SelectedValuesChanged="ResponUserChanged" ToStringFunc="@(id => _userList.FirstOrDefault(c => c.Id == id)?.FullName ?? string.Empty)" Label="@_localizer["Sorumlu"]">
+                            @foreach (UserResponse item in _userList)
+                            {
+                                <MudSelectItem Value="@item.Id">@item.FullName</MudSelectItem>
+                            }
+                        </MudSelect>
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudSelect Disabled="true" T="string" @bind-Value="AddEditTemplateWorkOrderModel.OwnerUserId" ToStringFunc="@(id => _userList.FirstOrDefault(c => c.Id == id)?.FullName ?? string.Empty)" Label="@_localizer["Talep Sahibi"]">
+                            @foreach (UserResponse item in _userList)
+                            {
+                                <MudSelectItem Value="@item.Id">@item.FullName</MudSelectItem>
+                            }
+                        </MudSelect>
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudDatePicker @ref="_pickerPS" @bind-Date="AddEditTemplateWorkOrderModel.PlannedWorkStartDate" TextChanged="TextChanged" Label="@_localizer["Planlanan İş Başlangıcı"]" AutoClose="true">
+                            <PickerActions Context="ctP1">
+                                <MudButton Class="mr-auto align-self-start" OnClick="@(() => _pickerPS.Clear())">Temizle</MudButton>
+                            </PickerActions>
+                        </MudDatePicker>
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudDatePicker @ref="_pickerPE" @bind-Date="AddEditTemplateWorkOrderModel.PlannedWorkEndDate" TextChanged="TextChanged" Label="@_localizer["Planlanan İş Bitişi"]" AutoClose="true">
+                            <PickerActions Context="ctP2">
+                                <MudButton Class="mr-auto align-self-start" OnClick="@(() => _pickerPE.Clear())">Temizle</MudButton>
+                            </PickerActions>
+                        </MudDatePicker>
+                    </MudItem>
+
+                    <MudItem xs="12" md="6">
+                        <MudDatePicker @ref="_pickerS" @bind-Date="AddEditTemplateWorkOrderModel.WorkStartDate" TextChanged="TextChanged" Label="@_localizer["İş Başlangıcı"]"  AutoClose="true">
+                            <PickerActions Context="ctP3">
+                                <MudButton Class="mr-auto align-self-start" OnClick="@(() => _pickerS.Clear())">Temizle</MudButton>
+                            </PickerActions>
+                        </MudDatePicker>
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudDatePicker @ref="_pickerE" @bind-Date="AddEditTemplateWorkOrderModel.WorkEndDate" TextChanged="TextChanged" Label="@_localizer["İş Bitişi"]"  AutoClose="true">
+                            <PickerActions Context="ctP4">
+                                <MudButton Class="mr-auto align-self-start" OnClick="@(() => _pickerE.Clear())">Temizle</MudButton>
+                            </PickerActions>
+                        </MudDatePicker>
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudSelect T="TemplateWorkOrderType" SelectedValuesChanged="WorkTypeChanged" @bind-Value="AddEditTemplateWorkOrderModel.TemplateWorkOrderType" Label="@_localizer["İş Tipi"]">
+                            @foreach (TemplateWorkOrderType item in Enum.GetValues(typeof(TemplateWorkOrderType)))
+                            {
+                                <MudSelectItem Value="@item">@item.ToDescriptionString()</MudSelectItem>
+                            }
+                        </MudSelect>
+                    </MudItem>
+
+                    <MudItem xs="12" md="6">
+                        <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Kalıp</RadzenText>
+                        @if(waitTemplates)
+                        {
+
+                            <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-7" />
+                        }
+                        else
+                        {
+                            <RadzenDropDownDataGrid  TValue="int" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" FilterOperator="StringFilterOperator.StartsWith" Placeholder="Kalıp Seçiniz"
+                                                AllowFiltering="true" AllowClear="true" Data=@_templatesData TextProperty="Code" ValueProperty="Id" @bind-Value="AddEditTemplateWorkOrderModel.TemplateId"
+                                                Style="width: 100%" Change=@(args => OnChangetmpDDL(args))>
+                                
+                                <Columns>
+                                    <RadzenDropDownDataGridColumn Property="Code" Title="Kalıp Kodu" Width="100px" />
+                                    <RadzenDropDownDataGridColumn Property="Name" Title="Kalıp Adı" Width="180px" />
+                                    
+                                </Columns>
+                            </RadzenDropDownDataGrid>
+                        }
+                    </MudItem>
+
+                    <MudItem xs="12" md="6" hidden="@(!isRework)">
+                        <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Üretim Bandı</RadzenText>
+                        @if(waitRework)
+                        {
+
+                            <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-7" />
+                        }
+                        else
+                        {
+                            <RadzenDropDownDataGrid TValue="int?" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" FilterOperator="StringFilterOperator.StartsWith" Placeholder="Üretim Bandı Seçiniz"
+                                                    AllowFiltering="true" AllowClear="true" Data=@_productionLinesData TextProperty="Code" ValueProperty="Id" @bind-Value="AddEditTemplateWorkOrderModel.ProductionLineId"
+                                                    Style="width: 100%" AllowColumnResize="true" AllowFilteringByAllStringColumns="true">
+                                    <Columns>
+                                    <RadzenDropDownDataGridColumn Property="Code" Title="Bant Kodu" Width="100px" />
+                                    <RadzenDropDownDataGridColumn Property="Name" Title="Bant Adı" Width="180px" />
+                                    </Columns>
+                            </RadzenDropDownDataGrid>
+                        }
+                    </MudItem>
+
+                    <MudItem xs="12" md="6"  hidden="@(!isRework)">
+                        <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Döküm</RadzenText>
+                        @if(waitRework)
+                        {
+
+                            <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-7" />
+                        }
+                        else
+                        {
+                            <RadzenDropDownDataGrid TValue="int?" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" FilterOperator="StringFilterOperator.StartsWith" Placeholder="Döküm Seçiniz"
+                                                    AllowFiltering="true" AllowClear="true" Data=@_moldsData TextProperty="Code" ValueProperty="Id" @bind-Value="AddEditTemplateWorkOrderModel.ConsumeProductId"
+                                                    Style="width: 100%" AllowColumnResize="true" AllowFilteringByAllStringColumns="true">
+                                <Columns>
+                                    <RadzenDropDownDataGridColumn Property="Code" Title="Döküm Kodu" Width="120px" />
+                                    <RadzenDropDownDataGridColumn Property="Name" Title="Döküm Adı" Width="120px" />
+                                    <RadzenDropDownDataGridColumn Property="IsNew" Title="Durumu" Width="100px">
+                                        <Template Context="ctx">
+                                            @((ctx.IsNew)? "Yeni" :  "Çıkma")
+                                        </Template>
+                                    </RadzenDropDownDataGridColumn>
+                                        
+                                    <RadzenDropDownDataGridColumn Property="SupplierCompany" Title="Tedarikçi" Width="120px" />
+                                    <RadzenDropDownDataGridColumn Property="ProductionDate" Title="İlk Üretim" Width="120px">
+                                        
+                                        <Template Context="ctx">
+                                            @(ctx.ProductionDate.ToString("dd/MM/yyy"))
+                                        </Template>
+                                    </RadzenDropDownDataGridColumn>
+                                </Columns>
+                            </RadzenDropDownDataGrid>
+                        }
+                    </MudItem>
+                    
+
+                    <MudItem xs="12" md="6">
+                        <MudSelect T="TemplateWorkOrderState" @bind-Value="AddEditTemplateWorkOrderModel.TemplateWorkOrderState" Label="@_localizer["Durum"]">
+                            @foreach (TemplateWorkOrderState item in Enum.GetValues(typeof(TemplateWorkOrderState)))
+                            {
+                                <MudSelectItem Value="@item">@item.ToDescriptionString()</MudSelectItem>
+                            }
+                        </MudSelect>
+                    </MudItem>
+
+
+                </MudGrid>
+            </MudContainer>
+
+
+        </DialogContent>
+        <DialogActions>
+            <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" OnClick="Cancel">@_localizer["Cancel"]</MudButton>
+            @if (AddEditTemplateWorkOrderModel.Id != 0)
+            {
+                <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" ButtonType="MudBlazor.ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Secondary">@_localizer["Güncelle"]</MudButton>
+            }
+            else
+            {
+                <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" ButtonType="MudBlazor.ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Success">@_localizer["Kaydet"]</MudButton>
+            }
+        </DialogActions>
+    </MudDialog>
+</EditForm>

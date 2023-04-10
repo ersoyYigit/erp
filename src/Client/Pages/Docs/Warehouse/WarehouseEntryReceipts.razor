@@ -1,0 +1,163 @@
+﻿@page "/catalog/warehouseEntryReceipts"
+@page "/catalog/warehouseEntryReceipts/{Id:int}"
+@using ArdaManager.Application.Features.Docs.WarehouseReceipts.Queries.GetAll;
+
+
+@inject Microsoft.Extensions.Localization.IStringLocalizer<WarehouseEntryReceipts> _localizer
+
+
+@* Add other required using statements here based on your project structure and dependencies *@
+@* ... *@
+
+<HeroTitle Title="Depo Giriş Fişleri" Description="Depo giriş fişlerini yönetin." />
+@if (!_loaded)
+{
+    <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+}
+else
+{
+
+    <MudDataGrid T="GetAllWarehouseReceiptsResponse" Items="@_warehouseReceiptList" SortMode="SortMode.Multiple" Filterable="true">
+        <ToolBarContent>
+            @if (_canCreateWarehouseReceipts)
+            {
+                <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" Color="Color.Primary" OnClick="(() => InvokeModal())" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">Ekle</MudButton>
+                <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" OnClick="GetWarehouseReceiptsAsync" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">Yenile</MudButton>
+            }
+            else
+            {
+                <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" OnClick="GetWarehouseReceiptsAsync" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">Yenile]</MudButton>
+
+            }
+
+            @*
+        <MudSpacer />
+        <MudTextField @bind-Value="_searchString" Placeholder="Search" Adornment="Adornment.Start" Immediate="true"
+        AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>*@
+        </ToolBarContent>
+        <Columns>
+            <HierarchyColumn T="GetAllWarehouseReceiptsResponse" />
+            <PropertyColumn Property="x => x.DocNo" Title="Doküman No" />
+            <TemplateColumn Title="Evrak Tarihi" Filterable="false">
+                <CellTemplate>
+                    @if (context.Item.DocDate.HasValue)
+                    {
+                        @context.Item.DocDate.Value.ToString("dd/MM/yyyy")
+                        ;
+                    }
+                </CellTemplate>
+            </TemplateColumn>
+            <PropertyColumn Property="x => x.RelatedCompanyName" Title="Tedarikçi Firma" />
+            <PropertyColumn Property="x => x.Description" Title="Açıklama" />
+            <TemplateColumn CellClass="d-flex justify-end">
+                <CellTemplate>
+                    <MudStack Row>
+                        <MudIconButton Elevation="10" Color="Color.Primary" @onclick="@(() => InvokeModal(context.Item.Id))" Icon="@Icons.Material.Filled.Edit"></MudIconButton>
+                        <MudIconButton Elevation="10" Color="Color.Error" @onclick="@(() => Delete(@context.Item.Id))" Icon="@Icons.Material.Filled.Delete"></MudIconButton>
+                    </MudStack>
+                </CellTemplate>
+            </TemplateColumn>
+        </Columns>
+        <ChildRowContent>
+            <MudDataGrid T="WarehouseReceiptRowsDto" Items="@context.Item.WarehouseReceiptRowsDto" ReadOnly="true" Class="custom-datagrid">
+                <Columns>
+                    <PropertyColumn Property="d => d.ProductCode" Title="Ürün Kodu" />
+                    <PropertyColumn Property="d => d.ProductName" Title="Ürün Adı" />
+                    <TemplateColumn Title="Miktar">
+                        <CellTemplate Context="detail">
+                            @($"{detail.Item.Quantity.ToString("N4")} {detail.Item.MeasurementUnitCode}")
+                        </CellTemplate>
+                    </TemplateColumn>
+                    <PropertyColumn Property="d => d.Description" Title="Açıklama" />
+                </Columns>
+            </MudDataGrid>
+        </ChildRowContent>
+        <PagerContent>
+            <MudDataGridPager T="GetAllWarehouseReceiptsResponse" />
+        </PagerContent>
+    </MudDataGrid>
+}
+@*
+<style>
+    .mud-table-container {
+        overflow: auto;
+    }
+</style>
+
+<HeroTitle Title="@_localizer["Depo Fişleri "]" Description="@_localizer["Depo Fişilerini yönetin"]" />
+@if (!_loaded)
+{
+    <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+}
+else
+{
+    <MudTable Hover="true" Elevation="25" Items="_warehouseReceiptList" Dense="true" Bordered="true" Striped="true" Filter="new Func<GetAllWarehouseReceiptsResponse, bool>(Search)" @bind-warehouseReceipt="_warehouseReceipt">
+        <ToolBarContent>
+            <div class="justify-center mud-text-align-center">
+                @if (_canCreateWarehouseReceipts)
+                {
+                    <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" Color="Color.Primary" OnClick="(() => InvokeModal())" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">@_localizer["Ekle"]</MudButton>
+                    <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" OnClick="GetWarehouseReceiptsAsync" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">@_localizer["Yenile"]</MudButton>
+                }
+                else
+                {
+                    <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" OnClick="GetWarehouseReceiptsAsync" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">@_localizer["Yenile"]</MudButton>
+
+                }
+            </div>
+            <MudSpacer />
+            @if (true)
+            {
+                <MudTextField @bind-Value="_searchString" Immediate="true" Placeholder="@_localizer["Kalıp iş emirlerinde ara "]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0 mb-3"></MudTextField>
+            }
+        </ToolBarContent>
+        <HeaderContent>
+            <MudTh><MudTableSortLabel SortBy="new Func<GetAllWarehouseReceiptsResponse, object>(x => x.Id)">@_localizer["Id"]</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<GetAllWarehouseReceiptsResponse, object>(x => x.DocNo)">@_localizer["Doküman No"]</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<GetAllWarehouseReceiptsResponse, object>(x => x.DocDate)">@_localizer["Tarih"]</MudTableSortLabel></MudTh>
+            <MudTh Style="text-align:right">@_localizer["Eylemler"]</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Id">@context.Id</MudTd>
+            <MudTd DataLabel="DocNo">
+                <MudHighlighter Text="@context.DocNo" HighlightedText="@_searchString" />
+            </MudTd>
+            <MudTd DataLabel="DocDate">
+                @if (context.DocDate.HasValue)
+                {
+                    @context.DocDate.Value.ToString("dd/MM/yyyy")
+                    ;
+                }
+            </MudTd>
+            <MudTd DataLabel="Actions" Style="text-align: right">
+                @if (_canEditWarehouseReceipts || _canDeleteWarehouseReceipts)
+                {
+                    @if (_canEditWarehouseReceipts)
+                    {
+                        <MudIconButton Elevation="10" Color="Color.Primary" @onclick="@(() => InvokeModal(@context.Id))" Icon="@Icons.Material.Filled.Edit"></MudIconButton>
+                    }
+                    @if (_canDeleteWarehouseReceipts)
+                    {
+                        <MudIconButton Elevation="10" Color="Color.Error" @onclick="@(() => Delete(@context.Id))" Icon="@Icons.Material.Filled.Delete"></MudIconButton>
+                    }
+                }
+                else
+                {
+                    <MudButton Variant="MudBlazor.Variant.Filled"
+                       DisableElevation="true"
+                       StartIcon="@Icons.Material.Filled.DoNotTouch"
+                       IconColor="Color.Secondary"
+                       Size="Size.Small"
+                       Color="Color.Surface">
+                        @_localizer["No Allowed Actions"]
+                    </MudButton>
+                }
+            </MudTd>
+        </RowTemplate>
+        <FooterContent>
+        </FooterContent>
+        <PagerContent>
+            <TablePager />
+        </PagerContent>
+    </MudTable>
+}*@

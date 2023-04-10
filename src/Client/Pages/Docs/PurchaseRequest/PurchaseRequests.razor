@@ -1,0 +1,84 @@
+﻿@page "/purchase/requests"
+@page "/purchase/requests/{Id:int}"
+
+@attribute [Authorize(Policy = Permissions.PurchaseRequests.View)]
+@inject Microsoft.Extensions.Localization.IStringLocalizer<PurchaseRequests> _localizer
+@using ArdaManager.Application.Features.Docs.PurchaseRequests.Queries.GetAll
+@using ArdaManager.Application.Features.Docs.PurchaseRequests.Queries;
+@using ArdaManager.Domain.Enums.Doc;
+
+@* Add other required using statements here based on your project structure and dependencies *@
+@* ... *@
+
+<HeroTitle Title="@_localizer["Satın Alma Talepleri"]" Description="@_localizer["Talepleri yönetin."]" />
+@if (!_loaded)
+{
+    <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+}
+else
+{
+
+    <MudDataGrid T="PurchaseRequestDto" MultiSelection="true" Items="@_purchaseRequestList" SortMode="SortMode.Multiple" Filterable="true" QuickFilter="@_quickFilter">
+        <ToolBarContent>
+            @if (_canCreatePurchaseRequests)
+            {
+                <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" Color="Color.Primary" OnClick="(() => InvokeModal())" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">@_localizer["Ekle"]</MudButton>
+                <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" OnClick="GetPurchaseRequestsAsync" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">@_localizer["Yenile"]</MudButton>
+            }
+            else
+            {
+                <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" OnClick="GetPurchaseRequestsAsync" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">@_localizer["Yenile"]</MudButton>
+
+            }
+
+            
+            <MudSpacer />
+            <MudTextField @bind-Value="_searchString" Placeholder="Search" Adornment="Adornment.Start" Immediate="true"
+                AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+        </ToolBarContent>
+        <Columns>
+            <HierarchyColumn T="PurchaseRequestDto"  />
+            <PropertyColumn Property="x => x.DocNo" Title="Doküman No"  />
+            <TemplateColumn Title="Evrak Durumu" >
+                <CellTemplate>
+                    <DocApprovalSummary DocumentId="@context.Item.Id"></DocApprovalSummary>
+                </CellTemplate>
+            </TemplateColumn>
+            <TemplateColumn Title="Evrak Tarihi">
+                <CellTemplate >
+                    @if (context.Item.DocDate.HasValue)
+                    {
+                        @context.Item.DocDate.Value.ToString("dd/MM/yyyy");
+                    }
+                </CellTemplate>
+            </TemplateColumn>
+            <PropertyColumn Property="x => x.RequesterName" Title="Talep Eden"  />
+            <PropertyColumn Property="x => x.Description" Title="Açıklama" />
+            <TemplateColumn CellClass="d-flex justify-end">
+                <CellTemplate>
+                    <MudStack Row>
+                        <MudIconButton Elevation="10" Color="Color.Primary" @onclick="@(() => InvokeModal(context.Item.Id))" Icon="@Icons.Material.Filled.Edit"></MudIconButton>
+                        <MudIconButton Elevation="10" Color="Color.Error" @onclick="@(() => Delete(@context.Item.Id))" Icon="@Icons.Material.Filled.Delete"></MudIconButton>
+                    </MudStack>
+                </CellTemplate>
+            </TemplateColumn>
+        </Columns>
+        <ChildRowContent >
+            <MudDataGrid T="PurchaseRequestRowDto" Items="@context.Item.PurchaseRequestRowsDto" ReadOnly="true" Class="custom-datagrid">
+                <Columns>
+                    <PropertyColumn Property="d => d.ProductCode" Title="Ürün Kodu" />
+                    <PropertyColumn Property="d => d.ProductName" Title="Ürün Adı" />
+                    <TemplateColumn Title="Miktar">
+                        <CellTemplate Context="detail" >
+                            @($"{detail.Item.Quantity.ToString("N4")} {detail.Item.MeasurementUnitCode}")
+                        </CellTemplate>
+                    </TemplateColumn>
+                    <PropertyColumn Property="d => d.Description" Title="Açıklama" />
+                </Columns>
+            </MudDataGrid>
+        </ChildRowContent>
+        <PagerContent>
+            <MudDataGridPager T="PurchaseRequestDto" />
+        </PagerContent>
+    </MudDataGrid>
+}

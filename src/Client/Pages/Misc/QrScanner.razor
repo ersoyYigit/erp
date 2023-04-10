@@ -1,0 +1,137 @@
+﻿@page "/misc/qrscanner"
+
+@using ZXingBlazor.Components
+
+
+<HeroTitle Title="Kod Tarayıcı" Description="Kodu taramak için kamera izni gereklidir." />
+
+<MudPaper>
+    <MudContainer>
+
+
+        <MudButton Variant="MudBlazor.Variant.Filled" Color="Color.Primary" @onclick="(() => ShowScanBarcode = !ShowScanBarcode)">Kod Tara</MudButton>
+
+
+        @if (ShowScanBarcode)
+        {
+            <BarcodeReader ScanResult="((e) => { BarCode=e; ShowScanBarcode = !ShowScanBarcode; })"
+                       Close="(()=>ShowScanBarcode=!ShowScanBarcode)"
+                       OnError="OnError"
+                       UseBuiltinDiv="false"
+                       @ref="barcodeReaderCustom" />
+
+            <div @ref="barcodeReaderCustom.barcodeScannerElement">
+
+                <MudCard>
+                    <MudCardHeader>
+                        <CardHeaderContent>
+                            <MudText Typo="Typo.body1">Taranıyor...</MudText>
+                        </CardHeaderContent>
+                        <CardHeaderActions>
+                            <MudIconButton Icon="@Icons.Material.Filled.Close" Color="Color.Default" data-action="closeButton" />
+                        </CardHeaderActions>
+                    </MudCardHeader>
+
+                    <MudCardContent>
+                        <div>
+                            <video id="video" playsinline autoplay style="height:auto; width: 100%;border: 1px solid red"></video>
+                        </div>
+                    </MudCardContent>
+                    <MudCardActions>
+                        <div data-action="sourceSelectPanel" style="display:none">
+                            <label for="sourceSelect">Aygıt seçin :</label><span class="text-dark" data-action="result"></span>
+                            <select data-action="sourceSelect" style="max-width:100%" class="form-control">
+                            </select>
+                        </div>
+                        <MudButton Variant="MudBlazor.Variant.Text" Color="Color.Primary" data-action="startButton">Tara</MudButton>
+                        <MudButton Variant="MudBlazor.Variant.Text" Color="Color.Primary" data-action="resetButton">Sıfırla</MudButton>
+                    </MudCardActions>
+                </MudCard>
+
+                @*
+
+                <div style="width: 480px; max-width: 100%">
+                    <MudButton Variant="MudBlazor.Variant.Filled" Color="Color.Primary" @onclick="(() => ShowScanBarcode = !ShowScanBarcode)">Kod Tara</MudButton>
+                    <button class="btn btn-outline-success p-2 m-1 w-25" data-action="startButton">Scan</button>
+                    <button class="btn btn-outline-success p-2 m-1 w-25" data-action="resetButton">Reset</button>
+                    <button type="button" class="btn btn-outline-success p-2 m-1 w-25" data-action="closeButton">Close</button>
+
+                    <div data-action="sourceSelectPanel" style="display:none">
+                        <label for="sourceSelect">SelectDevice:</label><span class="text-dark" data-action="result"></span>
+                        <select data-action="sourceSelect" style="max-width:100%" class="form-control">
+                        </select>
+                    </div>
+                    <div>
+                        <video id="video" playsinline autoplay style="height:480px;width: 640px;border: 1px solid red"></video>
+                    </div>
+                </div>
+                *@
+            </div>
+
+
+            @*
+
+            <BarcodeReader ScanResult="ScanResult"
+                       ShowScanBarcode="ShowScanBarcode"
+                       Close="(()=>ShowScanBarcode=!ShowScanBarcode)"
+                       ScanBtnTitle="Tara"
+                       ResetBtnTitle="Sıfırla"
+                       CloseBtnTitle="Kapat"
+                       Pdf417Only="false"
+                       Decodeonce="true"
+                       DecodeAllFormats="true"
+                       SelectDeviceBtnTitle="Aygıt Seçiniz" />
+            *@
+
+        }
+
+
+        @if (!string.IsNullOrEmpty(BarCode))
+        {
+
+            <MudButton Variant="MudBlazor.Variant.Filled" Color="Color.Primary" Href="@BarCode">Dokümanı Aç</MudButton>
+            /*
+            <button class="btn btn-primary"
+                    type="button"
+                    @onclick="(() => _navigationManager.NavigateTo(BarCode))">
+                Dokümanı Aç
+            </button>
+            */
+        }
+    </MudContainer>
+
+</MudPaper>
+
+
+
+@code {
+
+
+    BarcodeReader barcodeReaderCustom;
+
+    /// <summary>
+    /// Display the scan code interface
+    /// </summary>
+    bool ShowScanBarcode { get; set; } = false;
+
+    /// <summary>
+    /// BarCode
+    /// </summary>
+    public string? BarCode { get; set; }
+
+
+    private string message;
+    private Task OnError(string message)
+    {
+        this.message = message;
+        StateHasChanged();
+        return Task.CompletedTask;
+    }
+
+    private void ScanResult(string e)
+    {
+
+        BarCode = e ;
+    }
+
+}

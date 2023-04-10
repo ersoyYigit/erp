@@ -1,0 +1,58 @@
+﻿@using ArdaManager.Application.Features.Docs.PurchaseOrders.Queries
+
+<MudDialog>
+    <DialogContent>
+        <MudDataGrid T="PurchaseOrderResponse" MultiSelection="true" Items="@_purchaseOrderList" SortMode="SortMode.Multiple" Filterable="true" QuickFilter="@_quickFilter"
+                     SelectedItem="_purchaseOrder" SelectedItemsChanged="OnSelectedItemsChanged">
+            <ToolBarContent>
+
+                <MudTextField @bind-Value="_searchString" Placeholder="Search" Adornment="Adornment.Start" Immediate="true"
+                              AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+            </ToolBarContent>
+            <Columns>
+                <HierarchyColumn T="PurchaseOrderResponse" />
+                <PropertyColumn Property="x => x.DocNo" Title="Doküman No" />
+                <TemplateColumn Title="Evrak Tarihi">
+                    <CellTemplate>
+                        @if (context.Item.DocDate.HasValue)
+                        {
+                            @context.Item.DocDate.Value.ToString("dd/MM/yyyy")
+                            ;
+                        }
+                    </CellTemplate>
+                </TemplateColumn>
+                <PropertyColumn Property="x => x.CompanyName" Title="Firma" />
+                <PropertyColumn Property="x => x.Description" Title="Açıklama" />
+            </Columns>
+            <ChildRowContent>
+                <MudDataGrid T="PurchaseOrderRowResponse" Items="@context.Item.PurchaseOrderRowResponse" ReadOnly="true" Class="custom-datagrid">
+                    <Columns>
+                        <PropertyColumn Property="d => d.ProductCode" Title="Ürün Kodu" />
+                        <PropertyColumn Property="d => d.ProductName" Title="Ürün Adı" />
+                        <TemplateColumn Title="Miktar">
+                            <CellTemplate Context="detail">
+                                @($"{detail.Item.Quantity.ToString("N2")} {detail.Item.MeasurementUnitCode}")
+                            </CellTemplate>
+                        </TemplateColumn>
+                        <TemplateColumn Title="Fiyat">
+                            <CellTemplate Context="detail">
+                                @($"{detail.Item.Price.ToString("N4")} {detail.Item.CurrencyCode}")
+                            </CellTemplate>
+                        </TemplateColumn>
+                        <PropertyColumn Property="d => d.Description" Title="Açıklama" />
+                    </Columns>
+                </MudDataGrid>
+            </ChildRowContent>
+            <PagerContent>
+                <MudDataGridPager T="PurchaseOrderResponse" />
+            </PagerContent>
+        </MudDataGrid>
+    </DialogContent>
+    <DialogActions>
+        <MudButton Variant="MudBlazor.Variant.Filled" Color="Color.Primary" OnClick="SelectItem" Disabled="@(!_isRowSelected)">Seç</MudButton>
+        <MudButton Variant="MudBlazor.Variant.Filled" Color="Color.Secondary" OnClick="Cancel">İptal</MudButton>
+    </DialogActions>
+</MudDialog>
+
+
+

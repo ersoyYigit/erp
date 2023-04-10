@@ -1,0 +1,91 @@
+﻿@page "/inventory/productionLines"
+@attribute [Authorize(Policy = Permissions.ProductionLines.View)]
+@inject Microsoft.Extensions.Localization.IStringLocalizer<ProductionLines> _localizer
+@using ArdaManager.Application.Features.ProductionLines.Queries.GetAll
+
+<style>
+    .mud-table-container {
+        overflow: auto;
+    }
+</style>
+
+<HeroTitle Title="@_localizer["Üretim Hatları "]" Description="@_localizer["Üretim hatlarını yönetin "]" />
+@if (!_loaded)
+{
+    <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+}
+else
+{
+    <MudTable Hover="true" Elevation="25" Items="_productionLineList" Dense="true" Bordered="true" Striped="true" Filter="new Func<GetAllProductionLinesResponse, bool>(Search)" @bind-productionLine="_productionLine">
+        <ToolBarContent>
+            <div class="justify-center mud-text-align-center">
+                @if (_canCreateProductionLines)
+                {
+                    <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" Color="Color.Primary" OnClick="(() => InvokeModal())" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">@_localizer["Ekle"]</MudButton>
+                    <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" OnClick="GetProductionLinesAsync" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">@_localizer["Yenile"]</MudButton>
+
+                }
+                else
+                {
+                    <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" OnClick="GetProductionLinesAsync" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">@_localizer["Yenile"]</MudButton>
+
+                }
+            </div>
+            <MudSpacer />
+            @if (_canSearchProductionLines)
+            {
+                <MudTextField @bind-Value="_searchString" Immediate="true" Placeholder="@_localizer["Üretim hattı ara"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0 mb-3"></MudTextField>
+            }
+        </ToolBarContent>
+        <HeaderContent>
+
+            <MudTh><MudTableSortLabel SortBy="new Func<GetAllProductionLinesResponse, object>(x => x.Code)">@_localizer["Kod"]</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<GetAllProductionLinesResponse, object>(x => x.Name)">@_localizer["Ad"]</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<GetAllProductionLinesResponse, object>(x => x.Description)">@_localizer["Açıklama"]</MudTableSortLabel></MudTh>
+
+            <MudTh Style="text-align:right">@_localizer["Eylemler"]</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Code">
+                <MudHighlighter Text="@context.Code" HighlightedText="@_searchString" />
+            </MudTd>
+            <MudTd DataLabel="Name">
+                <MudHighlighter Text="@context.Name" HighlightedText="@_searchString" />
+            </MudTd>
+            <MudTd DataLabel="Description">
+                <MudHighlighter Text="@context.Description" HighlightedText="@_searchString" />
+            </MudTd>
+            <MudTd DataLabel="Actions" Style="text-align: right">
+                @if (_canEditProductionLines || _canDeleteProductionLines)
+                {
+                    <MudMenu Label="@_localizer["Eylem"]" Variant="MudBlazor.Variant.Filled" DisableElevation="true" EndIcon="@Icons.Filled.KeyboardArrowDown" IconColor="Color.Secondary" Direction="Direction.Left" OffsetX="true">
+                        @if (_canEditProductionLines)
+                        {
+                            <MudMenuItem @onclick="@(() => InvokeModal(@context.Id))">@_localizer["Düzenle"]</MudMenuItem>
+                        }
+                        @if (_canDeleteProductionLines)
+                        {
+                            <MudMenuItem @onclick="@(() => Delete(@context.Id))">@_localizer["Sil"]</MudMenuItem>
+                        }
+                    </MudMenu>
+                }
+                else
+                {
+                    <MudButton Variant="MudBlazor.Variant.Filled"
+                       DisableElevation="true"
+                       StartIcon="@Icons.Material.Filled.DoNotTouch"
+                       IconColor="Color.Secondary"
+                       Size="Size.Small"
+                       Color="Color.Surface">
+                        @_localizer["Yetkiniz Yok!"]
+                    </MudButton>
+                }
+            </MudTd>
+        </RowTemplate>
+        <FooterContent>
+        </FooterContent>
+        <PagerContent>
+            <TablePager />
+        </PagerContent>
+    </MudTable>
+}

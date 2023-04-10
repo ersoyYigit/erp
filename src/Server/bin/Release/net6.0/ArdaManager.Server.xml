@@ -1,0 +1,961 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ArdaManager.Server</name>
+    </assembly>
+    <members>
+        <member name="M:ArdaManager.Server.Controllers.Approval.ApprovalScenarioController.GetAllScenarios">
+            <summary>
+            Get user notifications
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="T:ArdaManager.Server.Controllers.BaseApiController`1">
+            <summary>
+            Abstract BaseApi Controller Class
+            </summary>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.Communication.ChatsController.GetChatHistoryAsync(System.String)">
+            <summary>
+            Get user wise chat history
+            </summary>
+            <param name="contactId"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.Communication.ChatsController.GetChatUsersAsync">
+            <summary>
+            get available users
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.Communication.ChatsController.SaveMessageAsync(ArdaManager.Application.Models.Chat.ChatHistory{ArdaManager.Application.Interfaces.Chat.IChatUser})">
+            <summary>
+            Save Chat Message
+            </summary>
+            <param name="message"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.Communication.ChatsController.MarkAsReadAsync(System.Int32)">
+            <summary>
+            Mark as read 
+            </summary>
+            <param name="messageId"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.Communication.ChatsController.GetUserNotificationsAsync">
+            <summary>
+            Get user notifications
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.Communication.ChatsController.GetUserNotificationCountsAsync">
+            <summary>
+            Get user notification count
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.Communication.ChatsController.GetUserNotificationUnreadCountsAsync">
+            <summary>
+            Get user unread notification count
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.Identity.AccountController.UpdateProfile(ArdaManager.Application.Requests.Identity.UpdateProfileRequest)">
+            <summary>
+            Update Profile
+            </summary>
+            <param name="model"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.Identity.AccountController.ChangePassword(ArdaManager.Application.Requests.Identity.ChangePasswordRequest)">
+            <summary>
+            Change Password
+            </summary>
+            <param name="model"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.Identity.AccountController.GetProfilePictureAsync(System.String)">
+            <summary>
+            Get Profile picture by Id
+            </summary>
+            <param name="userId"></param>
+            <returns>Status 200 OK </returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.Identity.AccountController.UpdateProfilePictureAsync(ArdaManager.Application.Requests.Identity.UpdateProfilePictureRequest)">
+            <summary>
+            Update Profile Picture
+            </summary>
+            <param name="request"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.Identity.TokenController.Get(ArdaManager.Application.Requests.Identity.TokenRequest)">
+            <summary>
+            Get Token (Email, Password)
+            </summary>
+            <param name="model"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.Identity.TokenController.Refresh(ArdaManager.Application.Requests.Identity.RefreshTokenRequest)">
+            <summary>
+            Refresh Token
+            </summary>
+            <param name="model"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.Identity.UserController.GetAll">
+            <summary>
+            Get User Details
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.Identity.UserController.GetById(System.String)">
+            <summary>
+            Get User By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.Identity.UserController.GetRolesAsync(System.String)">
+            <summary>
+            Get User Roles By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.Identity.UserController.UpdateRolesAsync(ArdaManager.Application.Requests.Identity.UpdateUserRolesRequest)">
+            <summary>
+            Update Roles for User
+            </summary>
+            <param name="request"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.Identity.UserController.RegisterAsync(ArdaManager.Application.Requests.Identity.RegisterRequest)">
+            <summary>
+            Register a User
+            </summary>
+            <param name="request"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.Identity.UserController.ConfirmEmailAsync(System.String,System.String)">
+            <summary>
+            Confirm Email
+            </summary>
+            <param name="userId"></param>
+            <param name="code"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.Identity.UserController.ToggleUserStatusAsync(ArdaManager.Application.Requests.Identity.ToggleUserStatusRequest)">
+            <summary>
+            Toggle User Status (Activate and Deactivate)
+            </summary>
+            <param name="request"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.Identity.UserController.ForgotPasswordAsync(ArdaManager.Application.Requests.Identity.ForgotPasswordRequest)">
+            <summary>
+            Forgot Password
+            </summary>
+            <param name="request"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.Identity.UserController.ResetPasswordAsync(ArdaManager.Application.Requests.Identity.ResetPasswordRequest)">
+            <summary>
+            Reset Password
+            </summary>
+            <param name="request"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.Identity.UserController.Export(System.String)">
+            <summary>
+            Export to Excel
+            </summary>
+            <param name="searchString"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.RoleClaimController.GetAll">
+            <summary>
+            Get All Role Claims(e.g. Product Create Permission)
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.RoleClaimController.GetAllByRoleId(System.String)">
+            <summary>
+            Get All Role Claims By Id
+            </summary>
+            <param name="roleId"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.RoleClaimController.Post(ArdaManager.Application.Requests.Identity.RoleClaimRequest)">
+            <summary>
+            Add a Role Claim
+            </summary>
+            <param name="request"></param>
+            <returns>Status 200 OK </returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.RoleClaimController.Delete(System.Int32)">
+            <summary>
+            Delete a Role Claim
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.RoleController.GetAll">
+            <summary>
+            Get All Roles (basic, admin etc.)
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.RoleController.Post(ArdaManager.Application.Requests.Identity.RoleRequest)">
+            <summary>
+            Add a Role
+            </summary>
+            <param name="request"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.RoleController.Delete(System.String)">
+            <summary>
+            Delete a Role
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.RoleController.GetPermissionsByRoleId(System.String)">
+            <summary>
+            Get Permissions By Role Id
+            </summary>
+            <param name="roleId"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.RoleController.Update(ArdaManager.Application.Requests.Identity.PermissionRequest)">
+            <summary>
+            Edit a Role Claim
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.Utilities.AuditsController.GetUserTrailsAsync">
+            <summary>
+            Get Current User Audit Trails
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.Utilities.AuditsController.ExportExcel(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Search Audit Trails and Export to Excel
+            </summary>
+            <param name="searchString"></param>
+            <param name="searchInOldValues"></param>
+            <param name="searchInNewValues"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="T:ArdaManager.Server.Controllers.Utilities.ExtendedAttributes.Base.ExtendedAttributesController`4">
+            <summary>
+            Abstract Extended Attributes Controller Class
+            </summary>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.Utilities.ExtendedAttributes.Base.ExtendedAttributesController`4.GetAll">
+            <summary>
+            Get All Entity Extended Attributes
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.Utilities.ExtendedAttributes.Base.ExtendedAttributesController`4.GetAllByEntityId(`1)">
+            <summary>
+            Get All Entity Extended Attributes by entity id
+            </summary>
+            <param name="entityId"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.Utilities.ExtendedAttributes.Base.ExtendedAttributesController`4.GetById(`0)">
+            <summary>
+            Get Entity Extended Attribute By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.Utilities.ExtendedAttributes.Base.ExtendedAttributesController`4.Post(ArdaManager.Application.Features.ExtendedAttributes.Commands.AddEdit.AddEditExtendedAttributeCommand{`0,`1,`2,`3})">
+            <summary>
+            Create/Update a Entity Extended Attribute
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.Utilities.ExtendedAttributes.Base.ExtendedAttributesController`4.Delete(`0)">
+            <summary>
+            Delete a Entity Extended Attribute
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.Utilities.ExtendedAttributes.Base.ExtendedAttributesController`4.Export(System.String,`1,System.Boolean,System.Boolean,System.String)">
+            <summary>
+            Search Entity Extended Attribute and Export to Excel
+            </summary>
+            <param name="searchString"></param>
+            <param name="entityId"></param>
+            <param name="includeEntity"></param>
+            <param name="onlyCurrentGroup"></param>
+            <param name="currentGroup"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.Utilities.Misc.DocumentsController.GetAll(System.Int32,System.Int32,System.String)">
+            <summary>
+            Get All Documents
+            </summary>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <param name="searchString"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.Utilities.Misc.DocumentsController.GetById(System.Int32)">
+            <summary>
+            Get Document By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.Utilities.Misc.DocumentsController.Post(ArdaManager.Application.Features.Documents.Commands.AddEdit.AddEditDocumentCommand)">
+            <summary>
+            Add/Edit Document
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.Utilities.Misc.DocumentsController.Delete(System.Int32)">
+            <summary>
+            Delete a Document
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.Utilities.Misc.DocumentTypesController.GetAll">
+            <summary>
+            Get All Document Types
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.Utilities.Misc.DocumentTypesController.GetById(System.Int32)">
+            <summary>
+            Get Document Type By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.Utilities.Misc.DocumentTypesController.Post(ArdaManager.Application.Features.DocumentTypes.Commands.AddEdit.AddEditDocumentTypeCommand)">
+            <summary>
+            Create/Update a Document Type
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.Utilities.Misc.DocumentTypesController.Delete(System.Int32)">
+            <summary>
+            Delete a Document Type
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.Utilities.Misc.DocumentTypesController.Export(System.String)">
+            <summary>
+            Search Document Types and Export to Excel
+            </summary>
+            <param name="searchString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.Utilities.PreferencesController.ChangeLanguageAsync(System.String)">
+            <summary>
+            Change Language Preference
+            </summary>
+            <param name="languageCode"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Addressing.CityController.GetAll">
+            <summary>
+            Get All Cities
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Addressing.CityController.GetById(System.Int32)">
+            <summary>
+            Get a City By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Addressing.CityController.GetByCountryId(System.Int32)">
+            <summary>
+            Get a City By Country Id
+            </summary>
+            <param name="countryid"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Addressing.CountryController.GetAll">
+            <summary>
+            Get All Countries
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Addressing.CountryController.GetById(System.Int32)">
+            <summary>
+            Get a Country By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Catalog.MeasurementUnitsController.GetAll">
+            <summary>
+            Get All Patterns
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Catalog.MoldsController.GetAll(System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Get All Molds
+            </summary>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <param name="searchString"></param>
+            <param name="orderBy"></param>
+            <param name="isMold"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Catalog.MoldsController.GetMoldImageAsync(System.Int32)">
+            <summary>
+            Get a Mold Image by Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Catalog.MoldsController.Post(ArdaManager.Application.Features.Molds.Commands.AddEdit.AddEditMoldCommand)">
+            <summary>
+            Add/Edit a Mold
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Catalog.MoldsController.Delete(System.Int32)">
+            <summary>
+            Delete a Mold
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK response</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Catalog.PatternsController.GetAll">
+            <summary>
+            Get All Patterns
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Catalog.PatternsController.GetById(System.Int32)">
+            <summary>
+            Get a Pattern By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Catalog.PatternsController.Post(ArdaManager.Application.Features.Patterns.Commands.AddEdit.AddEditPatternCommand)">
+            <summary>
+            Create/Update a Pattern
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Catalog.PatternsController.Delete(System.Int32)">
+            <summary>
+            Delete a Pattern
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Catalog.PatternsController.Export(System.String)">
+            <summary>
+            Search Patterns and Export to Excel
+            </summary>
+            <param name="searchString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Catalog.ProductCategoriesController.GetAll">
+            <summary>
+            Get All ProductCategories
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Catalog.ProductCategoriesController.GetById(System.Int32)">
+            <summary>
+            Get a ProductCategory By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Catalog.ProductCategoriesController.Post(ArdaManager.Application.Features.ProductCategories.Commands.AddEdit.AddEditProductCategoryCommand)">
+            <summary>
+            Create/Update a ProductCategory
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Catalog.ProductCategoriesController.Delete(System.Int32)">
+            <summary>
+            Delete a ProductCategory
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Catalog.ProductCategoriesController.Export(System.String)">
+            <summary>
+            Search ProductCategories and Export to Excel
+            </summary>
+            <param name="searchString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Catalog.ProductsController.GetAll(System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Get All Products
+            </summary>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <param name="searchString"></param>
+            <param name="orderBy"></param>
+            <param name="isTemplate"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Catalog.ProductsController.GetProductImageAsync(System.Int32)">
+            <summary>
+            Get a Product Image by Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Catalog.ProductsController.Post(ArdaManager.Application.Features.Products.Commands.AddEdit.AddEditProductCommand)">
+            <summary>
+            Add/Edit a Product
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Catalog.ProductsController.Delete(System.Int32)">
+            <summary>
+            Delete a Product
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK response</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Catalog.ProductsController.Export(System.String)">
+            <summary>
+            Search Products and Export to Excel
+            </summary>
+            <param name="searchString"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Catalog.RecipeItemsController.GetByOwnerProductId(System.Int32)">
+            <summary>
+            Get a ProductRecipeItem By Type
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Catalog.RecipeItemsController.Post(ArdaManager.Application.Features.RecipeItems.Commands.AddEdit.AddEditRecipeItemCommand)">
+            <summary>
+            Create/Update a ProductRecipeItem
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Catalog.RecipeItemsController.Delete(System.Int32)">
+            <summary>
+            Delete a ProductRecipeItem
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Catalog.TemplatesController.GetAll(System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Get All Templates
+            </summary>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <param name="searchString"></param>
+            <param name="orderBy"></param>
+            <param name="isTemplate"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Catalog.TemplatesController.GetTemplateImageAsync(System.Int32)">
+            <summary>
+            Get a Template Image by Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Catalog.TemplatesController.Post(ArdaManager.Application.Features.Templates.Commands.AddEdit.AddEditTemplateCommand)">
+            <summary>
+            Add/Edit a Template
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Catalog.TemplatesController.Delete(System.Int32)">
+            <summary>
+            Delete a Template
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK response</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Catalog.TemplateWorkOrdersController.GetAll">
+            <summary>
+            Get All TemplateWorkOrders
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Catalog.TemplateWorkOrdersController.GetById(System.Int32)">
+            <summary>
+            Get a TemplateWorkOrder By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Catalog.TemplateWorkOrdersController.Post(ArdaManager.Application.Features.Docs.TemplateWorkOrders.Commands.AddEdit.AddEditTemplateWorkOrderCommand)">
+            <summary>
+            Add/Edit a TemplateWorkOrder
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Catalog.TemplateWorkOrdersController.Delete(System.Int32)">
+            <summary>
+            Delete a TemplateWorkOrder
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK response</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Corporation.CompaniesController.GetAll(System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Get All Companies
+            </summary>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <param name="searchString"></param>
+            <param name="orderBy"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Corporation.CompaniesController.Post(ArdaManager.Application.Features.Companies.Commands.AddEdit.AddEditCompanyCommand)">
+            <summary>
+            Add/Edit a Company
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Corporation.CompaniesController.Delete(System.Int32)">
+            <summary>
+            Delete a Company
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK response</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Corporation.CompaniesController.Export(System.String)">
+            <summary>
+            Search Companies and Export to Excel
+            </summary>
+            <param name="searchString"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Corporation.CompanyFairsController.GetAll">
+            <summary>
+            Get All Fairs
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Corporation.CompanyFairsController.GetById(System.Int32)">
+            <summary>
+            Get a Fair By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Corporation.CompanyFairsController.Post(ArdaManager.Application.Features.CompanyFairs.Commands.AddEdit.AddEditCompanyFairCommand)">
+            <summary>
+            Create/Update a Fair
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Corporation.CompanyFairsController.GetByCompanyId(System.Int32)">
+            <summary>
+            Get a Fairs By Company Id
+            </summary>
+            <param name="companyid"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Corporation.CompanyFairsController.Delete(System.Int32)">
+            <summary>
+            Delete a Fair
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Corporation.FairsController.GetAll">
+            <summary>
+            Get All Fairs
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Corporation.FairsController.GetById(System.Int32)">
+            <summary>
+            Get a Fair By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Corporation.FairsController.Post(ArdaManager.Application.Features.Fairs.Commands.AddEdit.AddEditFairCommand)">
+            <summary>
+            Create/Update a Fair
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Corporation.FairsController.Delete(System.Int32)">
+            <summary>
+            Delete a Fair
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.DashboardController.GetDataAsync">
+            <summary>
+            Get Dashboard Data
+            </summary>
+            <returns>Status 200 OK </returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Human.PersonsController.GetAll(System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Get All Persons
+            </summary>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <param name="searchString"></param>
+            <param name="orderBy"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Human.PersonsController.GetPersonImageAsync(System.Int32)">
+            <summary>
+            Get a Person Image by Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Human.PersonsController.Post(ArdaManager.Application.Features.Persons.Commands.AddEdit.AddEditPersonCommand)">
+            <summary>
+            Add/Edit a Person
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Human.PersonsController.Delete(System.Int32)">
+            <summary>
+            Delete a Person
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK response</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Inventory.ProductionLinesController.GetAll">
+            <summary>
+            Get All ProductionLines
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Inventory.ProductionLinesController.GetById(System.Int32)">
+            <summary>
+            Get a  ProductionLine By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Inventory.ProductionLinesController.GetByType(System.Int32)">
+            <summary>
+            Get a ProductionLine By Type
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Inventory.ProductionLinesController.Post(ArdaManager.Application.Features.ProductionLines.Commands.AddEdit.AddEditProductionLineCommand)">
+            <summary>
+            Create/Update a  ProductionLine
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Inventory.ProductionLinesController.Delete(System.Int32)">
+            <summary>
+            Delete a  ProductionLine
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Inventory.RacksController.GetAll">
+            <summary>
+            Get All Racks
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Inventory.RacksController.GetById(System.Int32)">
+            <summary>
+            Get a  Rack By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Inventory.RacksController.GetByType(System.Int32)">
+            <summary>
+            Get a Rack By Type
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Inventory.RacksController.Post(ArdaManager.Application.Features.Racks.Commands.AddEdit.AddEditRackCommand)">
+            <summary>
+            Create/Update a  Rack
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Inventory.RacksController.Delete(System.Int32)">
+            <summary>
+            Delete a  Rack
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Inventory.WarehousesController.GetAll">
+            <summary>
+            Get All Warehouses
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Inventory.WarehousesController.GetById(System.Int32)">
+            <summary>
+            Get a  Warehouse By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Inventory.WarehousesController.GetByType(System.Int32)">
+            <summary>
+            Get a Warehouse By Type
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Inventory.WarehousesController.Post(ArdaManager.Application.Features.Warehouses.Commands.AddEdit.AddEditWarehouseCommand)">
+            <summary>
+            Create/Update a  Warehouse
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Inventory.WarehousesController.Delete(System.Int32)">
+            <summary>
+            Delete a  Warehouse
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Misc.CategoriesController.GetAll">
+            <summary>
+            Get All ProductCategories
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Misc.CategoriesController.GetById(System.Int32)">
+            <summary>
+            Get a ProductCategory By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Misc.CategoriesController.GetByType(System.Int32)">
+            <summary>
+            Get a ProductCategory By Type
+            </summary>
+            <param name="type"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Misc.CategoriesController.Post(ArdaManager.Application.Features.Categories.Commands.AddEdit.AddEditCategoryCommand)">
+            <summary>
+            Create/Update a ProductCategory
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Misc.CategoriesController.Delete(System.Int32)">
+            <summary>
+            Delete a ProductCategory
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Misc.TaxesController.GetAll">
+            <summary>
+            Get All Taxes
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Misc.TaxesController.Post(ArdaManager.Application.Features.Taxes.Commands.UpsertTaxCommand)">
+            <summary>
+            Create/Update a Tax
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Misc.TaxesController.Delete(System.Int32)">
+            <summary>
+            Delete a Tax
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Reports.ReportsController.GetAllWarehousesStocks(System.Int32)">
+            <summary>
+            Get All TemplateWorkOrders
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Transactions.WarehouseReceiptsController.GetAll">
+            <summary>
+            Get All WarehouseReceipts
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Transactions.WarehouseReceiptsController.GetAllByType(ArdaManager.Domain.Enums.Doc.WarehouseReceiptType)">
+            <summary>
+            Get All WarehouseReceipts
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Transactions.WarehouseReceiptsController.GetAllByWarehouseId(ArdaManager.Domain.Enums.Doc.WarehouseReceiptType,System.Int32)">
+            <summary>
+            Get All WarehouseReceipts
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Transactions.WarehouseReceiptsController.GetById(System.Int32)">
+            <summary>
+            Get a WarehouseReceipt By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Transactions.WarehouseReceiptsController.Post(ArdaManager.Application.Features.Docs.WarehouseReceipts.Commands.AddEdit.AddEditWarehouseReceiptCommand)">
+            <summary>
+            Add/Edit a WarehouseReceipt
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:ArdaManager.Server.Controllers.v1.Transactions.WarehouseReceiptsController.Delete(System.Int32)">
+            <summary>
+            Delete a WarehouseReceipt
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK response</returns>
+        </member>
+    </members>
+</doc>

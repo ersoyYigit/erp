@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "ArdaManager.Domain/1.0.0": {
+        "runtime": {
+          "ArdaManager.Domain.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "ArdaManager.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

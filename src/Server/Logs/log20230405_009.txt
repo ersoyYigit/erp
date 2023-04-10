@@ -1,0 +1,348 @@
+2023-04-05 22:09:12.494 +03:00 [ERR] Failed executing DbCommand (57ms) [Parameters=[@__request_WarehouseReceiptType_0='11'], CommandType='"Text"', CommandTimeout='30']
+SELECT [b].[DocNo], [b].[DocDate], [b].[DocType], [b].[Id], [b].[Description], [t].[Id], [t].[Name], [w].[RelatedCompanyId], [t0].[Name], [t1].[Id], [t1].[Name], [w].[WarehouseReceiptType], [w].[WayBillDate], [w].[WayBillNo], [b].[DocState], [b].[NextDocId], [b].[PrevDocId], [w].[PurchaseOrderDocNo], [w].[PurchaseOrderId], [t2].[DocNo], [w].[PurchaseRequestId], [w].[RequesterDepartment], [w].[RequesterId], [w].[RequesterName], [w].[WarehouseOfficerId], [w].[WarehouseOfficerName], [b].[CreatedBy], [t0].[Id], [t2].[Id], [t3].[Id], [t3].[ProductId], [t3].[ProductName], [t3].[ProductCode], [t3].[Quantity], [t3].[MeasurementUnitCode], [t3].[MeasurementUnitId], [t3].[MeasurementUnitName], [t3].[Price], [t3].[RackCode], [t3].[RackId], [t3].[RackName], [t3].[RowNo], [t3].[WarehouseReceiptId], [t3].[CurrencyCode], [t3].[CurrencyName], [t3].[CurrencyId], [t3].[Description], [t3].[DiscountAmount], [t3].[DiscountPercentage], [t3].[ExchangeRate], [t3].[PurchaseOrderRowId], [t3].[TaxAmount], [t3].[TaxCode], [t3].[TaxId], [t3].[TotalAmount], [t3].[MeasurementUnitSystem], [t3].[Id0], [t3].[Id1], [t3].[Id2]
+FROM [BaseDocs] AS [b]
+INNER JOIN [WarehouseReceipts] AS [w] ON [b].[Id] = [w].[Id]
+INNER JOIN (
+    SELECT [b0].[Id], [b0].[Name]
+    FROM [BaseEntities] AS [b0]
+    INNER JOIN [Warehouses] AS [w0] ON [b0].[Id] = [w0].[Id]
+) AS [t] ON [w].[WarehouseId] = [t].[Id]
+LEFT JOIN (
+    SELECT [b1].[Id], [b1].[Name]
+    FROM [BaseEntities] AS [b1]
+    INNER JOIN [Companies] AS [c] ON [b1].[Id] = [c].[Id]
+) AS [t0] ON [w].[RelatedCompanyId] = [t0].[Id]
+LEFT JOIN (
+    SELECT [b2].[Id], [b2].[Name]
+    FROM [BaseEntities] AS [b2]
+    INNER JOIN [Warehouses] AS [w1] ON [b2].[Id] = [w1].[Id]
+) AS [t1] ON [w].[RelatedWarehouseId] = [t1].[Id]
+LEFT JOIN (
+    SELECT [b3].[Id], [b3].[DocNo]
+    FROM [BaseDocs] AS [b3]
+    INNER JOIN [PurchaseRequests] AS [p] ON [b3].[Id] = [p].[Id]
+) AS [t2] ON [w].[PurchaseRequestId] = [t2].[Id]
+LEFT JOIN (
+    SELECT [w2].[Id], [w2].[ProductId], [t4].[Name] AS [ProductName], [t4].[Code] AS [ProductCode], [w2].[Quantity], [m0].[Code] AS [MeasurementUnitCode], [m0].[Id] AS [MeasurementUnitId], [m0].[Name] AS [MeasurementUnitName], [w2].[Price], [r].[Code] AS [RackCode], CASE
+        WHEN [w2].[RackId] IS NOT NULL THEN [w2].[RackId]
+        ELSE 0
+    END AS [RackId], [r].[Name] AS [RackName], [w2].[RowNo], [w2].[WarehouseReceiptId], [c0].[Code] AS [CurrencyCode], [c0].[Name] AS [CurrencyName], [c0].[Id] AS [CurrencyId], [w2].[Description], [w2].[DiscountAmount], [w2].[DiscountPercentage], [w2].[ExchangeRate], [w2].[PurchaseOrderRowId], [w2].[TaxAmount], [t5].[Code] AS [TaxCode], [w2].[TaxId], [w2].[TotalAmount], [m0].[System] AS [MeasurementUnitSystem], [t4].[Id] AS [Id0], [r].[Id] AS [Id1], [t5].[Id] AS [Id2]
+    FROM [WarehouseReceiptRows] AS [w2]
+    INNER JOIN (
+        SELECT [b4].[Id], [b4].[Code], [b4].[Name]
+        FROM [BaseEntities] AS [b4]
+        INNER JOIN [Products] AS [p0] ON [b4].[Id] = [p0].[Id]
+    ) AS [t4] ON [w2].[ProductId] = [t4].[Id]
+    INNER JOIN [MeasurementUnits] AS [m0] ON [w2].[MeasurementUnitId] = [m0].[Id]
+    LEFT JOIN [Racks] AS [r] ON [w2].[RackId] = [r].[Id]
+    LEFT JOIN [Currencies] AS [c0] ON [w2].[CurrencyId] = [c0].[Id]
+    LEFT JOIN [Taxes] AS [t5] ON [w2].[TaxId] = [t5].[Id]
+) AS [t3] ON [b].[Id] = [t3].[WarehouseReceiptId]
+WHERE [w].[WarehouseReceiptType] = @__request_WarehouseReceiptType_0
+ORDER BY [b].[Id], [t].[Id], [t0].[Id], [t1].[Id], [t2].[Id], [t3].[Id], [t3].[Id0], [t3].[MeasurementUnitId], [t3].[Id1], [t3].[CurrencyId]
+2023-04-05 22:09:12.560 +03:00 [ERR] An exception occurred while iterating over the results of a query for context type 'ArdaManager.Infrastructure.Contexts.VappContext'.
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'WarehouseOfficerName'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__209_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__272_0(Object obj)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:0f04812e-6097-47ca-a016-6eff40690095
+Error Number:207,State:1,Class:16
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'WarehouseOfficerName'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__209_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__272_0(Object obj)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:0f04812e-6097-47ca-a016-6eff40690095
+Error Number:207,State:1,Class:16
+2023-04-05 22:09:14.317 +03:00 [ERR] An unhandled exception occurred while processing the request.
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'WarehouseOfficerName'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__209_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__272_0(Object obj)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at LazyCache.CachingService.GetOrAddAsync[T](String key, Func`2 addItemFactory, MemoryCacheEntryOptions policy)
+   at ArdaManager.Application.Features.Docs.WarehouseReceipts.Queries.GetAll.GetAllWarehouseReceiptsCachedQueryHandler.Handle(GetAllWarehouseReceiptsQuery request, CancellationToken cancellationToken) in D:\Dev\ArdaManager\src\Application\Features\Docs\WarehouseReceipts\Queries\GetAll\GetAllWarehouseReceiptsQuery.cs:line 118
+   at MediatR.Pipeline.RequestExceptionProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at MediatR.Pipeline.RequestExceptionProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at MediatR.Pipeline.RequestExceptionActionProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at MediatR.Pipeline.RequestExceptionActionProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at MediatR.Pipeline.RequestPostProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at MediatR.Pipeline.RequestPreProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at ArdaManager.Server.Controllers.v1.Transactions.WarehouseReceiptsController.GetAllByType(WarehouseReceiptType type) in D:\Dev\ArdaManager\src\Server\Controllers\v1\Transactions\WarehouseReceiptsController.cs:line 36
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.Policy.AuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at ArdaManager.Server.Middlewares.RequestCultureMiddleware.InvokeAsync(HttpContext context) in D:\Dev\ArdaManager\src\Server\Middlewares\RequestCultureMiddleware.cs:line 39
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at ArdaManager.Server.Middlewares.ErrorHandlerMiddleware.Invoke(HttpContext context) in D:\Dev\ArdaManager\src\Server\Middlewares\ErrorHandlerMiddleware.cs:line 29
+ClientConnectionId:0f04812e-6097-47ca-a016-6eff40690095
+Error Number:207,State:1,Class:16
+2023-04-05 22:09:14.453 +03:00 [ERR] Unhandled exception occurred.
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'WarehouseOfficerName'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__209_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__272_0(Object obj)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at LazyCache.CachingService.GetOrAddAsync[T](String key, Func`2 addItemFactory, MemoryCacheEntryOptions policy)
+   at ArdaManager.Application.Features.Docs.WarehouseReceipts.Queries.GetAll.GetAllWarehouseReceiptsCachedQueryHandler.Handle(GetAllWarehouseReceiptsQuery request, CancellationToken cancellationToken) in D:\Dev\ArdaManager\src\Application\Features\Docs\WarehouseReceipts\Queries\GetAll\GetAllWarehouseReceiptsQuery.cs:line 118
+   at MediatR.Pipeline.RequestExceptionProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at MediatR.Pipeline.RequestExceptionProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at MediatR.Pipeline.RequestExceptionActionProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at MediatR.Pipeline.RequestExceptionActionProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at MediatR.Pipeline.RequestPostProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at MediatR.Pipeline.RequestPreProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at ArdaManager.Server.Controllers.v1.Transactions.WarehouseReceiptsController.GetAllByType(WarehouseReceiptType type) in D:\Dev\ArdaManager\src\Server\Controllers\v1\Transactions\WarehouseReceiptsController.cs:line 36
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.Policy.AuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at ArdaManager.Server.Middlewares.RequestCultureMiddleware.InvokeAsync(HttpContext context) in D:\Dev\ArdaManager\src\Server\Middlewares\RequestCultureMiddleware.cs:line 39
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at ArdaManager.Server.Middlewares.ErrorHandlerMiddleware.Invoke(HttpContext context) in D:\Dev\ArdaManager\src\Server\Middlewares\ErrorHandlerMiddleware.cs:line 29
+ClientConnectionId:0f04812e-6097-47ca-a016-6eff40690095
+Error Number:207,State:1,Class:16
+2023-04-05 22:14:29.982 +03:00 [ERR] Failed executing DbCommand (65ms) [Parameters=[@__request_WarehouseReceiptType_0='0'], CommandType='"Text"', CommandTimeout='30']
+SELECT [b].[DocNo], [b].[DocDate], [b].[DocType], [b].[Id], [b].[Description], [t].[Id], [t].[Name], [w].[RelatedCompanyId], [t0].[Name], [t1].[Id], [t1].[Name], [w].[WarehouseReceiptType], [w].[WayBillDate], [w].[WayBillNo], [b].[DocState], [b].[NextDocId], [b].[PrevDocId], [w].[PurchaseOrderDocNo], [w].[PurchaseOrderId], [t2].[DocNo], [w].[PurchaseRequestId], [w].[RequesterDepartment], [w].[RequesterId], [w].[RequesterName], [w].[WarehouseOfficerId], [w].[WarehouseOfficerName], [b].[CreatedBy], [t0].[Id], [t2].[Id], [t3].[Id], [t3].[ProductId], [t3].[ProductName], [t3].[ProductCode], [t3].[Quantity], [t3].[MeasurementUnitCode], [t3].[MeasurementUnitId], [t3].[MeasurementUnitName], [t3].[Price], [t3].[RackCode], [t3].[RackId], [t3].[RackName], [t3].[RowNo], [t3].[WarehouseReceiptId], [t3].[CurrencyCode], [t3].[CurrencyName], [t3].[CurrencyId], [t3].[Description], [t3].[DiscountAmount], [t3].[DiscountPercentage], [t3].[ExchangeRate], [t3].[PurchaseOrderRowId], [t3].[TaxAmount], [t3].[TaxCode], [t3].[TaxId], [t3].[TotalAmount], [t3].[MeasurementUnitSystem], [t3].[Id0], [t3].[Id1], [t3].[Id2]
+FROM [BaseDocs] AS [b]
+INNER JOIN [WarehouseReceipts] AS [w] ON [b].[Id] = [w].[Id]
+INNER JOIN (
+    SELECT [b0].[Id], [b0].[Name]
+    FROM [BaseEntities] AS [b0]
+    INNER JOIN [Warehouses] AS [w0] ON [b0].[Id] = [w0].[Id]
+) AS [t] ON [w].[WarehouseId] = [t].[Id]
+LEFT JOIN (
+    SELECT [b1].[Id], [b1].[Name]
+    FROM [BaseEntities] AS [b1]
+    INNER JOIN [Companies] AS [c] ON [b1].[Id] = [c].[Id]
+) AS [t0] ON [w].[RelatedCompanyId] = [t0].[Id]
+LEFT JOIN (
+    SELECT [b2].[Id], [b2].[Name]
+    FROM [BaseEntities] AS [b2]
+    INNER JOIN [Warehouses] AS [w1] ON [b2].[Id] = [w1].[Id]
+) AS [t1] ON [w].[RelatedWarehouseId] = [t1].[Id]
+LEFT JOIN (
+    SELECT [b3].[Id], [b3].[DocNo]
+    FROM [BaseDocs] AS [b3]
+    INNER JOIN [PurchaseRequests] AS [p] ON [b3].[Id] = [p].[Id]
+) AS [t2] ON [w].[PurchaseRequestId] = [t2].[Id]
+LEFT JOIN (
+    SELECT [w2].[Id], [w2].[ProductId], [t4].[Name] AS [ProductName], [t4].[Code] AS [ProductCode], [w2].[Quantity], [m0].[Code] AS [MeasurementUnitCode], [m0].[Id] AS [MeasurementUnitId], [m0].[Name] AS [MeasurementUnitName], [w2].[Price], [r].[Code] AS [RackCode], CASE
+        WHEN [w2].[RackId] IS NOT NULL THEN [w2].[RackId]
+        ELSE 0
+    END AS [RackId], [r].[Name] AS [RackName], [w2].[RowNo], [w2].[WarehouseReceiptId], [c0].[Code] AS [CurrencyCode], [c0].[Name] AS [CurrencyName], [c0].[Id] AS [CurrencyId], [w2].[Description], [w2].[DiscountAmount], [w2].[DiscountPercentage], [w2].[ExchangeRate], [w2].[PurchaseOrderRowId], [w2].[TaxAmount], [t5].[Code] AS [TaxCode], [w2].[TaxId], [w2].[TotalAmount], [m0].[System] AS [MeasurementUnitSystem], [t4].[Id] AS [Id0], [r].[Id] AS [Id1], [t5].[Id] AS [Id2]
+    FROM [WarehouseReceiptRows] AS [w2]
+    INNER JOIN (
+        SELECT [b4].[Id], [b4].[Code], [b4].[Name]
+        FROM [BaseEntities] AS [b4]
+        INNER JOIN [Products] AS [p0] ON [b4].[Id] = [p0].[Id]
+    ) AS [t4] ON [w2].[ProductId] = [t4].[Id]
+    INNER JOIN [MeasurementUnits] AS [m0] ON [w2].[MeasurementUnitId] = [m0].[Id]
+    LEFT JOIN [Racks] AS [r] ON [w2].[RackId] = [r].[Id]
+    LEFT JOIN [Currencies] AS [c0] ON [w2].[CurrencyId] = [c0].[Id]
+    LEFT JOIN [Taxes] AS [t5] ON [w2].[TaxId] = [t5].[Id]
+) AS [t3] ON [b].[Id] = [t3].[WarehouseReceiptId]
+WHERE [w].[WarehouseReceiptType] = @__request_WarehouseReceiptType_0
+ORDER BY [b].[Id], [t].[Id], [t0].[Id], [t1].[Id], [t2].[Id], [t3].[Id], [t3].[Id0], [t3].[MeasurementUnitId], [t3].[Id1], [t3].[CurrencyId]
+2023-04-05 22:14:30.004 +03:00 [ERR] An exception occurred while iterating over the results of a query for context type 'ArdaManager.Infrastructure.Contexts.VappContext'.
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'WarehouseOfficerName'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__209_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__272_0(Object obj)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:7264d27f-e88a-4d26-90cf-9a794c7a89ff
+Error Number:207,State:1,Class:16
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'WarehouseOfficerName'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__209_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__272_0(Object obj)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:7264d27f-e88a-4d26-90cf-9a794c7a89ff
+Error Number:207,State:1,Class:16
+2023-04-05 22:14:32.247 +03:00 [ERR] An unhandled exception occurred while processing the request.
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'WarehouseOfficerName'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__209_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__272_0(Object obj)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at LazyCache.CachingService.GetOrAddAsync[T](String key, Func`2 addItemFactory, MemoryCacheEntryOptions policy)
+   at ArdaManager.Application.Features.Docs.WarehouseReceipts.Queries.GetAll.GetAllWarehouseReceiptsCachedQueryHandler.Handle(GetAllWarehouseReceiptsQuery request, CancellationToken cancellationToken) in D:\Dev\ArdaManager\src\Application\Features\Docs\WarehouseReceipts\Queries\GetAll\GetAllWarehouseReceiptsQuery.cs:line 118
+   at MediatR.Pipeline.RequestExceptionProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at MediatR.Pipeline.RequestExceptionProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at MediatR.Pipeline.RequestExceptionActionProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at MediatR.Pipeline.RequestExceptionActionProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at MediatR.Pipeline.RequestPostProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at MediatR.Pipeline.RequestPreProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at ArdaManager.Server.Controllers.v1.Transactions.WarehouseReceiptsController.GetAll() in D:\Dev\ArdaManager\src\Server\Controllers\v1\Transactions\WarehouseReceiptsController.cs:line 23
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at ArdaManager.Server.Middlewares.RequestCultureMiddleware.InvokeAsync(HttpContext context) in D:\Dev\ArdaManager\src\Server\Middlewares\RequestCultureMiddleware.cs:line 39
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at ArdaManager.Server.Middlewares.ErrorHandlerMiddleware.Invoke(HttpContext context) in D:\Dev\ArdaManager\src\Server\Middlewares\ErrorHandlerMiddleware.cs:line 29
+ClientConnectionId:7264d27f-e88a-4d26-90cf-9a794c7a89ff
+Error Number:207,State:1,Class:16
+2023-04-05 22:14:32.289 +03:00 [ERR] Unhandled exception occurred.
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'WarehouseOfficerName'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__209_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__272_0(Object obj)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at LazyCache.CachingService.GetOrAddAsync[T](String key, Func`2 addItemFactory, MemoryCacheEntryOptions policy)
+   at ArdaManager.Application.Features.Docs.WarehouseReceipts.Queries.GetAll.GetAllWarehouseReceiptsCachedQueryHandler.Handle(GetAllWarehouseReceiptsQuery request, CancellationToken cancellationToken) in D:\Dev\ArdaManager\src\Application\Features\Docs\WarehouseReceipts\Queries\GetAll\GetAllWarehouseReceiptsQuery.cs:line 118
+   at MediatR.Pipeline.RequestExceptionProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at MediatR.Pipeline.RequestExceptionProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at MediatR.Pipeline.RequestExceptionActionProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at MediatR.Pipeline.RequestExceptionActionProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at MediatR.Pipeline.RequestPostProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at MediatR.Pipeline.RequestPreProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at ArdaManager.Server.Controllers.v1.Transactions.WarehouseReceiptsController.GetAll() in D:\Dev\ArdaManager\src\Server\Controllers\v1\Transactions\WarehouseReceiptsController.cs:line 23
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at ArdaManager.Server.Middlewares.RequestCultureMiddleware.InvokeAsync(HttpContext context) in D:\Dev\ArdaManager\src\Server\Middlewares\RequestCultureMiddleware.cs:line 39
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at ArdaManager.Server.Middlewares.ErrorHandlerMiddleware.Invoke(HttpContext context) in D:\Dev\ArdaManager\src\Server\Middlewares\ErrorHandlerMiddleware.cs:line 29
+ClientConnectionId:7264d27f-e88a-4d26-90cf-9a794c7a89ff
+Error Number:207,State:1,Class:16
+2023-04-05 22:16:16.653 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-04-05 22:16:17.265 +03:00 [INF] Hosting environment: Development
+2023-04-05 22:16:17.275 +03:00 [INF] Content root path: D:\Dev\ArdaManager\src\Server\
+2023-04-05 22:52:26.591 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-04-05 22:52:27.040 +03:00 [INF] Hosting environment: Development
+2023-04-05 22:52:27.047 +03:00 [INF] Content root path: D:\Dev\ArdaManager\src\Server\
+2023-04-05 23:18:30.476 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-04-05 23:18:30.968 +03:00 [INF] Hosting environment: Development
+2023-04-05 23:18:30.986 +03:00 [INF] Content root path: D:\Dev\ArdaManager\src\Server\
+2023-04-05 23:42:51.201 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-04-05 23:42:51.793 +03:00 [INF] Hosting environment: Development
+2023-04-05 23:42:51.803 +03:00 [INF] Content root path: D:\Dev\ArdaManager\src\Server\

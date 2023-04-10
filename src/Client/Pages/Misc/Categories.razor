@@ -1,0 +1,170 @@
+﻿@page "/misc/categories"
+@attribute [Authorize(Policy = Permissions.Categories.View)]
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Categories> _localizer
+@inject ContextMenuService ContextMenuService
+@using ArdaManager.Application.Extensions
+@using ArdaManager.Application.Features.Categories.Queries.GetAll
+
+@using Radzen
+@using Radzen.Blazor
+<style>
+    .mud-table-container {
+        overflow: auto;
+    }
+</style>
+
+<HeroTitle Title="@_localizer["Categories"]" Description="@_localizer["Manage Categories."]" />
+@if (!_loaded)
+{
+    <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+}
+else
+{
+    <MudPaper>
+        <div class="justify-center mud-text-align-center">
+            @if (_canCreateCategories)
+            {
+                <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" Color="Color.Primary" OnClick="(() => InvokeModal(0))" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">@_localizer["Create"]</MudButton>
+                <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" OnClick="GetCategoriesAsync" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">@_localizer["Reload"]</MudButton>
+
+            }
+            else
+            {
+                <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" OnClick="GetCategoriesAsync" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">@_localizer["Reload"]</MudButton>
+            }
+        </div>
+    </MudPaper>
+
+
+    <RadzenDataGrid @ref="grid" AllowFiltering="true" AllowSorting="true" AllowColumnResize="true" ExpandMode="DataGridExpandMode.Single"
+                Data="@rootCategories" TItem="GetAllCategoriesResponse" RowRender="@RowRender" LoadChildData="@LoadChildData" CellContextMenu="@OnCellContextMenu"
+                AllowGrouping="true" HideGroupedColumn="true" GroupRowRender="OnGroupRowRender" GroupRowExpand="OnGroupRowExpand" GroupRowCollapse="OnGroupRowCollapse" Group="@OnGroup">
+        <Columns>
+            <!-- <RadzenDataGridColumn TItem="Employee" Property="EmployeeID" Filterable="false" Title="ID" Frozen="true" Width="120px" /> -->
+
+            <RadzenDataGridColumn TItem="GetAllCategoriesResponse" Property="Code" Title="Kod" Width="240px" />
+            <RadzenDataGridColumn TItem="GetAllCategoriesResponse" Property="Name" Title="Kategori Adı" Width="240px" />
+            <RadzenDataGridColumn TItem="GetAllCategoriesResponse" Property="Type" Title="Tip">
+                <Template Context="category">
+                    @category.Type.ToDescriptionString()
+                </Template>
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="GetAllCategoriesResponse" Context="order" Filterable="false" Sortable="false" TextAlign="TextAlign.Right" Width="156px">
+                <Template Context="context">
+                    <RadzenButton  Icon="subdirectory_arrow_left" ButtonStyle="ButtonStyle.Success" Variant="Radzen.Variant.Flat" Size="ButtonSize.Medium" Click="@(args => InvokeModal(0,@context.Id))" @onclick:stopPropagation="true"></RadzenButton>
+                    <RadzenButton Icon="edit" ButtonStyle="ButtonStyle.Light" Variant="Radzen.Variant.Flat" Size="ButtonSize.Medium" Click="@(args => InvokeModal(@context.Id))" @onclick:stopPropagation="true"></RadzenButton>
+                    @if (context.SubCategories == null || context.SubCategories.Count == 0)
+                    { 
+                        <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Variant="Radzen.Variant.Flat" Shade="Shade.Lighter" Size="ButtonSize.Medium" Class="my-1 ms-1" Click="@(args => Delete(@context.Id))" @onclick:stopPropagation="true"></RadzenButton>
+                    }
+                </Template>
+                
+            </RadzenDataGridColumn>
+        </Columns>
+    </RadzenDataGrid>
+
+
+
+
+
+
+
+    @*
+    <MudPaper Width="300px" Elevation="0">
+        <MudTreeView T="string">
+            <MudTreeViewItem Value="@("Root")">
+            @foreach (var item in _productCategoryList)
+            {
+                <MudTreeViewItem Value="@(item.Name)">
+                    @foreach (var sub in item.SubCategories)
+                    {
+                        <MudTreeViewItem Value="@(sub.Name)" />
+                    }
+                </MudTreeViewItem>
+            }
+            </MudTreeViewItem>
+            
+        </MudTreeView>
+    </MudPaper>
+    
+
+    <MudTable Hover="true" Elevation="25" Items="_productCategoryList" Dense="true" Bordered="true" Striped="true" Filter="new Func<GetAllCategoriesResponse, bool>(Search)" @bind-productCategory="_productCategory">
+        <ToolBarContent>
+            <div class="justify-center mud-text-align-center">
+                @if (_canCreateCategories)
+                {
+                    <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" Color="Color.Primary" OnClick="(() => InvokeModal())" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">@_localizer["Create"]</MudButton>
+                    <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" OnClick="GetCategoriesAsync" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">@_localizer["Reload"]</MudButton>
+
+                }
+                else
+                {
+                    <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" OnClick="GetCategoriesAsync" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">@_localizer["Reload"]</MudButton>
+                }
+            </div>
+            <MudSpacer />
+            @if (_canSearchCategories)
+            {
+                <MudTextField @bind-Value="_searchString" Immediate="true" Placeholder="@_localizer["Search for Categories"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0 mb-3"></MudTextField>
+            }
+        </ToolBarContent>
+        <HeaderContent>
+            
+            <MudTh><MudTableSortLabel SortBy="new Func<GetAllCategoriesResponse, object>(x => x.Code)">@_localizer["Code"]</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<GetAllCategoriesResponse, object>(x => x.Type.ToDescriptionString())">@_localizer["Type"]</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<GetAllCategoriesResponse, object>(x => x.Name)">@_localizer["Name"]</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<GetAllCategoriesResponse, object>(x => x.Description)">@_localizer["Description"]</MudTableSortLabel></MudTh>
+            <MudTh Style="text-align:right">@_localizer["Actions"]</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            
+            <MudTd DataLabel="Code">
+                <MudHighlighter Text="@context.Code" HighlightedText="@_searchString" />
+            </MudTd>
+            <MudTd DataLabel="Type">
+                <MudHighlighter Text="@context.Type.ToDescriptionString()" HighlightedText="@_searchString" />
+            </MudTd>
+            <MudTd DataLabel="Name">
+                <MudHighlighter Text="@context.Name" HighlightedText="@_searchString" />
+            </MudTd>
+            <MudTd DataLabel="Description">
+                <MudHighlighter Text="@context.Description" HighlightedText="@_searchString" />
+            </MudTd>
+            
+            <MudTd DataLabel="Actions" Style="text-align: right">
+                @if (_canEditCategories || _canDeleteCategories)
+                    {
+                    <MudMenu Label="@_localizer["Actions"]" Variant="MudBlazor.Variant.Filled" DisableElevation="true" EndIcon="@Icons.Filled.KeyboardArrowDown" IconColor="Color.Secondary" Direction="Direction.Left" OffsetX="true">
+                        @if (_canEditCategories)
+                            {
+                            <MudMenuItem @onclick="@(() => InvokeModal(@context.Id))">@_localizer["Edit"]</MudMenuItem>
+                            }
+                        @if (_canDeleteCategories)
+                            {
+                            <MudMenuItem @onclick="@(() => Delete(@context.Id))">@_localizer["Delete"]</MudMenuItem>
+                            }
+                    </MudMenu>
+                    }
+                    else
+                    {
+                    <MudButton Variant="MudBlazor.Variant.Filled"
+                               DisableElevation="true"
+                               StartIcon="@Icons.Material.Filled.DoNotTouch"
+                               IconColor="Color.Secondary"
+                               Size="Size.Small"
+                               Color="Color.Surface">
+                        @_localizer["No Allowed Actions"]
+                    </MudButton>
+                    }
+            </MudTd>
+        </RowTemplate>
+        <FooterContent>
+        </FooterContent>
+        <PagerContent>
+            <TablePager />
+        </PagerContent>
+    </MudTable>
+    *@
+
+    
+}

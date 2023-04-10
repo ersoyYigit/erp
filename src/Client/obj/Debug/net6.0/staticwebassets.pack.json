@@ -1,0 +1,197 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\Dev\\ArdaManager\\src\\Client\\bin\\Debug\\net6.0\\wwwroot\\_framework\\blazor.webassembly.js",
+      "PackagePath": "staticwebassets\\_framework\\blazor.webassembly.js"
+    },
+    {
+      "Id": "D:\\Dev\\ArdaManager\\src\\Client\\obj\\Debug\\net6.0\\build-gz\\sEp+AS19.gz",
+      "PackagePath": "staticwebassets\\_framework\\blazor.webassembly.js.gz"
+    },
+    {
+      "Id": "D:\\Dev\\ArdaManager\\src\\Client\\obj\\Debug\\net6.0\\scopedcss\\bundle\\ArdaManager.Client.styles.css",
+      "PackagePath": "staticwebassets\\ArdaManager.Client.styles.css"
+    },
+    {
+      "Id": "D:\\Dev\\ArdaManager\\src\\Client\\wwwroot\\Files\\Images\\Products\\1a948c29-6a3c-4d31-84f4-dad7087b20a6-P-02-b77e4600-4315-4de4-8cef-204d3af0f822.png",
+      "PackagePath": "staticwebassets\\Files\\Images\\Products\\1a948c29-6a3c-4d31-84f4-dad7087b20a6-P-02-b77e4600-4315-4de4-8cef-204d3af0f822.png"
+    },
+    {
+      "Id": "D:\\Dev\\ArdaManager\\src\\Client\\wwwroot\\Files\\Images\\Products\\1e628055-96ab-410b-9cdb-320e28c03a0f-P-01.png",
+      "PackagePath": "staticwebassets\\Files\\Images\\Products\\1e628055-96ab-410b-9cdb-320e28c03a0f-P-01.png"
+    },
+    {
+      "Id": "D:\\Dev\\ArdaManager\\src\\Client\\wwwroot\\Files\\Images\\Products\\34313d34-9f42-4298-b52a-3a7f52fb0f07-P-01.png",
+      "PackagePath": "staticwebassets\\Files\\Images\\Products\\34313d34-9f42-4298-b52a-3a7f52fb0f07-P-01.png"
+    },
+    {
+      "Id": "D:\\Dev\\ArdaManager\\src\\Client\\wwwroot\\Files\\Images\\Products\\34b37829-956f-4152-a5aa-1c5084a05da8-P-01.png",
+      "PackagePath": "staticwebassets\\Files\\Images\\Products\\34b37829-956f-4152-a5aa-1c5084a05da8-P-01.png"
+    },
+    {
+      "Id": "D:\\Dev\\ArdaManager\\src\\Client\\wwwroot\\Files\\Images\\Products\\67bab025-1726-44cc-aed9-e2e2a8e3cfa4-P-01.png",
+      "PackagePath": "staticwebassets\\Files\\Images\\Products\\67bab025-1726-44cc-aed9-e2e2a8e3cfa4-P-01.png"
+    },
+    {
+      "Id": "D:\\Dev\\ArdaManager\\src\\Client\\wwwroot\\Files\\Images\\Products\\P-01 (1).png",
+      "PackagePath": "staticwebassets\\Files\\Images\\Products\\P-01 (1).png"
+    },
+    {
+      "Id": "D:\\Dev\\ArdaManager\\src\\Client\\wwwroot\\Files\\Images\\Products\\P-01.png",
+      "PackagePath": "staticwebassets\\Files\\Images\\Products\\P-01.png"
+    },
+    {
+      "Id": "D:\\Dev\\ArdaManager\\src\\Client\\wwwroot\\Files\\Images\\Products\\b90cc171-9f91-4eee-b2f5-283321311427-P-9947-6acbd62c-f7cb-4824-9676-78ed1fe92d4d.png",
+      "PackagePath": "staticwebassets\\Files\\Images\\Products\\b90cc171-9f91-4eee-b2f5-283321311427-P-9947-6acbd62c-f7cb-4824-9676-78ed1fe92d4d.png"
+    },
+    {
+      "Id": "D:\\Dev\\ArdaManager\\src\\Client\\wwwroot\\Files\\Images\\Products\\cafb9be0-adcf-4ee8-a009-3fe962eabf77-P-01.png",
+      "PackagePath": "staticwebassets\\Files\\Images\\Products\\cafb9be0-adcf-4ee8-a009-3fe962eabf77-P-01.png"
+    },
+    {
+      "Id": "D:\\Dev\\ArdaManager\\src\\Client\\wwwroot\\Files\\Images\\Products\\d29ba544-443d-48d1-aa81-718dded1389e-P-10-493d7688-d6dd-4276-94b2-436182e688a6.png",
+      "PackagePath": "staticwebassets\\Files\\Images\\Products\\d29ba544-443d-48d1-aa81-718dded1389e-P-10-493d7688-d6dd-4276-94b2-436182e688a6.png"
+    },
+    {
+      "Id": "D:\\Dev\\ArdaManager\\src\\Client\\wwwroot\\Files\\Images\\Products\\f6392523-aca8-4d7a-b8e5-f4a1d9dd21d3-P-10-1858b078-dffa-41dc-909a-e2d25041552f.png",
+      "PackagePath": "staticwebassets\\Files\\Images\\Products\\f6392523-aca8-4d7a-b8e5-f4a1d9dd21d3-P-10-1858b078-dffa-41dc-909a-e2d25041552f.png"
+    },
+    {
+      "Id": "D:\\Dev\\ArdaManager\\src\\Client\\wwwroot\\Files\\Images\\Products\\f7573b76-f22b-44b6-884e-9aa7e750510b-P-01.png",
+      "PackagePath": "staticwebassets\\Files\\Images\\Products\\f7573b76-f22b-44b6-884e-9aa7e750510b-P-01.png"
+    },
+    {
+      "Id": "D:\\Dev\\ArdaManager\\src\\Client\\wwwroot\\Files\\Images\\Static\\placeholder-image.png",
+      "PackagePath": "staticwebassets\\Files\\Images\\Static\\placeholder-image.png"
+    },
+    {
+      "Id": "D:\\Dev\\ArdaManager\\src\\Client\\wwwroot\\appsettings.Development.json",
+      "PackagePath": "staticwebassets\\appsettings.Development.json"
+    },
+    {
+      "Id": "D:\\Dev\\ArdaManager\\src\\Client\\wwwroot\\appsettings.json",
+      "PackagePath": "staticwebassets\\appsettings.json"
+    },
+    {
+      "Id": "D:\\Dev\\ArdaManager\\src\\Client\\wwwroot\\css\\Main.css",
+      "PackagePath": "staticwebassets\\css\\Main.css"
+    },
+    {
+      "Id": "D:\\Dev\\ArdaManager\\src\\Client\\wwwroot\\css\\loader.css",
+      "PackagePath": "staticwebassets\\css\\loader.css"
+    },
+    {
+      "Id": "D:\\Dev\\ArdaManager\\src\\Client\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "D:\\Dev\\ArdaManager\\src\\Client\\wwwroot\\icon-192.png",
+      "PackagePath": "staticwebassets\\icon-192.png"
+    },
+    {
+      "Id": "D:\\Dev\\ArdaManager\\src\\Client\\wwwroot\\icon-256.png",
+      "PackagePath": "staticwebassets\\icon-256.png"
+    },
+    {
+      "Id": "D:\\Dev\\ArdaManager\\src\\Client\\wwwroot\\icon-512.png",
+      "PackagePath": "staticwebassets\\icon-512.png"
+    },
+    {
+      "Id": "D:\\Dev\\ArdaManager\\src\\Client\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "D:\\Dev\\ArdaManager\\src\\Client\\wwwroot\\js\\custom.js",
+      "PackagePath": "staticwebassets\\js\\custom.js"
+    },
+    {
+      "Id": "D:\\Dev\\ArdaManager\\src\\Client\\wwwroot\\js\\file.js",
+      "PackagePath": "staticwebassets\\js\\file.js"
+    },
+    {
+      "Id": "D:\\Dev\\ArdaManager\\src\\Client\\wwwroot\\js\\scroll.js",
+      "PackagePath": "staticwebassets\\js\\scroll.js"
+    },
+    {
+      "Id": "D:\\Dev\\ArdaManager\\src\\Client\\wwwroot\\js\\sounds.js",
+      "PackagePath": "staticwebassets\\js\\sounds.js"
+    },
+    {
+      "Id": "D:\\Dev\\ArdaManager\\src\\Client\\wwwroot\\manifest.json",
+      "PackagePath": "staticwebassets\\manifest.json"
+    },
+    {
+      "Id": "D:\\Dev\\ArdaManager\\src\\Client\\wwwroot\\media\\Images\\C1.png",
+      "PackagePath": "staticwebassets\\media\\Images\\C1.png"
+    },
+    {
+      "Id": "D:\\Dev\\ArdaManager\\src\\Client\\wwwroot\\media\\Images\\C2.png",
+      "PackagePath": "staticwebassets\\media\\Images\\C2.png"
+    },
+    {
+      "Id": "D:\\Dev\\ArdaManager\\src\\Client\\wwwroot\\media\\Images\\blank.gif",
+      "PackagePath": "staticwebassets\\media\\Images\\blank.gif"
+    },
+    {
+      "Id": "D:\\Dev\\ArdaManager\\src\\Client\\wwwroot\\media\\Images\\delete.gif",
+      "PackagePath": "staticwebassets\\media\\Images\\delete.gif"
+    },
+    {
+      "Id": "D:\\Dev\\ArdaManager\\src\\Client\\wwwroot\\media\\Images\\edit.gif",
+      "PackagePath": "staticwebassets\\media\\Images\\edit.gif"
+    },
+    {
+      "Id": "D:\\Dev\\ArdaManager\\src\\Client\\wwwroot\\media\\Images\\expand.png",
+      "PackagePath": "staticwebassets\\media\\Images\\expand.png"
+    },
+    {
+      "Id": "D:\\Dev\\ArdaManager\\src\\Client\\wwwroot\\media\\Images\\filter.png",
+      "PackagePath": "staticwebassets\\media\\Images\\filter.png"
+    },
+    {
+      "Id": "D:\\Dev\\ArdaManager\\src\\Client\\wwwroot\\media\\Images\\sortAsc.png",
+      "PackagePath": "staticwebassets\\media\\Images\\sortAsc.png"
+    },
+    {
+      "Id": "D:\\Dev\\ArdaManager\\src\\Client\\wwwroot\\media\\Images\\sortDec.png",
+      "PackagePath": "staticwebassets\\media\\Images\\sortDec.png"
+    },
+    {
+      "Id": "D:\\Dev\\ArdaManager\\src\\Client\\wwwroot\\media\\Images\\toggle.png",
+      "PackagePath": "staticwebassets\\media\\Images\\toggle.png"
+    },
+    {
+      "Id": "D:\\Dev\\ArdaManager\\src\\Client\\wwwroot\\media\\ardacam-logo.png",
+      "PackagePath": "staticwebassets\\media\\ardacam-logo.png"
+    },
+    {
+      "Id": "D:\\Dev\\ArdaManager\\src\\Client\\wwwroot\\media\\notification.mp3",
+      "PackagePath": "staticwebassets\\media\\notification.mp3"
+    },
+    {
+      "Id": "D:\\Dev\\ArdaManager\\src\\Client\\wwwroot\\media\\vapp.png",
+      "PackagePath": "staticwebassets\\media\\vapp.png"
+    },
+    {
+      "Id": "D:\\Dev\\ArdaManager\\src\\Client\\wwwroot\\service-worker.js",
+      "PackagePath": "staticwebassets\\service-worker.js"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.ArdaManager.Client.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.build.ArdaManager.Client.props",
+      "PackagePath": "build\\ArdaManager.Client.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildMultiTargeting.ArdaManager.Client.props",
+      "PackagePath": "buildMultiTargeting\\ArdaManager.Client.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildTransitive.ArdaManager.Client.props",
+      "PackagePath": "buildTransitive\\ArdaManager.Client.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

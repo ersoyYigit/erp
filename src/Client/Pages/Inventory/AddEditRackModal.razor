@@ -1,0 +1,66 @@
+﻿@inject Microsoft.Extensions.Localization.IStringLocalizer<AddEditWarehouseModal> _localizer
+
+<EditForm Model="@AddEditRackModel" OnValidSubmit="SaveAsync">
+    <FluentValidationValidator @ref="_fluentValidationValidator" />
+    <MudDialog>
+        <TitleContent>
+            @{
+                if (AddEditRackModel.Id == 0)
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.Add" Class="mr-3 mb-n1" />
+                        @_localizer["Create"]
+                    </MudText>
+                }
+                else
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.Update" Class="mr-3 mb-n1" />
+                        @_localizer["Update"]
+                    </MudText>
+                }
+            }
+        </TitleContent>
+        <DialogContent>
+            <MudGrid>
+                @if (AddEditRackModel.Id != 0)
+                {
+                    <MudItem xs="12" md="6">
+                        <MudTextField Disabled For="@(() => AddEditRackModel.Id)" @bind-Value="AddEditRackModel.Id" Label="@_localizer["Id"]" />
+                    </MudItem>
+                }
+                <MudItem xs="12" md="6">
+                    <MudTextField T="string" For="@(() => AddEditRackModel.Code)" @bind-Value="AddEditRackModel.Code" Label="@_localizer["Code"]" />
+                </MudItem>
+                <MudItem xs="12" md="6">
+                    <MudTextField T="string" For="@(() => AddEditRackModel.Name)" @bind-Value="AddEditRackModel.Name" Label="@_localizer["Name"]" />
+                </MudItem>
+
+                <MudItem xs="12" md="6">
+                    <MudTextField T="string" For="@(() => AddEditRackModel.Section)" @bind-Value="AddEditRackModel.Section" Label="@_localizer["Kısım"]" />
+                </MudItem>
+
+                <MudItem xs="12" md="6">
+                    <MudTextField T="string" For="@(() => AddEditRackModel.SectionCode)" @bind-Value="AddEditRackModel.SectionCode" Label="@_localizer["Kısım Kodu"]" />
+                </MudItem>
+                <MudItem xs="12" md="6">
+                    <MudTextField For="@(() => AddEditRackModel.Description)" @bind-Value="AddEditRackModel.Description" Label="@_localizer["Description"]" />
+                </MudItem>
+                <MudItem xs="12" md="6">
+                    <MudAutocomplete T="int" Label="@_localizer["Warehouse"]"    For="@(() => AddEditRackModel.WarehouseId)"    @bind-Value="AddEditRackModel.WarehouseId"    ResetValueOnEmptyText="true"  SearchFunc="@SearchWarehouses"  Variant="MudBlazor.Variant.Filled" ToStringFunc="@(i => _warehouses.FirstOrDefault(b => b.Id == i)?.Name ?? string.Empty)" OffsetY="true" />
+                </MudItem>
+            </MudGrid>
+        </DialogContent>
+        <DialogActions>
+            <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" OnClick="Cancel">@_localizer["Cancel"]</MudButton>
+            @if (AddEditRackModel.Id != 0)
+            {
+                <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" ButtonType="MudBlazor.ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Secondary">@_localizer["Update"]</MudButton>
+            }
+            else
+            {
+                <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" ButtonType="MudBlazor.ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Success">@_localizer["Save"]</MudButton>
+            }
+        </DialogActions>
+    </MudDialog>
+</EditForm>

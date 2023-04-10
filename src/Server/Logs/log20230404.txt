@@ -1,0 +1,89 @@
+2023-04-04 00:09:52.121 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-04-04 00:09:52.347 +03:00 [INF] Hosting environment: Development
+2023-04-04 00:09:52.390 +03:00 [INF] Content root path: D:\Dev\ArdaManager\src\Server\
+2023-04-04 00:20:33.849 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-04-04 00:20:34.114 +03:00 [INF] Hosting environment: Development
+2023-04-04 00:20:34.120 +03:00 [INF] Content root path: D:\Dev\ArdaManager\src\Server\
+2023-04-04 14:09:04.486 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-04-04 14:09:04.760 +03:00 [INF] Hosting environment: Development
+2023-04-04 14:09:04.765 +03:00 [INF] Content root path: D:\Dev\ArdaManager\src\Server\
+2023-04-04 14:27:58.062 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-04-04 14:27:58.325 +03:00 [INF] Hosting environment: Development
+2023-04-04 14:27:58.331 +03:00 [INF] Content root path: D:\Dev\ArdaManager\src\Server\
+2023-04-04 14:35:20.960 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-04-04 14:35:21.037 +03:00 [INF] Hosting environment: Development
+2023-04-04 14:35:21.073 +03:00 [INF] Content root path: D:\Dev\ArdaManager\src\Server\
+2023-04-04 14:37:37.579 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-04-04 14:37:37.671 +03:00 [INF] Hosting environment: Development
+2023-04-04 14:37:37.739 +03:00 [INF] Content root path: D:\Dev\ArdaManager\src\Server\
+2023-04-04 14:43:40.345 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-04-04 14:43:40.586 +03:00 [INF] Hosting environment: Development
+2023-04-04 14:43:40.591 +03:00 [INF] Content root path: D:\Dev\ArdaManager\src\Server\
+2023-04-04 14:53:27.302 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-04-04 14:53:27.585 +03:00 [INF] Hosting environment: Development
+2023-04-04 14:53:27.592 +03:00 [INF] Content root path: D:\Dev\ArdaManager\src\Server\
+2023-04-04 15:04:28.826 +03:00 [ERR] Connection ID "18374686489066864653", Request ID "4000000e-0002-ff00-b63f-84710c7967bb": An unhandled exception was thrown by the application.
+System.InvalidOperationException: The response headers cannot be modified because the response has already started.
+   at Microsoft.AspNetCore.HttpSys.Internal.HeaderCollection.ThrowIfReadOnly()
+   at Microsoft.AspNetCore.HttpSys.Internal.HeaderCollection.set_Item(String key, StringValues value)
+   at Microsoft.AspNetCore.Http.IHeaderDictionary.set_ContentType(StringValues value)
+   at Microsoft.AspNetCore.Http.DefaultHttpResponse.set_ContentType(String value)
+   at ArdaManager.Server.Middlewares.ErrorHandlerMiddleware.Invoke(HttpContext context) in D:\Dev\ArdaManager\src\Server\Middlewares\ErrorHandlerMiddleware.cs:line 36
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Watch.BrowserRefresh.BrowserRefreshMiddleware.InvokeAsync(HttpContext context)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContextOfT`1.ProcessRequestAsync()
+2023-04-04 15:04:28.826 +03:00 [ERR] Connection ID "17870283322211434503", Request ID "40000008-0000-f800-b63f-84710c7967bb": An unhandled exception was thrown by the application.
+System.InvalidOperationException: The response headers cannot be modified because the response has already started.
+   at Microsoft.AspNetCore.HttpSys.Internal.HeaderCollection.ThrowIfReadOnly()
+   at Microsoft.AspNetCore.HttpSys.Internal.HeaderCollection.set_Item(String key, StringValues value)
+   at Microsoft.AspNetCore.Http.IHeaderDictionary.set_ContentType(StringValues value)
+   at Microsoft.AspNetCore.Http.DefaultHttpResponse.set_ContentType(String value)
+   at ArdaManager.Server.Middlewares.ErrorHandlerMiddleware.Invoke(HttpContext context) in D:\Dev\ArdaManager\src\Server\Middlewares\ErrorHandlerMiddleware.cs:line 36
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Watch.BrowserRefresh.BrowserRefreshMiddleware.InvokeAsync(HttpContext context)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContextOfT`1.ProcessRequestAsync()
+2023-04-04 15:04:28.826 +03:00 [ERR] Connection ID "18086456108620185623", Request ID "40000018-0001-fb00-b63f-84710c7967bb": An unhandled exception was thrown by the application.
+System.InvalidOperationException: The response headers cannot be modified because the response has already started.
+   at Microsoft.AspNetCore.HttpSys.Internal.HeaderCollection.ThrowIfReadOnly()
+   at Microsoft.AspNetCore.HttpSys.Internal.HeaderCollection.set_Item(String key, StringValues value)
+   at Microsoft.AspNetCore.Http.IHeaderDictionary.set_ContentType(StringValues value)
+   at Microsoft.AspNetCore.Http.DefaultHttpResponse.set_ContentType(String value)
+   at ArdaManager.Server.Middlewares.ErrorHandlerMiddleware.Invoke(HttpContext context) in D:\Dev\ArdaManager\src\Server\Middlewares\ErrorHandlerMiddleware.cs:line 36
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Watch.BrowserRefresh.BrowserRefreshMiddleware.InvokeAsync(HttpContext context)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContextOfT`1.ProcessRequestAsync()
+2023-04-04 15:04:32.224 +03:00 [ERR] Connection ID "18374686510541701135", Request ID "40000010-0007-ff00-b63f-84710c7967bb": An unhandled exception was thrown by the application.
+System.InvalidOperationException: The response headers cannot be modified because the response has already started.
+   at Microsoft.AspNetCore.HttpSys.Internal.HeaderCollection.ThrowIfReadOnly()
+   at Microsoft.AspNetCore.HttpSys.Internal.HeaderCollection.set_Item(String key, StringValues value)
+   at Microsoft.AspNetCore.Http.IHeaderDictionary.set_ContentType(StringValues value)
+   at Microsoft.AspNetCore.Http.DefaultHttpResponse.set_ContentType(String value)
+   at ArdaManager.Server.Middlewares.ErrorHandlerMiddleware.Invoke(HttpContext context) in D:\Dev\ArdaManager\src\Server\Middlewares\ErrorHandlerMiddleware.cs:line 36
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Watch.BrowserRefresh.BrowserRefreshMiddleware.InvokeAsync(HttpContext context)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContextOfT`1.ProcessRequestAsync()
+2023-04-04 15:04:32.420 +03:00 [ERR] Connection ID "18158513719837982725", Request ID "40000006-0005-fc00-b63f-84710c7967bb": An unhandled exception was thrown by the application.
+System.InvalidOperationException: The response headers cannot be modified because the response has already started.
+   at Microsoft.AspNetCore.HttpSys.Internal.HeaderCollection.ThrowIfReadOnly()
+   at Microsoft.AspNetCore.HttpSys.Internal.HeaderCollection.set_Item(String key, StringValues value)
+   at Microsoft.AspNetCore.Http.IHeaderDictionary.set_ContentType(StringValues value)
+   at Microsoft.AspNetCore.Http.DefaultHttpResponse.set_ContentType(String value)
+   at ArdaManager.Server.Middlewares.ErrorHandlerMiddleware.Invoke(HttpContext context) in D:\Dev\ArdaManager\src\Server\Middlewares\ErrorHandlerMiddleware.cs:line 36
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Watch.BrowserRefresh.BrowserRefreshMiddleware.InvokeAsync(HttpContext context)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContextOfT`1.ProcessRequestAsync()

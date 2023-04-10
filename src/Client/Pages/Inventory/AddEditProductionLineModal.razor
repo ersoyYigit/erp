@@ -1,0 +1,55 @@
+﻿@inject Microsoft.Extensions.Localization.IStringLocalizer<AddEditProductionLineModal> _localizer
+
+<EditForm Model="@AddEditProductionLineModel" OnValidSubmit="SaveAsync">
+    <FluentValidationValidator @ref="_fluentValidationValidator" />
+    <MudDialog>
+        <TitleContent>
+            @{
+                if (AddEditProductionLineModel.Id == 0)
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.Add" Class="mr-3 mb-n1" />
+                        @_localizer["Üretim Hattı Ekle"]
+                    </MudText>
+                }
+                else
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.Update" Class="mr-3 mb-n1" />
+                        @_localizer["Üretim Hattı Güncelle"]
+                    </MudText>
+                }
+            }
+        </TitleContent>
+        <DialogContent>
+            <MudGrid>
+                @if (AddEditProductionLineModel.Id != 0 && false)
+                {
+                    <MudItem xs="12" md="6">
+                        <MudTextField Disabled For="@(() => AddEditProductionLineModel.Id)" @bind-Value="AddEditProductionLineModel.Id" Label="@_localizer["Id"]" />
+                    </MudItem>
+                }
+                <MudItem xs="12" md="6">
+                    <MudTextField T="string" For="@(() => AddEditProductionLineModel.Code)" @bind-Value="AddEditProductionLineModel.Code" Label="@_localizer["Kod"]" />
+                </MudItem>
+                <MudItem xs="12" md="6">
+                    <MudTextField T="string" For="@(() => AddEditProductionLineModel.Name)" @bind-Value="AddEditProductionLineModel.Name" Label="@_localizer["Ad"]" />
+                </MudItem>
+                <MudItem xs="12" md="6">
+                    <MudTextField For="@(() => AddEditProductionLineModel.Description)" @bind-Value="AddEditProductionLineModel.Description" Label="@_localizer["Açıklama"]" />
+                </MudItem>
+            </MudGrid>
+        </DialogContent>
+        <DialogActions>
+            <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" OnClick="Cancel">@_localizer["İptal"]</MudButton>
+            @if (AddEditProductionLineModel.Id != 0)
+            {
+                <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" ButtonType="MudBlazor.ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Secondary">@_localizer["Güncelle"]</MudButton>
+            }
+            else
+            {
+                <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" ButtonType="MudBlazor.ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Success">@_localizer["Kaydet"]</MudButton>
+            }
+        </DialogActions>
+    </MudDialog>
+</EditForm>

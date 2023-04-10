@@ -1,0 +1,12 @@
+2023-04-07 12:55:50.875 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-04-07 12:55:51.306 +03:00 [INF] Hosting environment: Development
+2023-04-07 12:55:51.341 +03:00 [INF] Content root path: D:\Dev\ArdaManager\src\Server\
+2023-04-07 16:17:32.287 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-04-07 16:17:32.571 +03:00 [INF] Hosting environment: Development
+2023-04-07 16:17:32.613 +03:00 [INF] Content root path: D:\Dev\ArdaManager\src\Server\
+2023-04-07 16:23:05.471 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-04-07 16:23:05.850 +03:00 [INF] Hosting environment: Development
+2023-04-07 16:23:05.857 +03:00 [INF] Content root path: D:\Dev\ArdaManager\src\Server\
+2023-04-07 22:10:45.175 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-04-07 22:10:45.529 +03:00 [INF] Hosting environment: Development
+2023-04-07 22:10:45.632 +03:00 [INF] Content root path: D:\Dev\ArdaManager\src\Server\

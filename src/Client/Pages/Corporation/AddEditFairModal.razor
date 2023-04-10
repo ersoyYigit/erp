@@ -1,0 +1,64 @@
+﻿@using ArdaManager.Application.Extensions
+@using ArdaManager.Domain.Enums
+
+@inject Microsoft.Extensions.Localization.IStringLocalizer<AddEditCompanyModal> _localizer
+
+<EditForm Model="@AddEditFairModel" OnValidSubmit="SaveAsync">
+    <FluentValidationValidator @ref="_fluentValidationValidator" />
+    <MudDialog>
+        <TitleContent>
+            @{
+                if (AddEditFairModel.Id == 0)
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.Add" Class="mr-3 mb-n1" />
+                        @_localizer["Add Fair"]
+                    </MudText>
+                }
+                else
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.Update" Class="mr-3 mb-n1" />
+                        @_localizer["Update Fair"]
+                    </MudText>
+                }
+            }
+        </TitleContent>
+        <DialogContent>
+            <MudGrid>
+                @if (AddEditFairModel.Id != 0)
+                {
+                    <MudItem xs="12" md="6">
+                        <MudTextField Disabled For="@(() => AddEditFairModel.Id)" @bind-Value="AddEditFairModel.Id" Label="@_localizer["Id"]" />
+                    </MudItem>
+                }
+                
+                <MudItem xs="12" md="6">
+                    <MudTextField T="string" For="@(() => AddEditFairModel.Code)" @bind-Value="AddEditFairModel.Code" Label="@_localizer["Code"]" />
+                </MudItem>
+                <MudItem xs="12" md="6">
+                    <MudTextField T="string" For="@(() => AddEditFairModel.Name)" @bind-Value="AddEditFairModel.Name" Label="@_localizer["Name"]" />
+                </MudItem>
+                
+                <MudItem xs="12" md="6">
+                    <MudTextField For="@(() => AddEditFairModel.Description)" @bind-Value="AddEditFairModel.Description" Label="@_localizer["Description"]" />
+                </MudItem>
+                <MudItem xs="12" md="6">
+                    
+                    <MudDatePicker Label="@_localizer["Date"]" For="@(() => AddEditFairModel.Date)" DisplayMonths="2" TitleDateFormat="dddd, dd MMMM" @bind-Date="AddEditFairModel.Date" />
+                </MudItem>
+            </MudGrid>
+        </DialogContent>
+        <DialogActions>
+            <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" OnClick="Cancel">@_localizer["Cancel"]</MudButton>
+            @if (AddEditFairModel.Id != 0)
+            {
+                <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" ButtonType="MudBlazor.ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Secondary">@_localizer["Update"]</MudButton>
+            }
+            else
+            {
+                <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" ButtonType="MudBlazor.ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Success">@_localizer["Save"]</MudButton>
+            }
+        </DialogActions>
+    </MudDialog>
+</EditForm>

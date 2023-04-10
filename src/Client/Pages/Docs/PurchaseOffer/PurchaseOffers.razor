@@ -1,0 +1,91 @@
+﻿@page "/purchase/offers"
+@using ArdaManager.Application.Features.Docs.PurchaseOffers.Queries;
+
+@* Add other required using statements here based on your project structure and dependencies *@
+@* ... *@
+
+<HeroTitle Title="Satın Alma Teklifleri" Description="Teklifleri yönetin." />
+@if (!_loaded)
+{
+    <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+}
+else
+{
+
+    <MudDataGrid T="PurchaseOfferResponse" Items="@_purchaseOfferList" SortMode="SortMode.Multiple" Filterable="true" Groupable="true">
+        <ToolBarContent>
+            @if (_canCreatePurchaseOffers)
+            {
+                <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" Color="Color.Primary" OnClick="(() => InvokeModal())" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">Ekle</MudButton>
+                <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" OnClick="GetPurchaseOffersAsync" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">Yenile</MudButton>
+            }
+            else
+            {
+                <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" OnClick="GetPurchaseOffersAsync" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">Yenile]</MudButton>
+
+            }
+
+            @*
+            <MudSpacer />
+            <MudTextField @bind-Value="_searchString" Placeholder="Search" Adornment="Adornment.Start" Immediate="true"
+                AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>*@
+        </ToolBarContent>
+        <Columns>
+            <HierarchyColumn T="PurchaseOfferResponse"  />
+            <PropertyColumn Property="x => x.DocNo" Title="Doküman No"  />
+            <TemplateColumn Title="Evrak Tarihi" Filterable="false">
+                <CellTemplate>
+                    @if (context.Item.DocDate.HasValue)
+                    {
+                        @context.Item.DocDate.Value.ToString("dd/MM/yyyy")
+                        ;
+                    }
+                </CellTemplate>
+            </TemplateColumn>
+            <TemplateColumn Title="Durumu">
+                <CellTemplate Context="detail">
+                    <DocStateChip DocState="@detail.Item.DocState"></DocStateChip>
+                </CellTemplate>
+            </TemplateColumn>
+
+            <PropertyColumn Property="x => x.CompanyName" Title="Tedarikçi Firma"  />
+            <PropertyColumn Property="x => x.Description" Title="Açıklama" />
+            <PropertyColumn Property="x => x.PurchaseRequestDocNo" Title="Talep" Grouping GroupBy="@(p => p.PrevDoc.DocNo)">
+                <GroupTemplate>
+                    <span style="font-weight:bold">İlgili Talep No: @context.Grouping.Key <MudChip Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Small">Toplanan teklif  @context.Grouping.Count()</MudChip></span>
+                </GroupTemplate>
+            </PropertyColumn>
+            <TemplateColumn CellClass="d-flex justify-end">
+                <CellTemplate>
+                    <MudStack Row>
+                        <MudIconButton Elevation="10" Color="Color.Primary" @onclick="@(() => ChooseOffer(context.Item.Id))" Icon="@Icons.Material.Filled.Approval"></MudIconButton>
+                        <MudIconButton Elevation="10" Color="Color.Primary" @onclick="@(() => InvokeModal(context.Item.Id))" Icon="@Icons.Material.Filled.Edit"></MudIconButton>
+                        <MudIconButton Elevation="10" Color="Color.Error" @onclick="@(() => Delete(@context.Item.Id))" Icon="@Icons.Material.Filled.Delete"></MudIconButton>
+                    </MudStack>
+                </CellTemplate>
+            </TemplateColumn>
+        </Columns>
+        <ChildRowContent >
+            <MudDataGrid T="PurchaseOfferRowResponse" Items="@context.Item.PurchaseOfferRowResponse" ReadOnly="true" Class="custom-datagrid">
+                <Columns>
+                    <PropertyColumn Property="d => d.ProductCode" Title="Ürün Kodu" />
+                    <PropertyColumn Property="d => d.ProductName" Title="Ürün Adı" />
+                    <TemplateColumn Title="Miktar">
+                        <CellTemplate Context="detail">
+                            @($"{detail.Item.Quantity.ToString("N4")} {detail.Item.MeasurementUnitCode}")
+                        </CellTemplate>
+                    </TemplateColumn>
+                    <TemplateColumn Title="Tutar">
+                        <CellTemplate Context="detail">
+                            @($"{detail.Item.Price.ToString("N4")} TL")
+                        </CellTemplate>
+                    </TemplateColumn>
+                    <PropertyColumn Property="d => d.Description" Title="Açıklama" />
+                </Columns>
+            </MudDataGrid>
+        </ChildRowContent>
+        <PagerContent>
+            <MudDataGridPager T="PurchaseOfferResponse" />
+        </PagerContent>
+    </MudDataGrid>
+}

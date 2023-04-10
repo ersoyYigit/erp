@@ -1,0 +1,54 @@
+﻿@inject Microsoft.Extensions.Localization.IStringLocalizer<AddEditCompanyModal> _localizer
+@using ArdaManager.Application.Features.CompanyFairs.Queries.GetByCompany
+@using ArdaManager.Application.Features.Fairs.Queries.GetAll
+
+@using Radzen
+@using Radzen.Blazor
+
+<MudTable  ServerData="@(new Func<TableState, Task<TableData<GetCompanyFairsByCompanyIdResponse>>>(ServerReload))" Hover="true" Elevation="25" Items="_companyFairs" Dense="true" Bordered="true" Striped="true"  @ref="_table">
+    <ToolBarContent>
+
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh><MudTableSortLabel SortBy="new Func<GetCompanyFairsByCompanyIdResponse, object>(x => x.FairName)">@_localizer["Name"]</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<GetCompanyFairsByCompanyIdResponse, object>(x => x.FairDescription)">@_localizer["Description"]</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<GetCompanyFairsByCompanyIdResponse, object>(x => x.FairDate)">@_localizer["Date"]</MudTableSortLabel></MudTh>
+        <MudTh Style="text-align:right">@_localizer["Actions"]</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="@_localizer["Name"]">
+            <MudHighlighter Text="@context.FairName" />
+        </MudTd>
+        <MudTd DataLabel="@_localizer["Description"]">
+            <MudHighlighter Text="@context.FairDescription"  />
+        </MudTd>
+        <MudTd DataLabel="@_localizer["Date"]">
+            <MudHighlighter Text="@context.FairDate.ToString()"  />
+        </MudTd>
+        <MudTd>
+            <MudButton Color="Color.Secondary" @onclick="@(() => Delete(@context.Id))">@_localizer["Remove"]</MudButton>
+        </MudTd>
+    </RowTemplate>
+    <FooterContent>
+    </FooterContent>
+    <PagerContent>
+        <TablePager />
+    </PagerContent>
+</MudTable>
+
+<div class="col-md-10p-3">
+    <RadzenCard>
+        <h4 class="mb-4">@_localizer["Add Relation"]</h4>
+        <RadzenDropDownDataGrid TValue="string" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowFiltering="true" AllowClear="true"
+                    Data=@(_fairs) Style="width: 100%" AllowColumnResize="true" Placeholder="@_localizer["Select Fair To add relation"]"
+                    TextProperty="Name" ValueProperty="Id" AllowFilteringByAllStringColumns="true"  @ref="ddlFairs"
+                    Change=@(args => OnChange(args, "DropDownDataGrid with filtering by all string columns"))>
+            <Columns>
+
+                <RadzenDropDownDataGridColumn Property="Code" Title="Code" Width="100px"/>
+                <RadzenDropDownDataGridColumn Property="Name" Title="Name" Width="200px"/>
+                <RadzenDropDownDataGridColumn Property="Date" Title="Date" Width="200px"/>
+            </Columns>
+        </RadzenDropDownDataGrid>
+    </RadzenCard>
+</div>

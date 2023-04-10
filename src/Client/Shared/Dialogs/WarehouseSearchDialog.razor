@@ -1,0 +1,23 @@
+﻿@using ArdaManager.Application.Features.Warehouses.Queries.GetAll;
+
+<MudDialog>
+    <DialogContent>
+        <MudTextField @ref="SearchInputRef" @bind-Value="SearchTerm" Placeholder="Depo ara..." Adornment="MudBlazor.Adornment.End" AdornmentIcon="@Icons.Material.Filled.Search" DebounceInterval="500" OnDebounceIntervalElapsed="HandleIntervalElapsed" />
+        <MudTable @ref="Table" Items="@_warehouseList" Hover="true" T="GetAllWarehousesResponse" OnRowClick="SelectItem">
+            <HeaderContent>
+                <MudTh>Depo Kodu</MudTh>
+                <MudTh>Depo Adı</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd>@context.Code</MudTd>
+                <MudTd>@context.Name</MudTd>
+            </RowTemplate>
+            <PagerContent>
+                <MudTablePager />
+            </PagerContent>
+        </MudTable>
+    </DialogContent>
+    <DialogActions>
+        <MudButton Variant="MudBlazor.Variant.Filled" Color="Color.Secondary" OnClick="Cancel">İptal</MudButton>
+    </DialogActions>
+</MudDialog>

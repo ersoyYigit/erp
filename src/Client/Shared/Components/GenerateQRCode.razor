@@ -1,0 +1,40 @@
+﻿@using QRCoder
+@using System.IO;
+
+@if (!loadded)
+{
+
+    <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-7" />
+}
+else
+{
+ 
+    <MudImage Src="@Base64BarcodeImage" Elevation="25" Class="rounded-lg ma-4" Width="200"> </MudImage>
+}
+
+@code {
+    [Parameter]
+    public string StringToEncode { get; set; }
+
+    public string Base64BarcodeImage { get; private set; }
+    private bool loadded;
+
+    protected override void OnParametersSet()
+    {
+        loadded = false;
+        base.OnParametersSet();
+        using (QRCodeGenerator qrGenerator = new QRCodeGenerator())
+        {
+            QRCodeData qrCodeData = qrGenerator.CreateQrCode(StringToEncode, QRCodeGenerator.ECCLevel.Q);
+            using (BitmapByteQRCode qrCode = new BitmapByteQRCode(qrCodeData))
+            {
+                var qrCodeImage = qrCode.GetGraphic(20);
+                using (MemoryStream ms = new MemoryStream(qrCodeImage))
+                {
+                    Base64BarcodeImage = $"data:image/png;base64,{Convert.ToBase64String(ms.ToArray())}";
+                    loadded = true;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,311 @@
+﻿@using ArdaManager.Application.Features.Companies.Queries.GetAllPaged;
+@using ArdaManager.Application.Features.Patterns.Queries.GetAll;
+@using ArdaManager.Application.Features.Categories.Queries.GetCategoriesByType
+@using ArdaManager.Application.Extensions
+@using ArdaManager.Application.Features.MeasurementUnits.Queries.GetAll;
+@using ArdaManager.Application.Features.Products.Queries.GetAllPaged
+@using ArdaManager.Application.Features.RecipeItems.Queries.GetByOwnerProductId
+@using ArdaManager.Domain.Enums
+
+@inject Microsoft.Extensions.Localization.IStringLocalizer<AddEditProductModal> _localizer
+
+<EditForm Model="@AddEditMoldModel" OnValidSubmit="SaveAsync">
+    <FluentValidationValidator @ref="_fluentValidationValidator" />
+    <MudDialog>
+
+        <TitleContent>
+            @{
+                if (AddEditMoldModel.Id == 0)
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.Add" Class="mr-3 mb-n1" />
+                        @_localizer["Döküm Ekle"]
+                    </MudText>
+                }
+                else
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.Update" Class="mr-3 mb-n1" />
+                        @_localizer["Döküm Güncelle"]
+                    </MudText>
+                }
+
+            }
+        </TitleContent>
+        <DialogContent>
+            <MudGrid>
+
+                @*MAIN Props*@
+                <MudItem xs="12" md="12">
+                    <MudSimpleTable Elevation="0">
+                        <thead>
+                            <colgroup>
+                                <col span="1" style="width: 40%;">
+                                <col span="1" style="width: 60%;">
+                            </colgroup>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <MudItem xs="12" md="12">
+                                        <MudItem>
+                                            @if (string.IsNullOrEmpty(AddEditMoldModel.ImageDataURL))
+                                            {
+                                                <MudImage Src="Files\\Images\\Static\\placeholder-image.png" Elevation="25" Class="rounded-lg ma-4" Width="200"> </MudImage>
+                                            }
+                                            else
+                                            {
+                                                <MudImage Src="@($"{AddEditMoldModel.ImageDataURL}")" Elevation="25" Class="rounded-lg ma-4" Width="200"> </MudImage>
+                                            }
+                                        </MudItem>
+                                        <MudItem>
+                                            <InputFile id="fileInput" hidden OnChange="UploadFiles" />
+                                            <div>
+                                                <MudButton HtmlTag="label"
+                                                           Variant="MudBlazor.Variant.Text"
+                                                           Color="Color.Primary"
+                                                           Size="Size.Small"
+                                                           StartIcon="@Icons.Filled.CloudUpload"
+                                                           for="fileInput">
+                                                    @_localizer["Upload"]
+                                                </MudButton>
+                                                @if (!string.IsNullOrEmpty(AddEditMoldModel.ImageDataURL))
+                                                {
+                                                    <MudButton Variant="MudBlazor.Variant.Text"
+                                                           Color="Color.Info"
+                                                           StartIcon="@Icons.Filled.RemoveRedEye"
+                                                           Size="Size.Small"
+                                                           Link="@($"http://ardaapp.azurewebsites.net/{AddEditMoldModel.ImageDataURL}")" Target="_blank">
+                                                        @_localizer["View"]
+                                                    </MudButton>
+                                                    <MudButton Variant="MudBlazor.Variant.Text"
+                                                           Color="Color.Error"
+                                                           StartIcon="@Icons.Filled.Delete"
+                                                           Size="Size.Small"
+                                                           OnClick="DeleteAsync">
+                                                        @_localizer["Delete"]
+                                                    </MudButton>
+                                                }
+                                            </div>
+                                        </MudItem>
+                                    </MudItem>
+                                </td>
+                                <td>
+
+
+                                    <MudItem xs="12" md="12">
+                                        <MudSimpleTable Elevation="0">
+                                            <thead>
+                                                <colgroup>
+                                                    <col span="1" style="width: 80%;">
+                                                    <col span="1" style="width: 20%;">
+                                                </colgroup>
+                                            </thead>
+                                            <tbody>
+
+                                                <tr>
+                                                    <td colspan="2">
+                                                        <MudTextField For="@(() => AddEditMoldModel.Code)" @bind-Value="AddEditMoldModel.Code" Label="@_localizer["Code"]" />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <MudItem xs="12">
+                                                            <MudTextField For="@(() => AddEditMoldModel.Weight)" @bind-Value="AddEditMoldModel.Weight" Label="@_localizer["Weight"]" />
+                                                        </MudItem>
+                                                    </td>
+                                                    <td>
+                                                        <MudSelect T="int" Label="@_localizer["Unit"]" ToStringFunc="@(id => _measurementUnits.FirstOrDefault(c => c.Id == id)?.Code ?? string.Empty)" @bind-Value="AddEditMoldModel.WeightMUId">
+                                                            @foreach (GetAllMeasurementUnitsResponse item in _measurementUnits.Where(x => x.System == "WE"))
+                                                            {
+                                                                <MudSelectItem Value="@item.Id">@item.Code</MudSelectItem>
+                                                            }
+                                                        </MudSelect>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <MudItem xs="12">
+                                                            <MudTextField For="@(() => AddEditMoldModel.Height)" @bind-Value="AddEditMoldModel.Height" Label="@_localizer["Height"]" />
+                                                        </MudItem>
+                                                    </td>
+                                                    <td>
+                                                        <MudSelect T="int" Label="@_localizer["Unit"]" ToStringFunc="@(id => _measurementUnits.FirstOrDefault(c => c.Id == id)?.Code ?? string.Empty)" @bind-Value="AddEditMoldModel.HeightMUId">
+                                                            @foreach (GetAllMeasurementUnitsResponse item in _measurementUnits.Where(x => x.System == "DI"))
+                                                            {
+                                                                <MudSelectItem Value="@item.Id">@item.Code</MudSelectItem>
+                                                            }
+                                                        </MudSelect>
+                                                    </td>
+                                                </tr>
+                                                <tr hidden="@(AddEditMoldModel.Length > 0 || AddEditMoldModel.Width > 0)">
+                                                    <td>
+                                                        <MudItem xs="12">
+                                                            <MudTextField For="@(() => AddEditMoldModel.Diameter)" @bind-Value="AddEditMoldModel.Diameter" Label="@_localizer["Diameter"]" />
+                                                        </MudItem>
+                                                    </td>
+                                                    <td>
+                                                        <MudSelect T="int" Label="@_localizer["Unit"]" ToStringFunc="@(id => _measurementUnits.FirstOrDefault(c => c.Id == id)?.Code ?? string.Empty)" @bind-Value="AddEditMoldModel.DiameterMUId">
+                                                            @foreach (GetAllMeasurementUnitsResponse item in _measurementUnits.Where(x => x.System == "DI"))
+                                                            {
+                                                                <MudSelectItem Value="@item.Id">@item.Code</MudSelectItem>
+                                                            }
+                                                        </MudSelect>
+                                                    </td>
+                                                </tr>
+                                                <tr hidden="@(AddEditMoldModel.Diameter > 0)">
+                                                    <td>
+                                                        <MudItem xs="12">
+                                                            <MudTextField For="@(() => AddEditMoldModel.Length)" @bind-Value="AddEditMoldModel.Length" Label="@_localizer["Length"]" />
+                                                        </MudItem>
+                                                    </td>
+                                                    <td>
+                                                        <MudSelect T="int" Label="@_localizer["Unit"]" ToStringFunc="@(id => _measurementUnits.FirstOrDefault(c => c.Id == id)?.Code ?? string.Empty)" @bind-Value="AddEditMoldModel.LengthMUId">
+                                                            @foreach (GetAllMeasurementUnitsResponse item in _measurementUnits.Where(x => x.System == "DI"))
+                                                            {
+                                                                <MudSelectItem Value="@item.Id">@item.Code</MudSelectItem>
+                                                            }
+                                                        </MudSelect>
+                                                    </td>
+                                                </tr>
+                                                <tr hidden="@(AddEditMoldModel.Diameter > 0)">
+                                                    <td>
+                                                        <MudItem xs="12">
+                                                            <MudTextField For="@(() => AddEditMoldModel.Width)" @bind-Value="AddEditMoldModel.Width" Label="@_localizer["Width"]" />
+                                                        </MudItem>
+                                                    </td>
+                                                    <td>
+                                                        <MudSelect T="int" Label="@_localizer["Unit"]" ToStringFunc="@(id => _measurementUnits.FirstOrDefault(c => c.Id == id)?.Code ?? string.Empty)" @bind-Value="AddEditMoldModel.WidthMUId">
+                                                            @foreach (GetAllMeasurementUnitsResponse item in _measurementUnits.Where(x => x.System == "DI"))
+                                                            {
+                                                                <MudSelectItem Value="@item.Id">@item.Code</MudSelectItem>
+                                                            }
+                                                        </MudSelect>
+                                                    </td>
+                                                </tr>
+
+
+                                            </tbody>
+                                        </MudSimpleTable>
+                                    </MudItem>
+
+
+
+
+
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </MudSimpleTable>
+
+
+
+                </MudItem>
+                @*PROPS*@
+                <MudItem xs="12" md="12">
+                    <MudSimpleTable Elevation="0">
+                        <thead>
+                            <colgroup>
+                                <col span="1" style="width: 50%;">
+                                <col span="1" style="width: 50%;">
+                            </colgroup>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                @*Name*@
+                                <td>
+                                    <MudTextField For="@(() => AddEditMoldModel.Name)" @bind-Value="AddEditMoldModel.Name" Label="@_localizer["Name"]" />
+                                </td>
+                                <td>
+                                    <MudSelect T="bool" @bind-Value="AddEditMoldModel.IsNew" Label="Döküm Durumu">
+                                        <MudSelectItem Value="true">Yeni</MudSelectItem>
+                                        <MudSelectItem Value="false">Çıkma</MudSelectItem>
+                                    </MudSelect>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                @*Pattern*@
+                                <td>
+                                    <MudSelect T="int" Label="@_localizer["Pattern"]" ToStringFunc="@(id => _patterns.FirstOrDefault(c => c.Id == id)?.Name ?? string.Empty)" @bind-Value="AddEditMoldModel.PatternId">
+                                        @foreach (GetAllPatternsResponse item in _patterns)
+                                        {
+                                            <MudSelectItem Value="@item.Id">@item.Name</MudSelectItem>
+                                        }
+                                    </MudSelect>
+                                </td>
+                                <td>
+                                    <MudSelect T="int" Label="@_localizer["Tedarikçi"]" SelectedValuesChanged="CompanyChanged" ToStringFunc="@(id => _suppliers.FirstOrDefault(c => c.Id == id)?.Name ?? string.Empty)" @bind-Value="compID">
+                                        @foreach (GetAllPagedCompaniesResponse supplier in _suppliers)
+                                        {
+                                            <MudSelectItem Value="@supplier.Id">@supplier.Name</MudSelectItem>
+                                        }
+                                    </MudSelect>
+                                </td>
+                            </tr>
+                            <tr>
+                                @*Prod Date*@
+                                <td>
+                                    <MudItem xs="12" md="12">
+                                        <MudDatePicker Label="@_localizer["Üretim Tarihi"]" For="@(() => AddEditMoldModel.ProductionDate)" DisplayMonths="2 " TitleDateFormat="dddd, dd MMMM" @bind-Date="AddEditMoldModel.ProductionDate" />
+                                    </MudItem>
+                                </td>
+                                <td>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                @*MU*@
+                                <td>
+                                    <MudItem xs="12" md="12">
+                                        <MudSelect T="int" Label="@_localizer["Measuremet Unit"]" ToStringFunc="@(id => _measurementUnits.FirstOrDefault(c => c.Id == id)?.Name ?? string.Empty)" @bind-Value="AddEditMoldModel.MeasurementUnitId">
+                                            @foreach (GetAllMeasurementUnitsResponse item in _measurementUnits)
+                                            {
+                                                <MudSelectItem Value="@item.Id">@item.Name</MudSelectItem>
+                                            }
+                                        </MudSelect>
+                                    </MudItem>
+                                </td>
+                                <td>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                @*DEsc*@
+                                <td>
+                                    <MudItem xs="12" md="12">
+                                        <MudTextField Lines="3" For="@(() => AddEditMoldModel.Description)" @bind-Value="AddEditMoldModel.Description" Label="@_localizer["Description"]" />
+                                    </MudItem>
+                                </td>
+                                <td>
+                                    @*DYNAMIC COLUMN 5*@
+                                </td>
+                            </tr>
+                        </tbody>
+                    </MudSimpleTable>
+                </MudItem>
+                @*DIMENSIONS*@
+
+
+            </MudGrid>
+
+
+
+
+
+        </DialogContent>
+        <DialogActions>
+            <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" OnClick="Cancel">@_localizer["Cancel"]</MudButton>
+            @if (AddEditMoldModel.Id != 0)
+            {
+                <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" ButtonType="MudBlazor.ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Secondary">@_localizer["Update"]</MudButton>
+            }
+            else
+            {
+                <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" ButtonType="MudBlazor.ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Success">@_localizer["Save"]</MudButton>
+            }
+        </DialogActions>
+    </MudDialog>
+</EditForm>
+

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>D:\Dev\ArdaManager\src\Client\bin\Release\net6.0\browser-wasm\publish\</_PublishTargetUrl>
+    <History>True|2023-03-02T23:22:14.6832988Z;True|2023-03-02T21:33:53.5176536+03:00;True|2023-03-02T14:33:12.4258296+03:00;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+</Project>

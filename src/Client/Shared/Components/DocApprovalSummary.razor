@@ -1,0 +1,55 @@
+﻿@using ArdaManager.Application.Responses.Approval;
+@using ArdaManager.Client.Shared.Cards
+@using ArdaManager.Domain.Enums.Doc;
+
+
+<DocStateChip DocState="@docState"></DocStateChip>
+
+<MudPopover Open="_isOpen" Elevation="12" OverflowBehavior="OverflowBehavior.FlipAlways" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter" Paper="false" Class="width-40-percent">
+
+    @*
+    <DocApproveCard DocumentType="@DocType.PurchaseRequest" DocumentId="@DocumentId" />
+    *@
+    <MudCard>
+    <MudCardHeader>
+        <CardHeaderContent>
+            <MudText Typo="Typo.h6">Onay Akışı</MudText>
+        </CardHeaderContent>
+    </MudCardHeader>
+    <MudCardContent>
+        <MudDataGrid Items="@_statuses" T="DocumentApprovalStatusResponse"
+                     Bordered="true" ColumnResizeMode="ResizeMode.Column" Dense="true">
+            <ColGroup>
+                <col span="1" style="width: 5%;">
+                <col span="1" style="width: 55%;">
+                <col span="1" style="width: 20%;">
+                <col span="1" style="width: 20%;">
+            </ColGroup>
+            <Columns>
+                <PropertyColumn Property="x => x.StepNumber" Title="Sıra" />
+
+                <PropertyColumn Property="x => x.UserRoleName" Title="Rol" />
+                <TemplateColumn Title="Durumu">
+                    <CellTemplate Context="detail">
+                        @if (detail.Item.IsApproved)
+                        {
+                            <MudChip Color="Color.Success">Onaylı</MudChip>
+                        }
+                        else if (detail.Item.IsRejected)
+                        {
+                            <MudChip Color="Color.Error">Red</MudChip>
+                        }
+                        else
+                        {
+                            <MudChip Color="Color.Warning">Bekliyor</MudChip>
+                        }
+                    </CellTemplate>
+                </TemplateColumn>
+                <PropertyColumn Property="x => x.ApproveDate" Title="Tarihi" />
+
+            </Columns>
+        </MudDataGrid>
+        </MudCardContent>
+    </MudCard>
+    
+</MudPopover>

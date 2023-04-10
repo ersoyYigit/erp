@@ -1,0 +1,40 @@
+﻿@page "/misc/exchange-rates"
+@using ArdaManager.Application.Features.Currencies.Queries;
+
+<MudContainer>
+
+
+
+    <MudTable Hover="true" Elevation="25" Items="_exchangeRates" Dense="true" Bordered="true" Striped="true" >
+        <ToolBarContent>
+            <MudDatePicker @bind-Date="SelectedDate" Label="Tarih Seç" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.DateRange" />
+            <MudButton Variant="MudBlazor.Variant.Filled" Color="Color.Primary" OnClick="LoadExchangeRates">Kurları Yükle</MudButton>
+            @if (ShowImportButton)
+            {
+                <MudSpacer/>
+                <MudButton Variant="MudBlazor.Variant.Filled" Color="Color.Secondary" OnClick="ImportExchangeRates">Kurları İçe Aktar</MudButton>
+            }
+        </ToolBarContent>
+        <HeaderContent>
+
+            <MudTh><MudTableSortLabel SortBy="new Func<GetExchangeRatesByDateResponse, object>(x => x.CurrencyCode)">Kod</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<GetExchangeRatesByDateResponse, object>(x => x.ForexBuying)">Forex alış</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<GetExchangeRatesByDateResponse, object>(x => x.ForexSelling)">Forex satış</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<GetExchangeRatesByDateResponse, object>(x => x.BanknoteBuying)">Efektif ALış</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<GetExchangeRatesByDateResponse, object>(x => x.BanknoteSelling)">Efektif Satış</MudTableSortLabel></MudTh>
+
+        </HeaderContent>
+        <RowTemplate Context="row">
+            <MudTd DataLabel="Kod">@row.CurrencyCode</MudTd>
+            <MudTd DataLabel="Forex alış">@row.ForexBuying.ToString("N4")</MudTd>
+            <MudTd DataLabel="Forex satış">@row.ForexSelling.ToString("N4")</MudTd>
+            <MudTd DataLabel="Efektif alış">@row.BanknoteBuying.ToString("N4")</MudTd>
+            <MudTd DataLabel="Efektif satış">@row.BanknoteSelling.ToString("N4")</MudTd>
+        </RowTemplate>
+        <FooterContent>
+        </FooterContent>
+        <PagerContent>
+            <TablePager />
+        </PagerContent>
+    </MudTable>
+</MudContainer>

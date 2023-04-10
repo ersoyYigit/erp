@@ -1,0 +1,122 @@
+﻿@page "/catalog/Templates"
+@attribute [Authorize(Policy = Permissions.Templates.View)]
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Templates> _localizer
+@using ArdaManager.Application.Features.Templates.Queries.GetAllPaged;
+@using ArdaManager.Application.Extensions
+
+<style>
+    .mud-table-container {
+        overflow: auto;
+    }
+</style>
+
+<HeroTitle Title="@_localizer["Kalıplar"]" Description="@_localizer["Kalıpları Yönetin."]" />
+@if (!_loaded)
+{
+    <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+}
+else
+{
+    <MudTable Elevation="25" ServerData="@(new Func<TableState, Task<TableData<GetAllPagedTemplatesResponse>>>(ServerReload))" Hover="true" Dense="true" Bordered="true" Striped="true" @ref="_table">
+        <ToolBarContent>
+            <div class="justify-center mud-text-align-center">
+                @if (_canCreateTemplates)
+                {
+                    <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" Color="Color.Primary" @onclick="@(() => InvokeModal(0))" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">@_localizer["Create"]</MudButton>
+                    <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" OnClick="@(() => OnSearch(""))" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">@_localizer["Reload"]</MudButton>
+                }
+                else
+                {
+                    <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" OnClick="@(() => OnSearch(""))" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">@_localizer["Reload"]</MudButton>
+                }
+            </div>
+            <MudSpacer />
+            @if (_canSearchTemplates)
+            {
+                <MudTextField T="string" ValueChanged="@(s=>OnSearch(s))" Placeholder="@_localizer["Search"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+            }
+        </ToolBarContent>
+        <ColGroup>
+        </ColGroup>
+        <HeaderContent>
+            <MudTh><MudTableSortLabel T="GetAllPagedTemplatesResponse" SortLabel="ImageDataURL">@_localizer["Görsel"]</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel T="GetAllPagedTemplatesResponse" SortLabel="Code">@_localizer["Kod"]</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel T="GetAllPagedTemplatesResponse" SortLabel="Name">@_localizer["Ad"]</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel T="GetAllPagedTemplatesResponse" SortLabel="Pattern">@_localizer["Pattern"]</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel T="GetAllPagedTemplatesResponse" SortLabel="Kind">@_localizer["Kalıp Tipi"]</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel T="GetAllPagedTemplatesResponse" SortLabel="TemplateState">@_localizer["Durumu"]</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel T="GetAllPagedTemplatesResponse" SortLabel="String1">@_localizer["Depo-Raf"]</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel T="GetAllPagedTemplatesResponse" SortLabel="Description">@_localizer["Açıklama"]</MudTableSortLabel></MudTh>
+            <MudTh Style="text-align:right">@_localizer["Actions"]</MudTh>
+        </HeaderContent>
+        <RowTemplate >
+            
+                <MudTd DataLabel="ImageDataURL">
+                <MudImage Src="@context.ImageDataURL" Elevation="25" Class="rounded-lg " Width="80"> </MudImage>
+                    @*@if (String.IsNullOrWhiteSpace(context.ImageDataURL))
+                    {
+                        <MudImage Src="Files\\Images\\Static\\placeholder-image.png" Elevation="25" Class="rounded-lg " Width="80"> </MudImage>
+                    }
+                    else
+                    {
+                        <MudImage Src="@($"http://ardaapp.azurewebsites.net/{@context.ImageDataURL}")" Elevation="25" Class="rounded-lg" Width="80"> </MudImage>
+                    }*@
+                </MudTd>
+                <MudTd DataLabel="Code" @onclick="@(() => InvokeModal(@context.Id))">@context.Code</MudTd>
+                <MudTd DataLabel="Name">
+                    <MudHighlighter Text="@context.Name" HighlightedText="@_searchString" />
+                </MudTd>
+                <MudTd DataLabel="Pattern">
+                    <MudHighlighter Text="@context.Pattern" HighlightedText="@_searchString" />
+                </MudTd>
+                <MudTd DataLabel="Pattern">
+                    <MudHighlighter Text="@context.Kind.ToDescriptionString()" HighlightedText="@_searchString" />
+                </MudTd>
+
+                <MudTd DataLabel="TemplateState">
+                    <MudHighlighter Text="@context.TemplateState.ToDescriptionString()" HighlightedText="@_searchString" />
+                </MudTd>
+                <MudTd DataLabel="String1">
+                    <MudHighlighter Text="@context.String1" HighlightedText="@_searchString" />
+                </MudTd>
+                <MudTd DataLabel="Description">
+                    <MudHighlighter Text="@context.Description" HighlightedText="@_searchString" />
+                </MudTd>
+
+                <MudTd DataLabel="Actions" Style="text-align: right; width:130px;">
+                    @if (_canEditTemplates || _canDeleteTemplates)
+                    {
+                        @if (_canEditTemplates)
+                        {
+                            <MudIconButton Elevation="10" Color="Color.Primary" @onclick="@(() => InvokeModal(@context.Id))" Icon="@Icons.Material.Filled.Edit"></MudIconButton>
+                        }
+                        @if (_canDeleteTemplates)
+                        {
+                            <MudIconButton Elevation="10" Color="Color.Error" @onclick="@(() => Delete(@context.Id))" Icon="@Icons.Material.Filled.Delete"></MudIconButton>
+                        }
+
+                    }
+                    else
+                    {
+                        <MudButton Variant="MudBlazor.Variant.Filled"
+                           DisableElevation="true"
+                           StartIcon="@Icons.Material.Filled.DoNotTouch"
+                           IconColor="Color.Secondary"
+                           Size="Size.Small"
+                           Color="Color.Surface">
+                            @_localizer["No Allowed Actions"]
+                        </MudButton>
+                    }
+                </MudTd>
+            
+        </RowTemplate>
+        <FooterContent>
+        </FooterContent>
+        <PagerContent>
+            <TablePager />
+        </PagerContent>
+    </MudTable>
+
+}
+
+

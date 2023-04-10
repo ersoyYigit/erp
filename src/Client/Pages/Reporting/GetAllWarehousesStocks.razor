@@ -1,0 +1,54 @@
+﻿@page "/reporting/GetAllWarehouseStocks"
+@page "/reporting/GetAllWarehouseStocks/{Id:int}"
+
+@attribute [Authorize(Policy = Permissions.Reports.GetAllWarehousesStocks)]
+
+@inject Microsoft.Extensions.Localization.IStringLocalizer<GetAllWarehousesStocks> _localizer
+@using ArdaManager.Application.Extensions
+@using ArdaManager.Domain.Entities.Report.Warehouse;
+
+<style>
+    .mud-table-container {
+        overflow: auto;
+    }
+</style>
+
+<HeroTitle Title="@_localizer["Raporlar"]" Description="@_localizer["Depo Raporları."]" />
+@if (!_loaded)
+{
+    <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+}
+else
+{
+
+
+    <MudDataGrid @ref="mudGrid" Elevation="25" Items="_resultList" Dense="true" Bordered="true" Striped="true" SortMode="SortMode.Multiple" Filterable="true" FilterMode="@DataGridFilterMode.ColumnFilterRow"
+             QuickFilter="@_quickFilter" ColumnResizeMode="ResizeMode.Column" FilterCaseSensitivity="DataGridFilterCaseSensitivity.CaseInsensitive" FilterPlaceholder="Enter ">
+        <ToolBarContent>
+            @if (Id == null)
+            {
+                <MudText Typo="Typo.h6">Depo bazındarüm ürünler</MudText>
+            }
+            else
+            {
+                <MudText Typo="Typo.h6">@_resultList.First().WarehouseName ürünleri</MudText>                
+            }
+            <MudSpacer />
+            <MudTextField @bind-Value="_searchString" Placeholder="Hızlı Arama" Adornment="Adornment.Start" Immediate="true"
+                      AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+        </ToolBarContent>
+        <Columns>
+            @if (Id == null)
+            {
+                <PropertyColumn Property="x => x.WarehouseCode" Title="Depo Kodu" />
+                <PropertyColumn Property="x => x.WarehouseName" Title="Depo Adı" />
+            }
+
+            <PropertyColumn Property="x => x.ProductCode" Title="Ürün Kodu" />
+            <PropertyColumn Property="x => x.ProductName" Title="Ürün Adı" />
+            <PropertyColumn Property="x => x.CategoryName" Title="Kategori" />
+            <PropertyColumn Property="x => x.Quantity" Format="N2" Title="Miktar" />
+        </Columns>
+    </MudDataGrid>
+
+}

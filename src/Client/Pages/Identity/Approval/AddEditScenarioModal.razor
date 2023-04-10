@@ -1,0 +1,78 @@
+﻿@using ArdaManager.Application.Responses.Identity;
+@using ArdaManager.Domain.Enums.Doc;
+@using ArdaManager.Application.Extensions;
+
+
+<EditForm Model="@AddEditScenarioModel" OnValidSubmit="SaveAsync">
+    <FluentValidationValidator @ref="_fluentValidationValidator" />
+    <MudDialog>
+        <TitleContent>
+            @{
+                if (AddEditScenarioModel.Id == 0)
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.Add" Class="mr-3 mb-n1" />
+                        Yeni Senaryo Oluştur
+                    </MudText>
+                }
+                else
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.Update" Class="mr-3 mb-n1" />
+                        Senaryo Güncelle
+                    </MudText>
+                }
+            }
+        </TitleContent>
+        <DialogContent>
+            <MudGrid>
+                <MudItem xs="12" md="6">
+                    <MudSelect T="DocType" @bind-Value="AddEditScenarioModel.DocType" Label="Doküman Tipi">
+                        @foreach (DocType item in Enum.GetValues(typeof(DocType)))
+                        {
+                            <MudSelectItem Value="@item">@item.ToDescriptionString()</MudSelectItem>
+                        }
+                    </MudSelect>
+                </MudItem>
+                <MudItem xs="12" md="6">
+                    <MudTextField @bind-Value="@AddEditScenarioModel.Description" Label="Açıklama" />
+                </MudItem>
+            </MudGrid>
+            <MudTable Items="@AddEditScenarioModel.ApprovalSteps" Hover="true" Dense="true" Class="minimize-table">
+                <HeaderContent>
+                    <MudTh>Adım </MudTh>
+                    <MudTh>Rol</MudTh>
+                    <MudTh>Aksiyonlar</MudTh>
+                </HeaderContent>
+                <RowTemplate Context="rowCtx">
+                    <MudTd>
+                        <MudTextField @bind-Value="@rowCtx.StepNumber" Label="Adım" />
+                    </MudTd>
+                    <MudTd>
+                        <MudSelect T="string" Label="Kullanıcı Rolü" ToStringFunc="@(id => _roleList.FirstOrDefault(c => c.Id == id)?.Name ?? string.Empty)" @bind-Value="@rowCtx.UserRoleId">
+                            @foreach (RoleResponse item in _roleList)
+                            {
+                                <MudSelectItem Value="@item.Id">@item.Name</MudSelectItem>
+                            }
+                        </MudSelect>
+                    </MudTd>
+                    <MudTd>
+                        <MudIconButton Icon="@Icons.Material.Filled.Delete" OnClick="@(async () => await DeleteRow(rowCtx))" tabindex="-1" />
+                    </MudTd>
+                </RowTemplate>
+            </MudTable>
+            <MudButton Class="table-add-button" Variant="MudBlazor.Variant.Outlined" StartIcon="@Icons.Material.Filled.Add" Disabled="@(!Validated)" OnClick="AddRow" FullWidth="true" Color="Color.Primary">Satır Ekle</MudButton>
+        </DialogContent>
+        <DialogActions>
+            <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" OnClick="Cancel">İptal</MudButton>
+            @if (AddEditScenarioModel.Id != 0)
+            {
+                <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" ButtonType="MudBlazor.ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Secondary">Güncelle</MudButton>
+            }
+            else
+            {
+                <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" ButtonType="MudBlazor.ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Success">Kaydet</MudButton>
+            }
+        </DialogActions>
+    </MudDialog>
+</EditForm>

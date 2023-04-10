@@ -1,0 +1,131 @@
+﻿.responsive {
+    width: 100%;
+    height: auto;
+}
+
+
+.mud-simple-table table * tr th {
+    border-bottom: 0px solid
+}
+
+.mud-popover {
+    animation: cssAnimation 0s 0.2s forwards;
+    visibility: hidden;
+}
+
+@keyframes cssAnimation {
+    to {
+        visibility: visible;
+    }
+}
+
+::deep .mud-simple-table table * tr > td {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    border-bottom: 0px solid var(--mud-palette-table-lines);
+}
+
+
+::deep .reset-padding-bt * input {
+    padding-top: 0 !important;
+    padding-bottom: 100px !important;
+    margin-top: 0 !important;
+    font-size: 0.9rem;
+
+}
+
+:deep .receipt-rows .mud-table-dense * .mud-table-row .mud-table-cell {
+    padding: 0px 0px 0px 0px;
+    padding-inline-start: 16px;
+    padding-inline-end: 5px;
+}
+
+/*
+.numeric-field-with-unit {
+    display: flex;
+    align-items: center;
+    
+
+}
+
+    .numeric-field-with-unit .numeric-field {
+        flex-grow: 1;
+    }
+
+    .numeric-field-with-unit .unit-select {
+        position: absolute;
+        right: 5px;
+        background-color: rebeccapurple;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 0;
+        margin: 0;
+        z-index: 999;
+    }
+    */
+
+.measurement-container {
+    display: flex;
+    width: 100%;
+}
+
+    .measurement-container .measurement-input {
+        flex-grow: 3;
+        margin-right: 4px;
+    }
+
+    .measurement-container .measurement-select {
+        flex-grow: 1;
+    }
+
+
+.minimize-table * .mud-table-row .mud-table-cell {
+    padding: 6px 10px 3px 9px;
+    padding-inline-start: 5px;
+    padding-inline-end: 4px;
+    
+}
+
+.minimize-table {
+    padding: 5px;
+    margin-top: 30px;
+    border: 1px solid #92b1dd; /* Change the border color and width as needed */
+    border-radius: 10px; /* Adjust the rounding of the corners */
+}
+
+.table-add-button {
+    margin-top:30px;
+}
+
+.grid-detail-row {
+    background-color: #81c784;
+}
+
+/*
+.custom-datagrid {
+    background-color: #81c784;
+    --mud-datagrid-row-hover: #a5d6a7;
+    --mud-datagrid-row-selected: #81c784;
+}*/
+
+.custom-datagrid .mud-table-row {
+    padding: 8px 16px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.custom-datagrid .mud-table-row:nth-child(2n+1) {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+.custom-datagrid .mud-table-row:nth-child(2n) {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.custom-datagrid .mud-table-cell {
+    border-bottom: none;
+}
+
+.width-40-percent {
+    max-width:30%;
+}

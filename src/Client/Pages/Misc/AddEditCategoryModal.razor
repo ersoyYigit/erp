@@ -1,0 +1,68 @@
+﻿@using ArdaManager.Application.Extensions
+@using ArdaManager.Domain.Enums
+
+@inject Microsoft.Extensions.Localization.IStringLocalizer<AddEditCategoryModal> _localizer
+
+<EditForm Model="@AddEditCategoryModel" OnValidSubmit="SaveAsync">
+    <FluentValidationValidator @ref="_fluentValidationValidator" />
+    <MudDialog>
+        <TitleContent>
+            @{
+                if (AddEditCategoryModel.Id == 0)
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.Add" Class="mr-3 mb-n1" />
+                        @_localizer["Add Category"]
+                    </MudText>
+                }
+                else
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.Update" Class="mr-3 mb-n1" />
+                        @_localizer["Update Category"]
+                    </MudText>
+                }
+            }
+        </TitleContent>
+        <DialogContent>
+            <MudGrid>
+                @if (AddEditCategoryModel.Id != 0)
+                {
+                    <MudItem xs="12" md="6">
+                        <MudTextField Disabled For="@(() => AddEditCategoryModel.Id)" @bind-Value="AddEditCategoryModel.Id" Label="@_localizer["Id"]" />
+                    </MudItem>
+                }
+                
+                <MudItem xs="12" md="6">
+                    <MudTextField T="string" For="@(() => AddEditCategoryModel.Code)" @bind-Value="AddEditCategoryModel.Code" Label="@_localizer["Code"]" />
+                </MudItem>
+                <MudItem xs="12" md="6">
+                    <MudTextField T="string" For="@(() => AddEditCategoryModel.Name)" @bind-Value="AddEditCategoryModel.Name" Label="@_localizer["Name"]" />
+                </MudItem>
+                
+                <MudItem xs="12" md="6">
+                    <MudSelect @bind-Value="AddEditCategoryModel.Type" Label="@_localizer["Type"]">
+                        @foreach (CategoryType item in Enum.GetValues(typeof(CategoryType)))
+                        {
+                            <MudSelectItem Value="@item">@item.ToDescriptionString()</MudSelectItem>
+                        }
+                    </MudSelect>
+                </MudItem>
+                <MudItem xs="12" md="6">
+                    <MudTextField For="@(() => AddEditCategoryModel.Description)" @bind-Value="AddEditCategoryModel.Description" Label="@_localizer["Description"]" />
+                </MudItem>
+            </MudGrid>
+        </DialogContent>
+        <DialogActions>
+            <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" OnClick="Cancel">@_localizer["Cancel"]</MudButton>
+            @if (AddEditCategoryModel.Id != 0)
+            {
+                <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" ButtonType="MudBlazor.ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Secondary">@_localizer["Update"]</MudButton>
+            }
+            else
+            {
+                <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" ButtonType="MudBlazor.ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Success">@_localizer["Save"]</MudButton>
+            }
+        </DialogActions>
+    </MudDialog>
+</EditForm>

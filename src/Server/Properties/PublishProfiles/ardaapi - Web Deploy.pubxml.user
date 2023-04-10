@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAfULLxiIehU2rNFaXJxWw6AAAAAACAAAAAAAQZgAAAAEAACAAAAAotrUMjn6eB+efl1GoyMOtTPrXcMKwtFWf8hcDCXyEawAAAAAOgAAAAAIAACAAAADC9YGBwmuuYKYc7it1s7a3OQdFxJHmBrzwgs9ys37E+YAAAACaS6u8aQlXQmyqi/tGDgL1kDrnL6IohuK20eRYItB6WZsZ1Qw9sKwXhTtxyDGoF5Sf8jZDZyIxrNv4IcnEZFxWpCW3JLfjMw4U4Kl9mc35UeAe7STJLm5KClqOMhuck1rHntXye65tGWQwpzDygSeuVqCEIKSU5YNV7P7/tLk2TkAAAADoBEpfJ1t8ED9XGM0UkrzuKnIXVyzKEvgzf/Jn53bdyK4IYW/nvhO6Fax0+fs8EWKpFVcVqAXfcXVFdwz/0HFT</EncryptedPassword>
+    <History>True|2023-03-01T08:54:08.1171555Z;True|2023-02-24T00:36:07.8419673+03:00;True|2023-01-16T09:00:45.6229117+03:00;True|2023-01-11T02:54:41.4544671+03:00;True|2023-01-09T15:46:44.2269832+03:00;True|2023-01-09T15:11:32.1746672+03:00;True|2022-12-16T15:55:54.6732371+03:00;True|2022-12-15T14:16:09.3072276+03:00;True|2022-12-15T14:13:03.8006578+03:00;True|2022-12-15T14:10:29.5528652+03:00;True|2022-12-15T13:59:56.7544449+03:00;True|2022-12-15T13:51:44.5598609+03:00;True|2022-12-15T13:25:18.3311617+03:00;True|2022-12-15T12:48:25.3491567+03:00;True|2022-12-15T12:43:51.7948767+03:00;True|2022-12-15T11:42:52.3840890+03:00;True|2022-12-15T00:48:56.4550492+03:00;False|2022-12-15T00:45:17.2910981+03:00;True|2022-12-15T00:37:52.7414391+03:00;True|2022-12-14T01:41:31.6197456+03:00;True|2022-12-12T15:55:35.9945989+03:00;True|2022-12-10T23:15:43.7819324+03:00;True|2022-09-21T12:33:51.0375288+03:00;True|2022-09-21T12:27:41.9212203+03:00;True|2022-06-28T18:59:27.1296449+03:00;True|2022-06-23T15:07:31.1516877+03:00;True|2022-06-23T15:00:17.5400266+03:00;True|2022-06-23T14:49:30.0101044+03:00;True|2022-06-23T14:43:08.6812881+03:00;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>Server=sqlos.vapp.works%3bDatabase=ArdaDev%3bUser Id=vappadmin%3bPassword=10Numara5Y!LD!Z%3b</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+</Project>

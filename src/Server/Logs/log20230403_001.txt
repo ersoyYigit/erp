@@ -1,0 +1,169 @@
+2023-04-03 09:28:07.442 +03:00 [ERR] Failed executing DbCommand (112ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [b].[DocNo], [b].[DocDate], [b].[DocType], [b].[Id], [p].[RequesterId], [p].[RequirementDate], [b].[Description], [p].[RequesterName], [p].[RequesterDepartment], [b].[CreatedBy], [t1].[Id], [t1].[ProductId], [t1].[ProductName], [t1].[Quantity], [t1].[MeasurementUnitCode], [t1].[MeasurementUnitId], [t1].[MeasurementUnitName], [t1].[ProductCode], [t1].[RowNo], [t1].[PurchaseRequestId], [t1].[Description], [t1].[Id0]
+FROM [BaseDocs] AS [b]
+INNER JOIN [PurchaseRequests] AS [p] ON [b].[Id] = [p].[Id]
+LEFT JOIN (
+    SELECT [p0].[Id], [p0].[ProductId], [t0].[Name] AS [ProductName], [p0].[Quantity], [m0].[Code] AS [MeasurementUnitCode], [m0].[Id] AS [MeasurementUnitId], [m0].[Name] AS [MeasurementUnitName], [t0].[Code] AS [ProductCode], [p0].[RowNo], [p0].[PurchaseRequestId], [p0].[Description], [t0].[Id] AS [Id0]
+    FROM [PurchaseRequestRows] AS [p0]
+    INNER JOIN (
+        SELECT [b0].[Id], [b0].[Code], [b0].[Name]
+        FROM [BaseEntities] AS [b0]
+        INNER JOIN [Products] AS [p1] ON [b0].[Id] = [p1].[Id]
+    ) AS [t0] ON [p0].[ProductId] = [t0].[Id]
+    INNER JOIN [MeasurementUnits] AS [m0] ON [p0].[MeasurementUnitId] = [m0].[Id]
+) AS [t1] ON [b].[Id] = [t1].[PurchaseRequestId]
+ORDER BY [b].[Id], [t1].[Id], [t1].[Id0]
+2023-04-03 09:28:07.543 +03:00 [ERR] An exception occurred while iterating over the results of a query for context type 'ArdaManager.Infrastructure.Contexts.VappContext'.
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'RequesterDepartment'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__209_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__272_0(Object obj)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:67a3a46d-7475-40d9-8c97-31e9fe4f129d
+Error Number:207,State:1,Class:16
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'RequesterDepartment'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__209_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__272_0(Object obj)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:67a3a46d-7475-40d9-8c97-31e9fe4f129d
+Error Number:207,State:1,Class:16
+2023-04-03 09:28:08.513 +03:00 [ERR] An unhandled exception occurred while processing the request.
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'RequesterDepartment'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__209_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__272_0(Object obj)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at LazyCache.CachingService.GetOrAddAsync[T](String key, Func`2 addItemFactory, MemoryCacheEntryOptions policy)
+   at ArdaManager.Application.Features.Docs.PurchaseRequests.Queries.GetAll.GetAllPurchaseRequestsQueryHandler.Handle(GetAllPurchaseRequestsQuery query, CancellationToken cancellationToken) in D:\Dev\ArdaManager\src\Application\Features\Docs\PurchaseRequests\Queries\GetAll\GetAllPurchaseRequestsQuery.cs:line 80
+   at MediatR.Pipeline.RequestExceptionProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at MediatR.Pipeline.RequestExceptionProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at MediatR.Pipeline.RequestExceptionActionProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at MediatR.Pipeline.RequestExceptionActionProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at MediatR.Pipeline.RequestPostProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at MediatR.Pipeline.RequestPreProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at ArdaManager.Server.Controllers.v1.Purcheasing.PurchaseRequestsController.GetAll() in D:\Dev\ArdaManager\src\Server\Controllers\v1\Purcheasing\PurchaseRequestsController.cs:line 19
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.Policy.AuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at ArdaManager.Server.Middlewares.RequestCultureMiddleware.InvokeAsync(HttpContext context) in D:\Dev\ArdaManager\src\Server\Middlewares\RequestCultureMiddleware.cs:line 39
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at ArdaManager.Server.Middlewares.ErrorHandlerMiddleware.Invoke(HttpContext context) in D:\Dev\ArdaManager\src\Server\Middlewares\ErrorHandlerMiddleware.cs:line 29
+ClientConnectionId:67a3a46d-7475-40d9-8c97-31e9fe4f129d
+Error Number:207,State:1,Class:16
+2023-04-03 09:28:08.586 +03:00 [ERR] Unhandled exception occurred.
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'RequesterDepartment'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__209_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__272_0(Object obj)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at LazyCache.CachingService.GetOrAddAsync[T](String key, Func`2 addItemFactory, MemoryCacheEntryOptions policy)
+   at ArdaManager.Application.Features.Docs.PurchaseRequests.Queries.GetAll.GetAllPurchaseRequestsQueryHandler.Handle(GetAllPurchaseRequestsQuery query, CancellationToken cancellationToken) in D:\Dev\ArdaManager\src\Application\Features\Docs\PurchaseRequests\Queries\GetAll\GetAllPurchaseRequestsQuery.cs:line 80
+   at MediatR.Pipeline.RequestExceptionProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at MediatR.Pipeline.RequestExceptionProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at MediatR.Pipeline.RequestExceptionActionProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at MediatR.Pipeline.RequestExceptionActionProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at MediatR.Pipeline.RequestPostProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at MediatR.Pipeline.RequestPreProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at ArdaManager.Server.Controllers.v1.Purcheasing.PurchaseRequestsController.GetAll() in D:\Dev\ArdaManager\src\Server\Controllers\v1\Purcheasing\PurchaseRequestsController.cs:line 19
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.Policy.AuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at ArdaManager.Server.Middlewares.RequestCultureMiddleware.InvokeAsync(HttpContext context) in D:\Dev\ArdaManager\src\Server\Middlewares\RequestCultureMiddleware.cs:line 39
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at ArdaManager.Server.Middlewares.ErrorHandlerMiddleware.Invoke(HttpContext context) in D:\Dev\ArdaManager\src\Server\Middlewares\ErrorHandlerMiddleware.cs:line 29
+ClientConnectionId:67a3a46d-7475-40d9-8c97-31e9fe4f129d
+Error Number:207,State:1,Class:16
+2023-04-03 09:30:31.994 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-04-03 09:30:32.088 +03:00 [INF] Hosting environment: Development
+2023-04-03 09:30:32.091 +03:00 [INF] Content root path: D:\Dev\ArdaManager\src\Server\
+2023-04-03 09:58:08.199 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-04-03 09:58:08.751 +03:00 [INF] Hosting environment: Development
+2023-04-03 09:58:08.812 +03:00 [INF] Content root path: D:\Dev\ArdaManager\src\Server\
+2023-04-03 10:43:14.504 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-04-03 10:43:14.624 +03:00 [INF] Hosting environment: Development
+2023-04-03 10:43:14.634 +03:00 [INF] Content root path: D:\Dev\ArdaManager\src\Server\
+2023-04-03 11:52:45.483 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-04-03 11:52:46.343 +03:00 [INF] Hosting environment: Development
+2023-04-03 11:52:46.358 +03:00 [INF] Content root path: D:\Dev\ArdaManager\src\Server\
+2023-04-03 11:59:30.857 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-04-03 11:59:30.949 +03:00 [INF] Hosting environment: Development
+2023-04-03 11:59:30.954 +03:00 [INF] Content root path: D:\Dev\ArdaManager\src\Server\
+2023-04-03 12:08:41.674 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-04-03 12:08:41.938 +03:00 [INF] Hosting environment: Development
+2023-04-03 12:08:41.945 +03:00 [INF] Content root path: D:\Dev\ArdaManager\src\Server\
+2023-04-03 14:57:56.250 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-04-03 14:57:56.644 +03:00 [INF] Hosting environment: Development
+2023-04-03 14:57:56.661 +03:00 [INF] Content root path: D:\Dev\ArdaManager\src\Server\
+2023-04-03 15:05:33.966 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-04-03 15:05:34.170 +03:00 [INF] Hosting environment: Development
+2023-04-03 15:05:34.217 +03:00 [INF] Content root path: D:\Dev\ArdaManager\src\Server\
+2023-04-03 15:28:50.868 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-04-03 15:28:51.196 +03:00 [INF] Hosting environment: Development
+2023-04-03 15:28:51.203 +03:00 [INF] Content root path: D:\Dev\ArdaManager\src\Server\

@@ -1,0 +1,137 @@
+﻿@using ArdaManager.Application.Features.Categories.Queries.GetCategoriesByType
+@using ArdaManager.Application.Extensions
+@using ArdaManager.Domain.Enums
+@inject Microsoft.Extensions.Localization.IStringLocalizer<AddEditPersonModal> _localizer
+
+<EditForm Model="@AddEditPersonModel" OnValidSubmit="SaveAsync">
+    <FluentValidationValidator @ref="_fluentValidationValidator" />
+    <MudDialog>
+        <TitleContent>
+            @{
+                if (AddEditPersonModel.Id == 0)
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.Add" Class="mr-3 mb-n1" />
+                        @_localizer["Add Person"]
+                    </MudText>
+                }
+                else
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.Update" Class="mr-3 mb-n1" />
+                        @_localizer["Update Person"]
+                    </MudText>
+                }
+            }
+        </TitleContent>
+        <DialogContent>
+            <MudGrid>
+                <MudItem xs="12" md="6">
+                    <MudTextField For="@(() => AddEditPersonModel.Code)" @bind-Value="AddEditPersonModel.Code" Label="@_localizer["Code"]" />
+                </MudItem>
+                <MudItem xs="12" md="6">
+                    <MudTextField For="@(() => AddEditPersonModel.Name)" @bind-Value="AddEditPersonModel.Name" Label="@_localizer["Name"]" />
+                </MudItem>
+                <MudItem xs="12" md="6">
+                    <MudTextField For="@(() => AddEditPersonModel.MiddleName)" @bind-Value="AddEditPersonModel.MiddleName" Label="@_localizer["MiddleName"]" />
+                </MudItem>
+                <MudItem xs="12" md="6">
+                    <MudTextField For="@(() => AddEditPersonModel.SurName)" @bind-Value="AddEditPersonModel.SurName" Label="@_localizer["SurName"]" />
+                </MudItem>
+                <MudItem xs="12" md="6">
+                    <MudTextField For="@(() => AddEditPersonModel.Title)" @bind-Value="AddEditPersonModel.Title" Label="@_localizer["Title"]" />
+                </MudItem>
+                <MudItem xs="12" md="6">
+                    <MudSelect @bind-Value="AddEditPersonModel.Gender" Label="@_localizer["Gender"]">
+                        @foreach (Gender item in Enum.GetValues(typeof(Gender)))
+                        {
+                            <MudSelectItem Value="@item">@item.ToDescriptionStringVapp()</MudSelectItem>
+                        }
+                    </MudSelect>
+                </MudItem>
+                <MudItem xs="12" md="6">
+                    <MudTextField For="@(() => AddEditPersonModel.Description)" @bind-Value="AddEditPersonModel.Description" Label="@_localizer["Description"]" />
+                </MudItem>
+                <MudItem xs="12" md="6">
+                    <MudTextField For="@(() => AddEditPersonModel.Telephone)" @bind-Value="AddEditPersonModel.Telephone" Label="@_localizer["Telephone"]" />
+                </MudItem>
+
+                <MudItem xs="12" md="6">
+                    <MudTextField For="@(() => AddEditPersonModel.TelephoneExt)" @bind-Value="AddEditPersonModel.TelephoneExt" Label="@_localizer["TelephoneExt"]" />
+                </MudItem>
+                <MudItem xs="12" md="6">
+                    <MudTextField For="@(() => AddEditPersonModel.Fax)" @bind-Value="AddEditPersonModel.Fax" Label="@_localizer["Fax"]" />
+                </MudItem>
+                <MudItem xs="12" md="6">
+                    <MudTextField For="@(() => AddEditPersonModel.Mobile)" @bind-Value="AddEditPersonModel.Mobile" Label="@_localizer["Mobile"]" />
+                </MudItem>
+                <MudItem xs="12" md="6">
+                    <MudTextField For="@(() => AddEditPersonModel.Email)" @bind-Value="AddEditPersonModel.Email" Label="@_localizer["Email"]" />
+                </MudItem>
+                <MudItem xs="12" md="6">
+                    <MudTextField For="@(() => AddEditPersonModel.EmailSecondary)" @bind-Value="AddEditPersonModel.EmailSecondary" Label="@_localizer["EmailSecondary"]" />
+                </MudItem>
+                <MudItem xs="12" md="6">
+                    <MudTextField For="@(() => AddEditPersonModel.Status)" @bind-Value="AddEditPersonModel.Status" Label="@_localizer["Status"]" />
+                </MudItem>
+                <MudItem xs="12" md="6">
+                    <MudTextField For="@(() => AddEditPersonModel.BCard)" @bind-Value="AddEditPersonModel.BCard" Label="@_localizer["BCard"]" />
+                </MudItem>
+                <MudItem xs="12" md="6">
+                    <MudTextField For="@(() => AddEditPersonModel.Note)" @bind-Value="AddEditPersonModel.Note" Label="@_localizer["Note"]" />
+                </MudItem>
+                
+                <MudItem xs="12" md="6">
+                    <MudAutocomplete T="int?" Label="@_localizer["Category"]" For="@(() => AddEditPersonModel.CategoryId)" @bind-Value="AddEditPersonModel.CategoryId" ResetValueOnEmptyText="true" SearchFunc="@SearchCategories" Variant="MudBlazor.Variant.Filled" ToStringFunc="@(id => _categories.FirstOrDefault(c => c.Id == id)?.Name ?? string.Empty)" OffsetY="true" />
+                </MudItem>
+
+                <MudItem xs="12" md="6">
+                    <MudItem>
+                        <MudAvatar Image="@(AddEditPersonModel.ImageDataURL)" Square="true" Style="height: auto; width: auto; max-height: 100%"> </MudAvatar>
+                    </MudItem>
+                    <MudItem>
+                        <InputFile id="fileInput" hidden OnChange="UploadFiles" />
+                        <div>
+                            <MudButton HtmlTag="label"
+                                       Variant="MudBlazor.Variant.Text"
+                                       Color="Color.Primary"
+                                       Size="Size.Small"
+                                       StartIcon="@Icons.Filled.CloudUpload"
+                                       for="fileInput">
+                                @_localizer["Upload"]
+                            </MudButton>
+                            @if (!string.IsNullOrEmpty(AddEditPersonModel.ImageDataURL))
+                            {
+                                <MudButton Variant="MudBlazor.Variant.Text"
+                                           Color="Color.Info"
+                                           StartIcon="@Icons.Filled.RemoveRedEye"
+                                           Size="Size.Small"
+                                           Link="@(AddEditPersonModel.ImageDataURL)" Target="_blank">
+                                    @_localizer["View"]
+                                </MudButton>
+                                <MudButton Variant="MudBlazor.Variant.Text"
+                                           Color="Color.Error"
+                                           StartIcon="@Icons.Filled.Delete"
+                                           Size="Size.Small"
+                                           OnClick="DeleteAsync">
+                                    @_localizer["Delete"]
+                                </MudButton>
+                            }
+                        </div>
+                    </MudItem>
+                </MudItem>
+            </MudGrid>
+        </DialogContent>
+        <DialogActions>
+            <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" OnClick="Cancel">@_localizer["Cancel"]</MudButton>
+            @if (AddEditPersonModel.Id != 0)
+            {
+                <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" ButtonType="MudBlazor.ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Secondary">@_localizer["Update"]</MudButton>
+            }
+            else
+            {
+                <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" ButtonType="MudBlazor.ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Success">@_localizer["Save"]</MudButton>
+            }
+        </DialogActions>
+    </MudDialog>
+</EditForm>

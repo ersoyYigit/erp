@@ -1,0 +1,31 @@
+﻿@using ArdaManager.Application.Features.Products.Queries.Search;
+
+
+<MudDialog>
+    <DialogContent>
+        <MudTextField @ref="SearchInputRef" @bind-Value="SearchTerm" Placeholder="Ürün ara..." Adornment="MudBlazor.Adornment.End" AdornmentIcon="@Icons.Material.Filled.Search" DebounceInterval="500" OnDebounceIntervalElapsed="HandleIntervalElapsed" />
+        <MudTable @ref="Table" Items="@FilteredProducts" Hover="true" T="ProductSearchResultDto" OnRowClick="SelectItem">
+            <HeaderContent>
+                <MudTh>Ürün Kodu</MudTh>
+                <MudTh>Ürün Adı</MudTh>
+                <MudTh>Kategori</MudTh>
+                <MudTh>Stok Miktarı</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd>@context.Code</MudTd>
+                <MudTd>@context.Name</MudTd>
+                <MudTd>@context.CategoryName</MudTd>
+                <MudTd Class="@((context.Quantity <= 0) ? "negative-stock" : "positive-stock")">@($"{context.Quantity.ToString("N2")} {context.StockUnitCode}")</MudTd>
+            </RowTemplate>
+            <PagerContent>
+                <MudTablePager />
+            </PagerContent>
+        </MudTable>
+    </DialogContent>
+    <DialogActions>
+        <MudButton Variant="MudBlazor.Variant.Filled" Color="Color.Secondary" OnClick="Cancel">İptal</MudButton>
+    </DialogActions>
+</MudDialog>
+
+
+

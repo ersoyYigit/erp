@@ -1,0 +1,28 @@
+﻿@using ArdaManager.Application.Responses.Identity;
+
+
+<MudDialog>
+    <DialogContent>
+        <MudTextField @ref="SearchInputRef" @bind-Value="SearchTerm" Placeholder="Kullanıcı ara..." Adornment="MudBlazor.Adornment.End" 
+            AdornmentIcon="@Icons.Material.Filled.Search" DebounceInterval="100" OnDebounceIntervalElapsed="HandleIntervalElapsed" />
+        <MudTable @ref="Table" Items="@_userList" Hover="true" T="UserResponse" OnRowClick="SelectItem">
+            <HeaderContent>
+                <MudTh>Adı</MudTh>
+                <MudTh>Soyadı</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd>@context.FirstName</MudTd>
+                <MudTd>@context.LastName</MudTd>
+            </RowTemplate>
+            <PagerContent>
+                <MudTablePager />
+            </PagerContent>
+        </MudTable>
+    </DialogContent>
+    <DialogActions>
+        <MudButton Variant="MudBlazor.Variant.Filled" Color="Color.Secondary" OnClick="Cancel">İptal</MudButton>
+    </DialogActions>
+</MudDialog>
+
+
+

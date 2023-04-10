@@ -1,0 +1,22 @@
+﻿@using ArdaManager.Domain.Enums.Doc;
+
+@if (DocState == DocState.Approved)
+{
+    <MudChip Color="Color.Success">Onaylı</MudChip>
+}
+else if (DocState == DocState.Rejected)
+{
+    <MudChip Color="Color.Error">Red</MudChip>
+}
+else if (DocState == DocState.Waiting)
+{
+    <MudChip Color="Color.Warning">Bekliyor</MudChip>
+}
+else
+{
+    <MudChip Color="Color.Dark">Tamamlandı</MudChip>
+}
+
+@code {
+    [Parameter] public DocState DocState { get; set; }
+}

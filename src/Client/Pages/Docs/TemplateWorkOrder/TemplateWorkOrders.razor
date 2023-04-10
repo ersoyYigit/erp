@@ -1,0 +1,107 @@
+﻿@page "/catalog/templateWorkOrders"
+@page "//catalog/templateWorkOrders/{Id:int}"
+@using ArdaManager.Application.Features.Docs.TemplateWorkOrders.Queries.GetAll;
+
+@attribute [Authorize(Policy = Permissions.TemplateWorkOrders.View)]
+@inject Microsoft.Extensions.Localization.IStringLocalizer<TemplateWorkOrders> _localizer
+
+
+
+<style>
+    .mud-table-container {
+        overflow: auto;
+    }
+</style>
+
+<HeroTitle Title="@_localizer["Kalıp İş Emirleri "]" Description="@_localizer["Kalıp iş emirlerini yönetin"]" />
+@if (!_loaded)
+{
+    <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+}
+else
+{
+    <MudTable Hover="true" Elevation="25" Items="_templateWorkOrderList" Dense="true" Bordered="true" Striped="true" Filter="new Func<GetAllTemplateWorkOrdersResponse, bool>(Search)" @bind-templateWorkOrder="_templateWorkOrder">
+        <ToolBarContent>
+            <div class="justify-center mud-text-align-center">
+                @if (_canCreateTemplateWorkOrders)
+                {
+                    <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" Color="Color.Primary" OnClick="(() => InvokeModal())" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">@_localizer["Ekle"]</MudButton>
+                    <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" OnClick="GetTemplateWorkOrdersAsync" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">@_localizer["Yenile"]</MudButton>
+                }
+                else
+                {
+                    <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" OnClick="GetTemplateWorkOrdersAsync" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">@_localizer["Yenile"]</MudButton>
+
+                }
+            </div>
+            <MudSpacer />
+            @if (true)
+            {
+                <MudTextField @bind-Value="_searchString" Immediate="true" Placeholder="@_localizer["Kalıp iş emirlerinde ara "]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0 mb-3"></MudTextField>
+            }
+        </ToolBarContent>
+        <HeaderContent>
+            <MudTh><MudTableSortLabel SortBy="new Func<GetAllTemplateWorkOrdersResponse, object>(x => x.Id)">@_localizer["Id"]</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<GetAllTemplateWorkOrdersResponse, object>(x => x.DocNo)">@_localizer["Doküman No"]</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<GetAllTemplateWorkOrdersResponse, object>(x => x.DocDate)">@_localizer["Tarih"]</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<GetAllTemplateWorkOrdersResponse, object>(x => x.OwnerUserName)">@_localizer["Talep Sahibi"]</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<GetAllTemplateWorkOrdersResponse, object>(x => x.ResponseUserName)">@_localizer["Sorumlu"]</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<GetAllTemplateWorkOrdersResponse, object>(x => x.DocType)">@_localizer["Talep Tipi"]</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<GetAllTemplateWorkOrdersResponse, object>(x => x.TemplateWorkOrderState)">@_localizer["Durum"]</MudTableSortLabel></MudTh>
+            <MudTh Style="text-align:right">@_localizer["Eylemler"]</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Id">@context.Id</MudTd>
+            <MudTd DataLabel="DocNo">
+                <MudHighlighter Text="@context.DocNo" HighlightedText="@_searchString" />
+            </MudTd>
+            <MudTd DataLabel="DocDate">
+                @if(context.DocDate.HasValue)
+                {
+                    @context.DocDate.Value.ToString("dd/MM/yyyy");
+                }
+            </MudTd>
+            <MudTd DataLabel="Sahip">
+                <MudHighlighter Text="@context.OwnerUserName" HighlightedText="@_searchString" />
+            </MudTd>
+            <MudTd DataLabel="Sorumlu">
+                <MudHighlighter Text="@context.ResponseUserName" HighlightedText="@_searchString" />
+            </MudTd>
+            <MudTd DataLabel="Tip">
+                <MudHighlighter Text="@context.TemplateWorkOrderType.ToDescriptionString()" HighlightedText="@_searchString" />
+            </MudTd>
+            <MudTd DataLabel="Durum">
+                <MudChip Disabled="true" Color="@stateColors[context.TemplateWorkOrderState]">@context.TemplateWorkOrderState.ToDescriptionString()</MudChip>
+            </MudTd>
+            <MudTd DataLabel="Actions" Style="text-align: right">
+                @if (_canEditTemplateWorkOrders || _canDeleteTemplateWorkOrders)
+                {
+                    @if (_canEditTemplateWorkOrders)
+                    {
+                        <MudIconButton Elevation="10" Color="Color.Primary" @onclick="@(() => InvokeModal(@context.Id))" Icon="@Icons.Material.Filled.Edit"></MudIconButton>
+                    }
+                    @if (_canDeleteTemplateWorkOrders)
+                    {
+                        <MudIconButton Elevation="10" Color="Color.Error" @onclick="@(() => Delete(@context.Id))" Icon="@Icons.Material.Filled.Delete"></MudIconButton>
+                    }
+                }
+                else
+                {
+                    <MudButton Variant="MudBlazor.Variant.Filled"
+                       DisableElevation="true"
+                       StartIcon="@Icons.Material.Filled.DoNotTouch"
+                       IconColor="Color.Secondary"
+                       Size="Size.Small"
+                       Color="Color.Surface">
+                        @_localizer["No Allowed Actions"]
+                    </MudButton>
+                }
+            </MudTd>
+        </RowTemplate>
+        <FooterContent>
+        </FooterContent>
+        <PagerContent>
+            <TablePager />
+        </PagerContent>
+    </MudTable>
+}

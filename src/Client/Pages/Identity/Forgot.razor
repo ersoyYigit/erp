@@ -1,0 +1,31 @@
+﻿@page "/account/forgot-password"
+@layout MainLayout
+@attribute [AllowAnonymous]
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Forgot> _localizer
+
+<EditForm Model="@_emailModel" OnValidSubmit="SubmitAsync">
+    <FluentValidationValidator @ref="_fluentValidationValidator" />
+    <MudGrid>
+        <MudItem xs="12">
+            <div class="d-flex justify-center">
+                <img src="/media/ardacam-logo.png">
+            </div>
+        </MudItem>
+        <MudItem xs="12">
+            <div class="d-flex justify-center">
+                <MudText Typo="Typo.h4">@_localizer["Parolanızı mı unuttunuz?"]</MudText>
+            </div>
+        </MudItem>
+        <MudItem xs="12">
+            <div class="d-flex justify-center">
+                <MudText Typo="Typo.subtitle2" Class="mb-n4">@_localizer["Parolanızı sıfırlamak için email adresinizi girin"]</MudText>
+            </div>
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="@_localizer["E-mail"]" @bind-Value="_emailModel.Email" For="@(() => _emailModel.Email)" Variant="MudBlazor.Variant.Outlined"></MudTextField>
+        </MudItem>
+        <MudItem xs="12" Class="d-flex justify-center">
+            <MudButton Variant="MudBlazor.Variant.Filled" Disabled="@(!Validated)" Color="Color.Primary" Size="Size.Large" ButtonType="MudBlazor.ButtonType.Submit" FullWidth="true">@_localizer["Parola Sıfırla"]</MudButton>
+        </MudItem>
+    </MudGrid>
+</EditForm>

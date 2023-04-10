@@ -1,0 +1,80 @@
+﻿@page "/misc/currencies"
+@attribute [Authorize(Policy = Permissions.Currencies.View)]
+@using ArdaManager.Application.Features.Currencies.Queries
+
+<style>
+    .mud-table-container {
+        overflow: auto;
+    }
+</style>
+
+<HeroTitle Title="Para Birimleri" Description="Para birimlerini yönetin" />
+@if (!_loaded)
+{
+    <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+}
+else
+{
+    <MudTable Hover="true" Elevation="25" Items="_currencyList" Dense="true" Bordered="true" Striped="true"  @bind-currency="_currency">
+        <ToolBarContent>
+            <div class="justify-center mud-text-align-center">
+                @if (_canCreateCurrencies)
+                {
+                    <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" Color="Color.Primary" OnClick="(() => InvokeModal())" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">Ekle</MudButton>
+                    <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" OnClick="GetCurrenciesAsync" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">Yenile</MudButton>
+
+                }
+                else
+                {
+                    <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" OnClick="GetCurrenciesAsync" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">Yenile</MudButton>
+
+                }
+            </div>
+            <MudSpacer />
+        </ToolBarContent>
+        <HeaderContent>
+
+            <MudTh><MudTableSortLabel SortBy="new Func<GetAllCurrenciesResponse, object>(x => x.Code)">Kod</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<GetAllCurrenciesResponse, object>(x => x.Name)">Ad</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<GetAllCurrenciesResponse, object>(x => x.Sign)">Sembol</MudTableSortLabel></MudTh>
+
+            <MudTh Style="text-align:right">Eylemler</MudTh>
+        </HeaderContent>
+        <RowTemplate Context="row">
+            <MudTd DataLabel="Kod">@row.Code</MudTd>
+            <MudTd DataLabel="Ad">@row.Name</MudTd>
+            <MudTd DataLabel="Sembol">@row.Sign</MudTd>
+            <MudTd DataLabel="Actions" Style="text-align: right">
+                @if (_canEditCurrencies || _canDeleteCurrencies)
+                {
+                    <MudMenu Label="Eylemler" Variant="MudBlazor.Variant.Filled" DisableElevation="true" EndIcon="@Icons.Filled.KeyboardArrowDown" IconColor="Color.Secondary" Direction="Direction.Left" OffsetX="true">
+                        @if (_canEditCurrencies)
+                        {
+                            <MudMenuItem @onclick="@(() => InvokeModal(@row.Id))">Düzenle</MudMenuItem>
+                        }
+                        @if (_canDeleteCurrencies)
+                        {
+                            <MudMenuItem @onclick="@(() => Delete(@row.Id))">Sil</MudMenuItem>
+                        }
+                    </MudMenu>
+                }
+                else
+                {
+                    <MudButton Variant="MudBlazor.Variant.Filled"
+                       DisableElevation="true"
+                       StartIcon="@Icons.Material.Filled.DoNotTouch"
+                       IconColor="Color.Secondary"
+                       Size="Size.Small"
+                       Color="Color.Surface">
+                        Yetkiniz Yok
+                    </MudButton>
+                }
+            </MudTd>
+        </RowTemplate>
+        <FooterContent>
+        </FooterContent>
+        <PagerContent>
+            <TablePager />
+        </PagerContent>
+    </MudTable>
+}

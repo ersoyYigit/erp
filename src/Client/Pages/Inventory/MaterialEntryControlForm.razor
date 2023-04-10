@@ -1,0 +1,125 @@
+﻿@page "/warehouse/materialentrycontrol"
+@attribute [Authorize(Policy = Permissions.Warehouses.View)]
+@inject NavigationManager NavigationManager
+<HeroTitle Title="Warehouse" Description="Material Entry Control Form" />
+
+
+
+    <MudCard Elevation="15">
+        <MudCardHeader>
+            <CardHeaderContent>
+                <MudText Typo="Typo.h6"></MudText>
+            </CardHeaderContent>
+            <CardHeaderActions>
+                <MudIconButton Icon="@Icons.Material.Filled.Close" Color="Color.Primary"  @onclick="@(()=>NavigationManager.NavigateTo("/"))"  />
+            </CardHeaderActions>
+
+        </MudCardHeader>
+        <MudCardContent>
+            <MudForm >
+                <MudGrid>
+                    <MudItem xs="12" md="8">
+                        <MudTextField T="string"  @bind-Value="EntryItem.CompanyName" Label="Company Name" />
+                    </MudItem>
+                    <MudItem xs="12" md="8">
+                        <MudTextField T="string"  @bind-Value="EntryItem.ProductCode" Label="Product Code" />
+                    </MudItem>
+                    <MudItem xs="12" md="8">
+                        <MudTextField T="string"  @bind-Value="EntryItem.ProductName" Label="Product Name" />
+                    </MudItem>
+                    
+                    <MudItem xs="12" md="6">
+                        <MudNumericField T="double"  @bind-Value="EntryItem.ProductQuantity" Label="Product Quantity" />
+                    </MudItem>
+
+
+                    <MudItem xs="12" md="2">
+                        <MudSelect @bind-Value="EntryItem.MeasurementUnit" Label="Select Unit"  AdornmentColor="Color.Primary">
+                            @foreach (MeasurementUnit item in Enum.GetValues(typeof(MeasurementUnit)))
+                            {
+                                <MudSelectItem Value="@item">@item</MudSelectItem>
+                            }
+                        </MudSelect>
+                    </MudItem>
+
+                    
+                    <MudItem xs="12" md="8">
+                        <MudTextField T="string"  @bind-Value="EntryItem.LotNo" Label="Lot No" />
+                    </MudItem>
+                    <MudItem xs="12" md="10">
+                        <MudTextField T="string"  @bind-Value="EntryItem.Description" Label="Dsscription"  Lines="3"/>
+                    </MudItem>
+                    
+                    <MudItem xs="12" md="4">
+                        <MudCheckBox @bind-Checked="EntryItem.IsApprovedByWarehouseStaff" Label="Is Approved By Warehouse Staff" Color="Color.Primary"></MudCheckBox>
+                    </MudItem>
+                    <MudItem xs="12" md="4">
+                        <MudCheckBox @bind-Checked="EntryItem.IsApprovedByRevelantDepdt" Label="Is Approved By Revelant Depdt" Color="Color.Primary"></MudCheckBox>
+                    </MudItem>
+                    <MudItem xs="12" md="4">
+                        <MudCheckBox @bind-Checked="EntryItem.IsApprovedByPurchasingManager" Label="Is Approved By Purchasing Manager" Color="Color.Primary"></MudCheckBox>
+                    </MudItem>
+                    
+
+
+                </MudGrid>
+            </MudForm>  
+        </MudCardContent>
+        <MudCardActions>
+            <MudButton Variant="MudBlazor.Variant.Outlined" Color="Color.Primary" >Save</MudButton>
+        </MudCardActions>
+    </MudCard>
+
+
+@code {
+
+    
+    List<WarehouseEntryItem> EntryItems = new List<WarehouseEntryItem>();
+
+
+    WarehouseEntryItem EntryItem = new WarehouseEntryItem();
+
+
+
+    public class WarehouseEntryItem
+    {
+        public int Id { get; set; }
+        public string CompanyName { get; set; }
+        public string WaybillNumber { get; set; }
+        public string ProductCode { get; set; }
+        public string ProductName { get; set; }
+        public double ProductQuantity { get; set; }
+        public MeasurementUnit MeasurementUnit { get; set; }
+        public string LotNo { get; set; }
+        public State State { get; set; }
+        public string Description { get; set; }
+        public bool IsApprovedByWarehouseStaff { get; set; }
+        public bool IsApprovedByRevelantDepdt { get; set; }
+        public bool IsApprovedByPurchasingManager { get; set; }
+
+    }
+
+
+    
+    public enum CompanyType
+    {
+        Customer = 1,
+        Supplier = 2
+
+    }
+
+
+    public enum State
+    {
+        Approved = 0,
+        Denied = 1
+    }
+
+    public enum MeasurementUnit
+    {
+        Kg = 0,
+        Meter = 1,
+        Piece = 2
+    }
+
+}

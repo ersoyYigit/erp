@@ -1,0 +1,207 @@
+﻿@page "/home"
+@page "/"
+@using ArdaManager.Application.Responses.Approval;
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Home> _localizer
+@inject NavigationManager NavigationManager
+
+
+
+    <MudPaper>
+
+        <MudGrid>
+            <MudItem xs="12" sm="12" md="12">
+                <div class="d-flex justify-center mt-4">
+                
+                </div>
+            </MudItem>
+
+        
+            <MudItem xs="12" sm="12" md="12">
+                <MudText Align="Align.Center" Typo="Typo.h2">@_localizer["Title"]</MudText>
+                <MudText Align="Align.Center" Typo="Typo.h5" Class="smaller">@_localizer["Description"]</MudText>
+            </MudItem>
+
+            @if(_showAmir)
+            {
+                <MudItem sm="8" md="8">
+                    <MudCardContent>
+                        <MudDataGrid Items="@_amirStatuses" T="DocumentApprovalStatusResponse"
+                                     Bordered="true" ColumnResizeMode="ResizeMode.Column" Dense="true">
+                            <ColGroup>
+                                <col span="1" style="width: 5%;">
+                                <col span="1" style="width: 40%;">
+                                <col span="1" style="width: 20%;">
+                                <col span="1" style="width: 35%;">
+                            </ColGroup>
+                            <Columns>
+                                <PropertyColumn Property="x => x.StepNumber" Title="Sıra" />
+
+                                <PropertyColumn Property="x => x.DocNo" Title="Doküman No" />
+                                <TemplateColumn Title="Durumu">
+                                    <CellTemplate Context="detail">
+                                        @if (detail.Item.IsApproved)
+                                        {
+                                            <MudChip Color="Color.Success">Onaylı</MudChip>
+                                        }
+                                        else if (detail.Item.IsRejected)
+                                        {
+                                            <MudChip Color="Color.Error">Red</MudChip>
+                                        }
+                                        else
+                                        {
+                                            <MudChip Color="Color.Warning">Bekliyor</MudChip>
+                                        }
+                                    </CellTemplate>
+                                </TemplateColumn>
+                                <TemplateColumn Title="Durumu">
+                                    <CellTemplate Context="detail">
+                                        <MudButton OnClick="() => TalepAc(detail.Item.BaseDocId)" Variant="Variant.Filled" Color="Color.Primary">Talebe Git</MudButton>
+                                    </CellTemplate>
+                                </TemplateColumn>
+
+                            </Columns>
+                        </MudDataGrid>
+                    </MudCardContent>
+                </MudItem>
+            }
+
+
+        @if (_showMudur)
+        {
+            <MudItem sm="8" md="8">
+                <MudCardContent>
+                    <MudDataGrid Items="@_mudurStatuses" T="DocumentApprovalStatusResponse"
+                             Bordered="true" ColumnResizeMode="ResizeMode.Column" Dense="true">
+                        <ColGroup>
+                            <col span="1" style="width: 5%;">
+                            <col span="1" style="width: 40%;">
+                            <col span="1" style="width: 20%;">
+                            <col span="1" style="width: 35%;">
+                        </ColGroup>
+                        <Columns>
+                            <PropertyColumn Property="x => x.StepNumber" Title="Sıra" />
+
+                            <PropertyColumn Property="x => x.UserRoleName" Title="Rol" />
+                            <TemplateColumn Title="Durumu">
+                                <CellTemplate Context="detail">
+                                    @if (detail.Item.IsApproved)
+                                    {
+                                        <MudChip Color="Color.Success">Onaylı</MudChip>
+                                    }
+                                    else if (detail.Item.IsRejected)
+                                    {
+                                        <MudChip Color="Color.Error">Red</MudChip>
+                                    }
+                                    else
+                                    {
+                                        <MudChip Color="Color.Warning">Bekliyor</MudChip>
+                                    }
+                                </CellTemplate>
+                            </TemplateColumn>
+                            <TemplateColumn Title="Durumu">
+                                <CellTemplate Context="detail">
+                                    <MudButton OnClick="() => TalepAc(detail.Item.BaseDocId)" Variant="Variant.Filled" Color="Color.Primary" >Talebe Git</MudButton >
+                                </CellTemplate>
+                            </TemplateColumn>
+
+                        </Columns>
+                    </MudDataGrid>
+                </MudCardContent>
+            </MudItem>
+        }
+        </MudGrid>
+    </MudPaper>
+
+
+
+
+
+@code{
+
+    private int Index = -1; //default value cannot be 0 -> first selectedindex is 0.
+
+    public List<ChartSeries> Series = new List<ChartSeries>()
+    {
+        new ChartSeries() { Name = "Orders", Data = new double[] { 90, 79, 72, 69, 62, 62, 55, 65, 70 } },
+        new ChartSeries() { Name = "Production", Data = new double[] { 10, 41, 35, 51, 49, 62, 69, 91, 148 } },
+    };
+    public string[] XAxisLabels = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep" };
+
+
+
+    
+
+    public List<ChartSeries> Series2 = new List<ChartSeries>()
+    {
+        new ChartSeries() { Name = "Category x", Data = new double[] { 40, 20, 25, 27, 46, 60, 48, 80, 15 } },
+        new ChartSeries() { Name = "Category y", Data = new double[] { 19, 24, 35, 13, 28, 15, 13, 16, 31 } },
+        new ChartSeries() { Name = "Category z", Data = new double[] { 8, 6, 11, 13, 4, 16, 10, 16, 18 } },
+    };
+    public string[] XAxisLabels2 = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep" };
+
+
+    List<Product> Warehouse1Stocks = new List<Product>()
+    {
+        new Product {Id = 1, Code = "eml30070", Name = "Kuvars", Stock = 26500 },
+        new Product {Id = 2, Code = "gtd897621", Name = "Antimon", Stock = 22400 },
+        new Product {Id = 3, Code = "ret65132245", Name = "Boraks", Stock = 1200 },
+        new Product {Id = 4, Code = "dol55485", Name = "Dolomit", Stock = 500 },
+        new Product {Id = 5, Code = "sil98797", Name = "Silis", Stock = 58700 },
+        new Product {Id = 6, Code = "sda30070", Name = "Soda", Stock = 120000 },
+        new Product {Id = 7, Code = "nan55655", Name = "Sodyum Nitrat", Stock = 800 }
+    };
+
+    List<Product> Warehouse2Stocks = new List<Product>()
+    {
+        new Product {Id = 1, Code = "SCO 6183/4", Name = "SARI", Stock =23.5 },
+        new Product {Id = 2, Code = "SCO 6702-1", Name = "TURUNCU ", Stock =29 },
+        new Product {Id = 3, Code = "SCO 6687", Name = "LİLA", Stock =70.2 },
+        new Product {Id = 4, Code = "SCO 6001", Name = "KOBALT MAVİ", Stock =113.3 },
+        new Product {Id = 5, Code = "SCO 6753", Name = "KIRMIZI", Stock =18.5 },
+        new Product {Id = 6, Code = "SCO 6753/1", Name = "KIRMIZI", Stock =4.5 },
+        new Product {Id = 7, Code = "SCO 6753/3", Name = "KIRMIZI", Stock =41.7 },
+        new Product {Id = 8, Code = "SCO 6712", Name = "TERRACOTA", Stock =12 },
+        new Product {Id = 9, Code = "SCO 6308/4", Name = "FISTIK YEŞİLİ", Stock =36.5 },
+        new Product {Id = 10, Code = "SCO 6314", Name = "PETROL  YEŞİLİ", Stock =137.6 },
+        new Product {Id = 11, Code = "SCO 6302", Name = "YEŞİL", Stock =12.7 },
+        new Product {Id = 12, Code = "SCO 6153", Name = "TABA", Stock =16.5 },
+        new Product {Id = 13, Code = "SCO 6058-3", Name = "BEBE MAVİ", Stock =23.5 },
+        new Product {Id = 14, Code = "SCO 6309", Name = "YEŞİL", Stock =14.8 },
+        new Product {Id = 15, Code = "SCO 6278", Name = "SİYAH", Stock =56 },
+        new Product {Id = 16, Code = "SCO 6013", Name = "MAVİ", Stock =9.8 },
+        new Product {Id = 17, Code = "CPB 125", Name = "KAHVE", Stock =40 },
+        new Product {Id = 18, Code = "CPB 139", Name = "YENİ MAVİ", Stock =50 },
+        new Product {Id = 19, Code = "CPB 138", Name = "SİYAH", Stock =100 },
+        new Product {Id = 20, Code = "CPB 123", Name = "KAHVE", Stock =12.5 },
+        new Product {Id = 21, Code = "CPB 108", Name = "YEŞİL", Stock =5 },
+        new Product {Id = 22, Code = "CPB 126", Name = "BLUE GREEN", Stock =79.5 },
+        new Product {Id = 23, Code = "CPB 131", Name = "MAVİ", Stock =25 },
+        new Product {Id = 24, Code = "E-96 ", Name = "PEMBE", Stock =28 },
+        new Product {Id = 25, Code = "B30", Name = "ANTİK PEMBE", Stock =5 },
+        new Product {Id = 26, Code = "B373", Name = "PEMBE", Stock =59 },
+        new Product {Id = 27, Code = "B862", Name = "PEMBE", Stock =47.5 },
+        new Product {Id = 28, Code = "B29", Name = "DARK RED", Stock =16.5 },
+        new Product {Id = 29, Code = "B38", Name = "DARK RED", Stock =5 },
+        new Product {Id = 30, Code = "B26", Name = "KAHVE", Stock =19.8 },
+        new Product {Id = 31, Code = "B25", Name = "KAHVE", Stock =16 },
+        new Product {Id = 32, Code = "CSV121", Name = "PEMBE", Stock =12 },
+        new Product {Id = 33, Code = "PE1155", Name = "KAHVE", Stock =12.5 },
+        new Product {Id = 34, Code = "B191", Name = "BEYAZ", Stock =133.5 },
+        new Product {Id = 35, Code = "(%70B191+%30SCO6278)", Name = "GRİ", Stock =16.5 },
+        new Product {Id = 36, Code = "SCO1058/1", Name = "OKYANUS YEŞİLİ", Stock =6 },
+        new Product {Id = 37, Code = "CPB 117", Name = "IRON RED", Stock =5.5 },
+        new Product {Id = 38, Code = "CPB 132", Name = "MAVİ", Stock =5 },
+        new Product {Id = 39, Code = "322E", Name = "SARI", Stock =50 }
+
+    };
+
+
+
+
+    protected class Product{
+        public int Id { get; set; }
+        public string Code { get; set; }
+        public string Name { get; set; }
+        public double Stock { get; set; }
+    }
+}

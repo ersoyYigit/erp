@@ -1,0 +1,417 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = browser
+build_property.RootNamespace = ArdaManager.Client
+build_property.RootNamespace = ArdaManager.Client
+build_property.ProjectDir = D:\Dev\ArdaManager\src\Client\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = D:\Dev\ArdaManager\src\Client
+build_property._RazorSourceGeneratorDebug = 
+
+[D:/Dev/ArdaManager/src/Client/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Authentication/Login.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0aGVudGljYXRpb25cTG9naW4ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Authentication/Register.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0aGVudGljYXRpb25cUmVnaXN0ZXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Catalog/AddEditMoldModal.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2F0YWxvZ1xBZGRFZGl0TW9sZE1vZGFsLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Catalog/AddEditPatternModal.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2F0YWxvZ1xBZGRFZGl0UGF0dGVybk1vZGFsLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Catalog/AddEditProductModal.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2F0YWxvZ1xBZGRFZGl0UHJvZHVjdE1vZGFsLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Catalog/AddEditTemplateModal.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2F0YWxvZ1xBZGRFZGl0VGVtcGxhdGVNb2RhbC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Catalog/Molds.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2F0YWxvZ1xNb2xkcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Catalog/Patterns.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2F0YWxvZ1xQYXR0ZXJucy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Catalog/Products.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2F0YWxvZ1xQcm9kdWN0cy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Catalog/Templates.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2F0YWxvZ1xUZW1wbGF0ZXMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Communication/Chat.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29tbXVuaWNhdGlvblxDaGF0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Content/Dashboard.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29udGVudFxEYXNoYm9hcmQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Content/Home.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29udGVudFxIb21lLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Corporation/AddEditCompanyModal.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29ycG9yYXRpb25cQWRkRWRpdENvbXBhbnlNb2RhbC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Corporation/AddEditFairModal.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29ycG9yYXRpb25cQWRkRWRpdEZhaXJNb2RhbC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Corporation/Companies.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29ycG9yYXRpb25cQ29tcGFuaWVzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Corporation/CompanyFairsTable.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29ycG9yYXRpb25cQ29tcGFueUZhaXJzVGFibGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Corporation/Fairs.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29ycG9yYXRpb25cRmFpcnMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Docs/PurchaseOffer/PurchaseOffers.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRG9jc1xQdXJjaGFzZU9mZmVyXFB1cmNoYXNlT2ZmZXJzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Docs/PurchaseOffer/UpsertPurchaseOfferModal.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRG9jc1xQdXJjaGFzZU9mZmVyXFVwc2VydFB1cmNoYXNlT2ZmZXJNb2RhbC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Docs/PurchaseOrder/PurchaseOrders.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRG9jc1xQdXJjaGFzZU9yZGVyXFB1cmNoYXNlT3JkZXJzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Docs/PurchaseOrder/UpsertPurchaseOrderModal.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRG9jc1xQdXJjaGFzZU9yZGVyXFVwc2VydFB1cmNoYXNlT3JkZXJNb2RhbC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Docs/PurchaseRequest/AddEditPurchaseRequestModal.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRG9jc1xQdXJjaGFzZVJlcXVlc3RcQWRkRWRpdFB1cmNoYXNlUmVxdWVzdE1vZGFsLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Docs/PurchaseRequest/PurchaseRequests.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRG9jc1xQdXJjaGFzZVJlcXVlc3RcUHVyY2hhc2VSZXF1ZXN0cy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Docs/TemplateWorkOrder/AddEditTemplateWorkOrderModal.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRG9jc1xUZW1wbGF0ZVdvcmtPcmRlclxBZGRFZGl0VGVtcGxhdGVXb3JrT3JkZXJNb2RhbC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Docs/TemplateWorkOrder/TemplateWorkOrders.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRG9jc1xUZW1wbGF0ZVdvcmtPcmRlclxUZW1wbGF0ZVdvcmtPcmRlcnMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Docs/Warehouse/AddEditWarehouseEntryReceiptModal.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRG9jc1xXYXJlaG91c2VcQWRkRWRpdFdhcmVob3VzZUVudHJ5UmVjZWlwdE1vZGFsLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Docs/Warehouse/AddEditWarehouseExitReceiptModal.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRG9jc1xXYXJlaG91c2VcQWRkRWRpdFdhcmVob3VzZUV4aXRSZWNlaXB0TW9kYWwucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Docs/Warehouse/WarehouseEntryReceipts.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRG9jc1xXYXJlaG91c2VcV2FyZWhvdXNlRW50cnlSZWNlaXB0cy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Docs/Warehouse/WarehouseExitReceipts.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRG9jc1xXYXJlaG91c2VcV2FyZWhvdXNlRXhpdFJlY2VpcHRzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Human/AddEditPersonModal.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSHVtYW5cQWRkRWRpdFBlcnNvbk1vZGFsLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Human/Persons.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSHVtYW5cUGVyc29ucy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Identity/Account.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSWRlbnRpdHlcQWNjb3VudC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Identity/Approval/AddEditScenarioModal.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSWRlbnRpdHlcQXBwcm92YWxcQWRkRWRpdFNjZW5hcmlvTW9kYWwucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Identity/Approval/Scenarios.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSWRlbnRpdHlcQXBwcm92YWxcU2NlbmFyaW9zLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Identity/Approval/Test.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSWRlbnRpdHlcQXBwcm92YWxcVGVzdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Identity/Forgot.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSWRlbnRpdHlcRm9yZ290LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Identity/Profile.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSWRlbnRpdHlcUHJvZmlsZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Identity/RegisterUserModal.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSWRlbnRpdHlcUmVnaXN0ZXJVc2VyTW9kYWwucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Identity/Reset.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSWRlbnRpdHlcUmVzZXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Identity/RoleModal.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSWRlbnRpdHlcUm9sZU1vZGFsLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Identity/RolePermissions.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSWRlbnRpdHlcUm9sZVBlcm1pc3Npb25zLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Identity/Roles.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSWRlbnRpdHlcUm9sZXMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Identity/Security.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSWRlbnRpdHlcU2VjdXJpdHkucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Identity/UserProfile.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSWRlbnRpdHlcVXNlclByb2ZpbGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Identity/UserRoles.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSWRlbnRpdHlcVXNlclJvbGVzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Identity/Users.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSWRlbnRpdHlcVXNlcnMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Inventory/AddEditProductionLineModal.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW52ZW50b3J5XEFkZEVkaXRQcm9kdWN0aW9uTGluZU1vZGFsLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Inventory/AddEditRackModal.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW52ZW50b3J5XEFkZEVkaXRSYWNrTW9kYWwucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Inventory/AddEditWarehouseModal.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW52ZW50b3J5XEFkZEVkaXRXYXJlaG91c2VNb2RhbC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Inventory/MaterialEntryControlForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW52ZW50b3J5XE1hdGVyaWFsRW50cnlDb250cm9sRm9ybS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Inventory/ProductionLines.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW52ZW50b3J5XFByb2R1Y3Rpb25MaW5lcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Inventory/Racks.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW52ZW50b3J5XFJhY2tzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Inventory/Warehouses.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW52ZW50b3J5XFdhcmVob3VzZXMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Misc/AddEditCategoryModal.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWlzY1xBZGRFZGl0Q2F0ZWdvcnlNb2RhbC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Misc/AddEditDocumentModal.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWlzY1xBZGRFZGl0RG9jdW1lbnRNb2RhbC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Misc/AddEditDocumentTypeModal.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWlzY1xBZGRFZGl0RG9jdW1lbnRUeXBlTW9kYWwucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Misc/Categories.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWlzY1xDYXRlZ29yaWVzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Misc/Currencies.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWlzY1xDdXJyZW5jaWVzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Misc/DocumentStore.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWlzY1xEb2N1bWVudFN0b3JlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Misc/DocumentTypes.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWlzY1xEb2N1bWVudFR5cGVzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Misc/ExchangeRates.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWlzY1xFeGNoYW5nZVJhdGVzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Misc/ExtendedAttribute/DocumentExtendedAttributes.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWlzY1xFeHRlbmRlZEF0dHJpYnV0ZVxEb2N1bWVudEV4dGVuZGVkQXR0cmlidXRlcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Misc/QrScanner.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWlzY1xRclNjYW5uZXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Misc/Taxes.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWlzY1xUYXhlcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Misc/UpsertCurrencyModal.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWlzY1xVcHNlcnRDdXJyZW5jeU1vZGFsLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Misc/UpsertTaxModal.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWlzY1xVcHNlcnRUYXhNb2RhbC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Order/AddEditOrder.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT3JkZXJcQWRkRWRpdE9yZGVyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Reporting/GetAllWarehousesStocks.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVwb3J0aW5nXEdldEFsbFdhcmVob3VzZXNTdG9ja3MucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Utilities/AuditTrails.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXRpbGl0aWVzXEF1ZGl0VHJhaWxzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Shared/Cards/DocApproveCard.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXENhcmRzXERvY0FwcHJvdmVDYXJkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Shared/Components/AddEditExtendedAttributeModal.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXENvbXBvbmVudHNcQWRkRWRpdEV4dGVuZGVkQXR0cmlidXRlTW9kYWwucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Shared/Components/Barcode.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXENvbXBvbmVudHNcQmFyY29kZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Shared/Components/CurrentUsers.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXENvbXBvbmVudHNcQ3VycmVudFVzZXJzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Shared/Components/DocApprovalSummary.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXENvbXBvbmVudHNcRG9jQXBwcm92YWxTdW1tYXJ5LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Shared/Components/DocStateChip.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXENvbXBvbmVudHNcRG9jU3RhdGVDaGlwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Shared/Components/ExtendedAttributes.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXENvbXBvbmVudHNcRXh0ZW5kZWRBdHRyaWJ1dGVzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Shared/Components/ExtendedAttributesBase.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXENvbXBvbmVudHNcRXh0ZW5kZWRBdHRyaWJ1dGVzQmFzZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Shared/Components/GenerateQRCode.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXENvbXBvbmVudHNcR2VuZXJhdGVRUkNvZGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Shared/Components/HeroTitle.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXENvbXBvbmVudHNcSGVyb1RpdGxlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Shared/Components/LanguageSelector.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXENvbXBvbmVudHNcTGFuZ3VhZ2VTZWxlY3Rvci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Shared/Components/NumericFieldWithUnit.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXENvbXBvbmVudHNcTnVtZXJpY0ZpZWxkV2l0aFVuaXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Shared/Components/TablePager.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXENvbXBvbmVudHNcVGFibGVQYWdlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Shared/Components/UserCard.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXENvbXBvbmVudHNcVXNlckNhcmQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Shared/Components/UserMessages.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXENvbXBvbmVudHNcVXNlck1lc3NhZ2VzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Shared/Dialogs/CompanySearchDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXERpYWxvZ3NcQ29tcGFueVNlYXJjaERpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Shared/Dialogs/DeleteConfirmation.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXERpYWxvZ3NcRGVsZXRlQ29uZmlybWF0aW9uLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Shared/Dialogs/Logout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXERpYWxvZ3NcTG9nb3V0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Shared/Dialogs/ProductSearchDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXERpYWxvZ3NcUHJvZHVjdFNlYXJjaERpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Shared/Dialogs/RelationPickers/Purchase/PurchaseOfferPicker.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXERpYWxvZ3NcUmVsYXRpb25QaWNrZXJzXFB1cmNoYXNlXFB1cmNoYXNlT2ZmZXJQaWNrZXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Shared/Dialogs/RelationPickers/Purchase/PurchaseOrderPicker.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXERpYWxvZ3NcUmVsYXRpb25QaWNrZXJzXFB1cmNoYXNlXFB1cmNoYXNlT3JkZXJQaWNrZXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Shared/Dialogs/RelationPickers/Purchase/PurchaseRequestPicker.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXERpYWxvZ3NcUmVsYXRpb25QaWNrZXJzXFB1cmNoYXNlXFB1cmNoYXNlUmVxdWVzdFBpY2tlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Shared/Dialogs/UserSearchDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXERpYWxvZ3NcVXNlclNlYXJjaERpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Shared/Dialogs/WarehouseSearchDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXERpYWxvZ3NcV2FyZWhvdXNlU2VhcmNoRGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Shared/Error.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEVycm9yLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Shared/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Shared/NotFoundLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5vdEZvdW5kTGF5b3V0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 

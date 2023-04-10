@@ -1,0 +1,25 @@
+﻿@using ArdaManager.Application.Features.Companies.Queries.Search;
+
+<MudDialog>
+    <DialogContent>
+        <MudTextField @ref="SearchInputRef" @bind-Value="SearchTerm" Placeholder="Firma ara..." Adornment="MudBlazor.Adornment.End" AdornmentIcon="@Icons.Material.Filled.Search" DebounceInterval="500" OnDebounceIntervalElapsed="HandleIntervalElapsed" />
+        <MudTable @ref="Table" Items="@FilteredCompanys" Hover="true" T="CompanySearchResultDto" OnRowClick="SelectItem">
+            <HeaderContent>
+                <MudTh>Firma Kodu</MudTh>
+                <MudTh>Firma Adı</MudTh>
+                <MudTh>Kategori</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd>@context.Code</MudTd>
+                <MudTd>@context.Name</MudTd>
+                <MudTd>@context.CategoryName</MudTd>
+            </RowTemplate>
+            <PagerContent>
+                <MudTablePager />
+            </PagerContent>
+        </MudTable>
+    </DialogContent>
+    <DialogActions>
+        <MudButton Variant="MudBlazor.Variant.Filled" Color="Color.Secondary" OnClick="Cancel">İptal</MudButton>
+    </DialogActions>
+</MudDialog>

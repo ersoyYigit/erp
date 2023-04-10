@@ -1,0 +1,82 @@
+﻿@page "/misc/taxes"
+@attribute [Authorize(Policy = Permissions.Taxes.View)]
+@using ArdaManager.Application.Features.Taxes.Queries
+
+<style>
+    .mud-table-container {
+        overflow: auto;
+    }
+</style>
+
+<HeroTitle Title="Vergi Dilimleri" Description="Vergi dilimlerini yönetin" /> 
+@if (!_loaded)
+{
+    <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+}
+else
+{
+    <MudTable Hover="true" Elevation="25" Items="_taxList" Dense="true" Bordered="true" Striped="true" @bind-tax="_tax">
+        <ToolBarContent>
+            <div class="justify-center mud-text-align-center">
+                @if (_canCreateTaxes)
+                {
+                    <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" Color="Color.Primary" OnClick="(() => InvokeModal())" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">Ekle</MudButton>
+                    <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" OnClick="GetTaxesAsync" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">Yenile</MudButton>
+
+                }
+                else
+                {
+                    <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" OnClick="GetTaxesAsync" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">Yenile</MudButton>
+
+                }
+            </div>
+            <MudSpacer />
+        </ToolBarContent>
+        <HeaderContent>
+
+            <MudTh><MudTableSortLabel SortBy="new Func<GetAllTaxesResponse, object>(x => x.Code)">Kod</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<GetAllTaxesResponse, object>(x => x.Name)">Ad</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<GetAllTaxesResponse, object>(x => x.Description)">Açıklama</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<GetAllTaxesResponse, object>(x => x.Description)">Yüzde değer</MudTableSortLabel></MudTh>
+
+            <MudTh Style="text-align:right">Eylemler</MudTh>
+        </HeaderContent>
+        <RowTemplate Context="row">
+            <MudTd DataLabel="Kod">@row.Code</MudTd>
+            <MudTd DataLabel="Ad">@row.Name</MudTd>
+            <MudTd DataLabel="Açıklama">@row.Description</MudTd>
+            <MudTd DataLabel="Yüzde %">@row.Percent</MudTd>
+            <MudTd DataLabel="Actions" Style="text-align: right">
+                @if (_canEditTaxes || _canDeleteTaxes)
+                {
+                    <MudMenu Label="Eylemler" Variant="MudBlazor.Variant.Filled" DisableElevation="true" EndIcon="@Icons.Filled.KeyboardArrowDown" IconColor="Color.Secondary" Direction="Direction.Left" OffsetX="true">
+                        @if (_canEditTaxes)
+                        {
+                            <MudMenuItem @onclick="@(() => InvokeModal(@row.Id))">Düzenle</MudMenuItem>
+                        }
+                        @if (_canDeleteTaxes)
+                        {
+                            <MudMenuItem @onclick="@(() => Delete(@row.Id))">Sil</MudMenuItem>
+                        }
+                    </MudMenu>
+                }
+                else
+                {
+                    <MudButton Variant="MudBlazor.Variant.Filled"
+                       DisableElevation="true"
+                       StartIcon="@Icons.Material.Filled.DoNotTouch"
+                       IconColor="Color.Secondary"
+                       Size="Size.Small"
+                       Color="Color.Surface">
+                        Yetkiniz Yok
+                    </MudButton>
+                }
+            </MudTd>
+        </RowTemplate>
+        <FooterContent>
+        </FooterContent>
+        <PagerContent>
+            <TablePager />
+        </PagerContent>
+    </MudTable>
+}

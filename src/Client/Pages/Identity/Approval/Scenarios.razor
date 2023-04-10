@@ -1,0 +1,46 @@
+﻿@using ArdaManager.Application.Extensions;
+@page "/Approval/scenarios"
+
+
+
+<HeroTitle Title="Onay Mekanizması Senaryoları" Description="Evraklar için onay hiyerarşisini kurgulayın" />
+@if (!_loaded)
+{
+    <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+}
+else
+{
+
+    <MudTable Items="@_scenarioList" Hover="true" Dense="true" Class="mt-3">
+        <ToolBarContent>
+            <div class="justify-center mud-text-align-center">
+                @if (_canCreateScenarios)
+                {
+                    <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" Color="Color.Primary" OnClick="(() => InvokeModal())" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">Ekle</MudButton>
+                }
+                <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" OnClick="GetScenariosAsync" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">Yenile</MudButton>
+            </div>
+            <MudSpacer />
+
+        </ToolBarContent>
+        <HeaderContent>
+            <MudTh>Evrak</MudTh>
+            <MudTh>Açıklama</MudTh>
+            <MudTh>İşlem Adedi</MudTh>
+        </HeaderContent>
+        <RowTemplate Context="scenario">
+            <MudTd>@scenario.DocType.ToDescriptionString()</MudTd>
+            <MudTd>@scenario.Description</MudTd>
+            <MudTd>@scenario.ApprovalSteps?.Count()</MudTd>
+            <MudTd>
+
+                <MudIconButton Icon="@Icons.Material.Filled.Edit" OnClick="@(() => InvokeModal(scenario.Id))" />
+                <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" OnClick="@(() => Delete(scenario.Id))" />
+            </MudTd>
+        </RowTemplate>
+    </MudTable>
+
+    @*<MudFab Icon="@Icons.Material.Filled.Add" Color="Color.Primary" Variant="MudBlazor.Variant.Filled" Size="MudBlazor.Size.Medium" Class="mt-3" OnClick="@(() => InvokeModal())" />*@
+
+
+}

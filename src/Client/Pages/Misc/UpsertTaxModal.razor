@@ -1,0 +1,51 @@
+﻿
+<EditForm Model="@UpsertTaxModel" OnValidSubmit="SaveAsync">
+    <FluentValidationValidator @ref="_fluentValidationValidator" />
+    <MudDialog>
+        @*<TitleContent>
+            @{
+                if (UpsertTaxModel.Id == 0)
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.Add" Class="mr-3 mb-n1" />
+                        Ekle
+                    </MudText>
+                }
+                else
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.Update" Class="mr-3 mb-n1" />
+                        Güncelle
+                    </MudText>
+                }
+            }
+        </TitleContent>*@
+        <DialogContent>
+            <MudGrid>
+                <MudItem xs="12" md="6">
+                    <MudTextField T="string" For="@(() => UpsertTaxModel.Code)" @bind-Value="UpsertTaxModel.Code" Label="Kod" />
+                </MudItem>
+                <MudItem xs="12" md="6">
+                    <MudTextField T="string" For="@(() => UpsertTaxModel.Name)" @bind-Value="UpsertTaxModel.Name" Label="Ad" />
+                </MudItem>
+                <MudItem xs="12" md="6">
+                    <MudTextField For="@(() => UpsertTaxModel.Description)" @bind-Value="UpsertTaxModel.Description" Label="Açıklama" />
+                </MudItem>
+                <MudItem xs="12" md="6">
+                    <MudNumericField For="@(() => UpsertTaxModel.Percent)" @bind-Value="UpsertTaxModel.Percent" Label="Yüzdelik değer" />
+                </MudItem>
+            </MudGrid>
+        </DialogContent>
+        <DialogActions>
+            <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" OnClick="Cancel">İptal</MudButton>
+            @if (UpsertTaxModel.Id != 0)
+            {
+                <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" ButtonType="MudBlazor.ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Secondary">Güncelle</MudButton>
+            }
+            else
+            {
+                <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" ButtonType="MudBlazor.ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Success">Kaydet</MudButton>
+            }
+        </DialogActions>
+    </MudDialog>
+</EditForm>
