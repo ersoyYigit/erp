@@ -63,6 +63,7 @@ namespace ArdaManager.Shared.Constants.Application
             public const string GetTemplateWorkOrdersByIdCacheKey = "template-work-order-by-id";            
             
             public const string GetAllWarehouseReceiptsCacheKey = "all-warehouse-receipts";
+            public const string GetAllWarehouseRequestsCacheKey = "all-warehouse-requests";
             public const string GetAllWarehouseReceiptsWarehouseIdCacheKey = "all-warehouse-by-warehouseId-receipts";
             public const string GetWarehouseReceiptsByIdCacheKey = "template-warehouse-receipt-by-id";
 

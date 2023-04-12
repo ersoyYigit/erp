@@ -144,6 +144,13 @@ namespace ArdaManager.Shared.Constants.Permission
             public const string Edit = "Permissions.Taxes.Edit";
             public const string Delete = "Permissions.Taxes.Delete";
         }
+        public static class WarehouseRequests
+        {
+            public const string View = "Permissions.WarehouseRequests.View";
+            public const string Create = "Permissions.WarehouseRequests.Create";
+            public const string Edit = "Permissions.WarehouseRequests.Edit";
+            public const string Delete = "Permissions.WarehouseRequests.Delete";
+        }
 
         public static class Communication
         {

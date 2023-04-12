@@ -1,0 +1,79 @@
+﻿@page "/catalog/warehouseRequests"
+@page "/catalog/warehouseRequests/{Id:int}"
+@using ArdaManager.Application.Features.Docs.WarehouseRequests.Queries;
+
+
+@inject Microsoft.Extensions.Localization.IStringLocalizer<WarehouseRequests> _localizer
+
+
+@* Add other required using statements here based on your project structure and dependencies *@
+@* ... *@
+
+<HeroTitle Title="Depo Talepleri" Description="Depo taleplerini yönetin." />
+@if (!_loaded)
+{
+    <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+}
+else
+{
+
+    <MudDataGrid T="WarehouseRequestResponse" Items="@_warehouseRequestList" SortMode="SortMode.Multiple" Filterable="true">
+        <ToolBarContent>
+            @if (_canCreateWarehouseRequests)
+            {
+                <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" Color="Color.Primary" OnClick="(() => InvokeModal())" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">Ekle</MudButton>
+                <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" OnClick="GetWarehouseRequestsAsync" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">Yenile</MudButton>
+            }
+            else
+            {
+                <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" OnClick="GetWarehouseRequestsAsync" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">Yenile]</MudButton>
+
+            }
+
+            @*
+        <MudSpacer />
+        <MudTextField @bind-Value="_searchString" Placeholder="Search" Adornment="Adornment.Start" Immediate="true"
+        AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>*@
+        </ToolBarContent>
+        <Columns>
+            <HierarchyColumn T="WarehouseRequestResponse" />
+            <PropertyColumn Property="x => x.DocNo" Title="Doküman No" />
+            <TemplateColumn Title="Evrak Tarihi" Filterable="false">
+                <CellTemplate>
+                    @if (context.Item.DocDate.HasValue)
+                    {
+                        @context.Item.DocDate.Value.ToString("dd/MM/yyyy")
+                        ;
+                    }
+                </CellTemplate>
+            </TemplateColumn>
+            <PropertyColumn Property="x => x.RelatedWarehouseName" Title="Talep Edilen Depo" />
+            <PropertyColumn Property="x => x.Description" Title="Açıklama" />
+            <TemplateColumn CellClass="d-flex justify-end">
+                <CellTemplate>
+                    <MudStack Row>
+                        <MudIconButton Elevation="10" Color="Color.Primary" @onclick="@(() => InvokeModal(context.Item.Id))" Icon="@Icons.Material.Filled.Edit"></MudIconButton>
+                        <MudIconButton Elevation="10" Color="Color.Error" @onclick="@(() => Delete(@context.Item.Id))" Icon="@Icons.Material.Filled.Delete"></MudIconButton>
+                    </MudStack>
+                </CellTemplate>
+            </TemplateColumn>
+        </Columns>
+        <ChildRowContent>
+            <MudDataGrid T="WarehouseRequestRowResponse" Items="@context.Item.WarehouseRequestRowsResponse" ReadOnly="true" Class="custom-datagrid">
+                <Columns>
+                    <PropertyColumn Property="d => d.ProductCode" Title="Ürün Kodu" />
+                    <PropertyColumn Property="d => d.ProductName" Title="Ürün Adı" />
+                    <TemplateColumn Title="Miktar">
+                        <CellTemplate Context="detail">
+                            @($"{detail.Item.Quantity.ToString("N4")} {detail.Item.MeasurementUnitCode}")
+                        </CellTemplate>
+                    </TemplateColumn>
+                    <PropertyColumn Property="d => d.Description" Title="Açıklama" />
+                </Columns>
+            </MudDataGrid>
+        </ChildRowContent>
+        <PagerContent>
+            <MudDataGridPager T="WarehouseRequestResponse" />
+        </PagerContent>
+    </MudDataGrid>
+}

@@ -55,5 +55,3 @@ D:\Dev\ArdaManager\src\Application\obj\Debug\net6.0\ArdaManager.Application.dll
 D:\Dev\ArdaManager\src\Application\obj\Debug\net6.0\refint\ArdaManager.Application.dll
 D:\Dev\ArdaManager\src\Application\obj\Debug\net6.0\ArdaManager.Application.pdb
 D:\Dev\ArdaManager\src\Application\obj\Debug\net6.0\ref\ArdaManager.Application.dll
-D:\Dev\ArdaManager\src\Application\obj\Debug\net6.0\en\ArdaManager.Application.resources.cs
-D:\Dev\ArdaManager\src\Application\obj\Debug\net6.0\tr\ArdaManager.Application.resources.cs

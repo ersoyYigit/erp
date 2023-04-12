@@ -1,0 +1,138 @@
+﻿@using ArdaManager.Application.Features.MeasurementUnits.Queries.GetAll;
+
+<EditForm Model="@UpsertWarehouseRequestModel" OnValidSubmit="SaveAsync">
+    <FluentValidationValidator @ref="_fluentValidationValidator" />
+    <MudDialog>
+        <TitleContent>
+            @{
+                if (UpsertWarehouseRequestModel.Id == 0)
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.Add" Class="mr-3 mb-n1" />
+                        Yeni Depo Giriş Fişi
+                    </MudText>
+                }
+                else
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.Update" Class="mr-3 mb-n1" />
+                        Depo Giriş Fişi Güncelle
+                    </MudText>
+                }
+            }
+        </TitleContent>
+        <DialogContent>
+            <MudGrid>
+                <MudContainer MaxWidth="@MaxWidth.ExtraLarge">
+                    <MudCard>
+                        <MudCardHeader>
+                            <CardHeaderContent>
+                                <MudText Typo="Typo.h6">Talep Detayı</MudText>
+                            </CardHeaderContent>
+                        </MudCardHeader>
+                        <MudCardContent>
+                            <MudGrid>
+                                <MudItem xs="12" md="6">
+                                    <MudTextField T="string" For="@(() => UpsertWarehouseRequestModel.DocNo)" @bind-Value="UpsertWarehouseRequestModel.DocNo" Label="Doküman No" />
+                                </MudItem>
+                                <MudItem xs="12" md="6">
+                                    <MudDatePicker For="@(() => UpsertWarehouseRequestModel.DocDate)" @bind-Date="UpsertWarehouseRequestModel.DocDate" Label="Doküman Tarihi" />
+                                </MudItem>
+                                <MudItem xs="12" md="6">
+                                    <MudTextField @bind-Value="@UpsertWarehouseRequestModel.WarehouseName" Label="Çıkış Deposu" Placeholder="Çıkış Deposu Seçin" OnKeyDown="@(async (KeyboardEventArgs e) => await OpenWarehouseDialogOnF4Code(e, UpsertWarehouseRequestModel))" AdornmentIcon="@Icons.Material.Outlined.ManageSearch" Adornment="MudBlazor.Adornment.End" OnAdornmentClick="(async () => await OpenWarehouseSearchDialog(UpsertWarehouseRequestModel.WarehouseName, UpsertWarehouseRequestModel))" />
+                                </MudItem>
+
+                                <MudItem xs="12" md="6">
+                                    <MudTextField Label="Talep Sahibi" ReadOnly="true" @bind-Value="@UpsertWarehouseRequestModel.RequesterName" OnKeyDown="@(async (KeyboardEventArgs e) => await OpenUserDialogOnF4Code(e, UpsertWarehouseRequestModel))" AdornmentIcon="@Icons.Material.Outlined.ManageSearch" Adornment="MudBlazor.Adornment.End" OnAdornmentClick="(async () => await OpenUserSearchDialog(UpsertWarehouseRequestModel.RequesterName, UpsertWarehouseRequestModel))" />/>
+                                </MudItem>
+                                <MudItem xs="12" md="6">
+                                    <MudTextField Label="Talep Sahibi Departmanı" ReadOnly="true" @bind-Value="@UpsertWarehouseRequestModel.RequesterDepartment" />
+                                </MudItem>
+                                <MudItem xs="12" md="6">
+                                    <MudTextField T="string" Label="İlgili Sipariş" ReadOnly="true" />
+                                </MudItem>
+                                <MudItem xs="12" md="6">
+                                    <MudTextField For="@(() => UpsertWarehouseRequestModel.Description)" Lines="3" @bind-Value="UpsertWarehouseRequestModel.Description" Label="Açıklama" />
+                                </MudItem>
+                            </MudGrid>
+                        </MudCardContent>
+                        <MudCardActions>
+                        </MudCardActions>
+                    </MudCard>
+                </MudContainer>
+
+            </MudGrid>
+
+
+            <MudTable Items="@UpsertWarehouseRequestModel.WarehouseRequestRowsResponse" Hover="true" Dense="true" Class="minimize-table">
+                <ColGroup>
+
+                    <col style="width: 12%;">
+                    <col style="width: 27%;">
+                    <col style="width: 15%;">
+                    <col style="width: 8%;">
+                    <col style="width: 8%;">
+                    <col style="width: 17%;">
+                    <col style="width: 8%;">
+                </ColGroup>
+                <HeaderContent>
+
+                    <MudTh>Ürün Kodu</MudTh>
+                    <MudTh>Ürün Adı</MudTh>
+                    <MudTh>Miktar</MudTh>
+                    <MudTh>Birim</MudTh>
+                    <MudTh>Raf</MudTh>
+                    <MudTh>Açıklama</MudTh>
+                    <MudTh>Aksiyonlar</MudTh>
+                </HeaderContent>
+                <RowTemplate Context="rowCtx">
+                    <MudTd>
+                        <MudTextField @bind-Value="@rowCtx.ProductCode" OnKeyDown="@(async (KeyboardEventArgs e) => await OpenProductSearchDialogOnF4Code(e, rowCtx))" AdornmentIcon="@Icons.Material.Outlined.ManageSearch" Adornment="MudBlazor.Adornment.End" OnAdornmentClick="(async () => await OpenSearchDialog(rowCtx.ProductCode, rowCtx))" />
+                    </MudTd>
+                    <MudTd>
+                        <MudTextField @bind-Value="@rowCtx.ProductName" OnKeyDown="@(async (KeyboardEventArgs e) => await OpenProductSearchDialogOnF4Name(e, rowCtx))" AdornmentIcon="@Icons.Material.Outlined.ManageSearch" Adornment="MudBlazor.Adornment.End" OnAdornmentClick="(async () => await OpenSearchDialog(rowCtx.ProductName, rowCtx))" />
+                    </MudTd>
+                    <MudTd>
+
+                        <MudNumericField @bind-Value="@rowCtx.Quantity" Format="N4" HideSpinButtons="true" />
+                    </MudTd>
+                    <MudTd>
+                        <MudSelect T="int" ToStringFunc="@(id => _measurementUnits.FirstOrDefault(c => c.Id == id)?.Code ?? string.Empty)" @bind-Value="rowCtx.MeasurementUnitId" Dense="false">
+                            @foreach (GetAllMeasurementUnitsResponse item in _measurementUnits.Where(x => rowCtx.MeasurementUnitSystem == null || x.System == rowCtx.MeasurementUnitSystem))
+                            {
+                                <MudSelectItem Value="@item.Id">@item.Code</MudSelectItem>
+                            }
+                        </MudSelect>
+                    </MudTd>
+
+                    <MudTd DataLabel="RackCode" Style="reset-padding-bt">
+                        <MudAutocomplete T="int" For="@(() => rowCtx.RackId)" @bind-Value="rowCtx.RackId"
+                                         ResetValueOnEmptyText="true" SearchFunc="@SearchRacks" ToStringFunc="@(id => _rackList.FirstOrDefault(c => c.Id == id)?.Name ?? string.Empty)"
+                                         OffsetY="true" AdornmentIcon="@Icons.Material.Filled.Search" AdornmentColor="Color.Primary"
+                                         Validation="@(new Func<string, IEnumerable<string>>(ValidateRacks))" />
+                    </MudTd>
+
+                    <MudTd>
+                        <MudTextField @bind-Value="@rowCtx.Description" OnBlur="@OnDescriptionFieldBlur" />
+                    </MudTd>
+                    <MudTd>
+                        <MudIconButton Icon="@Icons.Material.Filled.Delete" OnClick="@(async () => await DeleteRow(rowCtx))" tabindex="-1" />
+                    </MudTd>
+                </RowTemplate>
+            </MudTable>
+            <MudButton Class="table-add-button" Variant="MudBlazor.Variant.Outlined" StartIcon="@Icons.Material.Filled.Add" Disabled="@(!Validated)" OnClick="AddRow" FullWidth="true" Color="Color.Primary">Satır Ekle</MudButton>
+        </DialogContent>
+        <DialogActions>
+            <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" OnClick="Cancel">İptal</MudButton>
+            @if (UpsertWarehouseRequestModel.Id != 0)
+            {
+                <MudIconButton Elevation="10" Color="Color.Primary" @onclick="@(() => ShowQrPop())" Icon="@Icons.Material.Filled.QrCode"></MudIconButton>
+                <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" ButtonType="MudBlazor.ButtonType.Submit" Disabled="@(!Validated )" Color="Color.Secondary">Güncelle</MudButton>
+            }
+            else
+            {
+                <MudButton DisableElevation Variant="MudBlazor.Variant.Filled" ButtonType="MudBlazor.ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Success">Kaydet</MudButton>
+            }
+        </DialogActions>
+    </MudDialog>
+</EditForm>

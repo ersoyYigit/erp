@@ -22,12 +22,15 @@ namespace ArdaManager.Domain.Enums.Doc
         WarehouseEntrance = 10,
         [Description(@"Depo Çıkış Fişi")]
         WarehouseExit = 11,
-        [Description(@"Depo Transfer Çıkış Fişi")]
-        WarehouseTransferExit = 12,
-        [Description(@"Depo Transfer Giriş Fişi")]
-        WarehouseTransferEntrance = 13,
+        [Description(@"Depo Transfer Fişi")]
+        WarehouseTransfer = 12,
+        //[Description(@"Depo Transfer Giriş Fişi")]
+        //WarehouseTransferEntrance = 13,
         [Description(@"Depo Sayım Fişi")]
         WarehouseCount = 14,
+
+        [Description(@"Depo Talep Formu")]
+        WarehouseRequest = 19,
         #endregion DEPO 
 
 

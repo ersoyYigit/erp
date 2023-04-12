@@ -1,0 +1,49 @@
+﻿@using ArdaManager.Application.Features.Docs.WarehouseRequests.Queries;
+@using ArdaManager.Domain.Enums.Doc;
+
+
+<MudDialog>
+    <DialogContent>
+
+        <MudTable T="WarehouseRequestResponse" Items="@_warehouseRequestList" Hover="true" Breakpoint="Breakpoint.Sm" LoadingProgressColor="Color.Info" SelectedItemChanged="@OnSelectedItemChangedTable">
+            <HeaderContent>
+                <MudTh>Doküman No</MudTh>
+                <MudTh>Evrak Tarihi</MudTh>
+                <MudTh>Talep Eden</MudTh>
+                <MudTh>Evrak Durumu</MudTh>
+                <MudTh>Açıklama</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Doküman No">@context.DocNo</MudTd>
+                <MudTd DataLabel="Evrak Tarihi">
+                    @if (context.DocDate.HasValue)
+                    {
+                        @context.DocDate.Value.ToString("dd/MM/yyyy")
+                        ;
+                    }
+                </MudTd>
+                <MudTd DataLabel="Talep Eden">@context.RequesterName</MudTd>
+                <MudTd DataLabel="Evrak Durumu">
+                    @if (context.DocState == DocState.Approved)
+                    {
+                        <MudChip Color="Color.Success">Onaylı</MudChip>
+                    }
+                    else if (context.DocState == DocState.Rejected)
+                    {
+                        <MudChip Color="Color.Error">Red</MudChip>
+                    }
+                    else
+                    {
+                        <MudChip Color="Color.Warning">Onay Bekliyor</MudChip>
+                    }
+                </MudTd>
+                <MudTd DataLabel="Açıklama">@context.Description</MudTd>
+            </RowTemplate>
+        </MudTable>
+
+    </DialogContent>
+    <DialogActions>
+        <MudButton Variant="MudBlazor.Variant.Filled" Color="Color.Primary" OnClick="SelectItem" Disabled="@(!_isRowSelected)">Seç</MudButton>
+        <MudButton Variant="MudBlazor.Variant.Filled" Color="Color.Secondary" OnClick="Cancel">İptal</MudButton>
+    </DialogActions>
+</MudDialog>

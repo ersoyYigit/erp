@@ -24,6 +24,7 @@ using ArdaManager.Domain.Entities.Report.Warehouse;
 using ArdaManager.Domain.Entities.Transactions.Purchase;
 using ArdaManager.Domain.Entities.Approval;
 using ArdaManager.Application.Features.Products.Queries.Search;
+using ArdaManager.Domain.Entities.Report.Purchase;
 
 namespace ArdaManager.Infrastructure.Contexts
 {
@@ -73,6 +74,9 @@ namespace ArdaManager.Infrastructure.Contexts
 
         public DbSet<WarehouseReceipt> WarehouseReceipts { get; set; }
         public DbSet<WarehouseReceiptRow> WarehouseReceiptRows { get; set; }
+
+        public DbSet<WarehouseRequest> WarehouseRequests { get; set; }
+        public DbSet<WarehouseRequestRow> WarehouseRequestRows { get; set; }
 
         public DbSet<PurchaseRequest> PurchaseRequests { get; set; }
         public DbSet<PurchaseRequestRow> PurchaseRequestRows { get; set; }
@@ -134,6 +138,7 @@ namespace ArdaManager.Infrastructure.Contexts
             builder.ApplyConfiguration(new RecipeItemConfiguration());
             builder.ApplyConfiguration(new CategoryConfiguration());
             builder.ApplyConfiguration(new WarehouseReceiptRowConfiguration());
+            builder.ApplyConfiguration(new WarehouseRequestRowConfiguration());
             builder.ApplyConfiguration(new PurchaseRequestRowConfiguration());
             builder.ApplyConfiguration(new PurchaseOfferRowConfiguration());
             builder.ApplyConfiguration(new PurchaseOrderRowConfiguration());
@@ -148,6 +153,8 @@ namespace ArdaManager.Infrastructure.Contexts
             /*REPORTING*/
             builder.Entity<WarehouseReport>().HasNoKey().ToView("vw_warehouses_stocks");
             builder.Entity<ProductSearchResultDto>().HasNoKey().ToSqlQuery("sp_search_products_with_stocks");
+            builder.Entity<PurchaseProcessResult>().HasNoKey().ToSqlQuery("vw_PurchaseProcess");
+            builder.Entity<PurchaseProcessRowResult>().HasNoKey().ToSqlQuery("vw_PurchaseProcessDetail");
             /*REPORTING*/
             
 

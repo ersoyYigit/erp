@@ -132,12 +132,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRG9jc1xXYXJlaG91c2VcQWRkRWRpdFdhcmVob3VzZUV4aXRSZWNlaXB0TW9kYWwucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Dev/ArdaManager/src/Client/Pages/Docs/Warehouse/UpsertWarehouseRequestModal.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRG9jc1xXYXJlaG91c2VcVXBzZXJ0V2FyZWhvdXNlUmVxdWVzdE1vZGFsLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Dev/ArdaManager/src/Client/Pages/Docs/Warehouse/WarehouseEntryReceipts.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRG9jc1xXYXJlaG91c2VcV2FyZWhvdXNlRW50cnlSZWNlaXB0cy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Dev/ArdaManager/src/Client/Pages/Docs/Warehouse/WarehouseExitReceipts.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRG9jc1xXYXJlaG91c2VcV2FyZWhvdXNlRXhpdFJlY2VpcHRzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Pages/Docs/Warehouse/WarehouseRequests.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRG9jc1xXYXJlaG91c2VcV2FyZWhvdXNlUmVxdWVzdHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Dev/ArdaManager/src/Client/Pages/Human/AddEditPersonModal.razor]
@@ -386,6 +394,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/Dev/ArdaManager/src/Client/Shared/Dialogs/RelationPickers/Purchase/PurchaseRequestPicker.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXERpYWxvZ3NcUmVsYXRpb25QaWNrZXJzXFB1cmNoYXNlXFB1cmNoYXNlUmVxdWVzdFBpY2tlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Dev/ArdaManager/src/Client/Shared/Dialogs/RelationPickers/Warehouse/WarehouseRequestPicker.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXERpYWxvZ3NcUmVsYXRpb25QaWNrZXJzXFdhcmVob3VzZVxXYXJlaG91c2VSZXF1ZXN0UGlja2VyLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Dev/ArdaManager/src/Client/Shared/Dialogs/UserSearchDialog.razor]

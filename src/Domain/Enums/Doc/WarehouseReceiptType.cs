@@ -10,9 +10,10 @@ namespace ArdaManager.Domain.Enums.Doc
     {
         Entrance = 10,
         Exit =11,
-        TransferExit= 12,
-        TransferEntrance = 13,
+        Transfert= 12,
         Count = 14,
+
+        WarehouseRequest = 19,
 
     }
 }

@@ -1323,5 +1323,3 @@ D:\Dev\ArdaManager\src\Client\obj\Debug\net6.0\ArdaManager.Client.dll
 D:\Dev\ArdaManager\src\Client\obj\Debug\net6.0\refint\ArdaManager.Client.dll
 D:\Dev\ArdaManager\src\Client\obj\Debug\net6.0\ArdaManager.Client.pdb
 D:\Dev\ArdaManager\src\Client\obj\Debug\net6.0\ref\ArdaManager.Client.dll
-D:\Dev\ArdaManager\src\Client\obj\Debug\net6.0\en\ArdaManager.Client.resources.cs
-D:\Dev\ArdaManager\src\Client\obj\Debug\net6.0\tr\ArdaManager.Client.resources.cs
