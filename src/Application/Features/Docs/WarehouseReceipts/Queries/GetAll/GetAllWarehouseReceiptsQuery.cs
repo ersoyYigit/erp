@@ -112,7 +112,7 @@ namespace ArdaManager.Application.Features.Docs.WarehouseReceipts.Queries.GetAll
 
             Func<Task<List<GetAllWarehouseReceiptsResponse>>> getAllTemplateWorkItems = () => _unitOfWork.Repository<WarehouseReceipt>().Entities
                 .Select(expression)
-                .Where(x=> x.WarehouseReceiptType == request.WarehouseReceiptType)
+                .Where(x=> x.DocType == (DocType)request.WarehouseReceiptType)
                 .ToListAsync();
 
             var data = await _cache.GetOrAddAsync(ApplicationConstants.Cache.GetAllWarehouseReceiptsCacheKey + request.WarehouseReceiptType.ToString(), getAllTemplateWorkItems);

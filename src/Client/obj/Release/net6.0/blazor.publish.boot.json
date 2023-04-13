@@ -10,11 +10,11 @@
   "linkerEnabled": true,
   "resources": {
     "assembly": {
-      "ArdaManager.Application.dll": "sha256-pkbEFxembBqYrTbXsr4vY0q20qk3w0lGFDPOg5XFNds=",
-      "ArdaManager.Client.dll": "sha256-4BOvVcxVD5kAwmcDQ6LBEl\/jnRRr2i8j3ypjlO1iVhk=",
-      "ArdaManager.Client.Infrastructure.dll": "sha256-nFvL3ORB5vp1IqiYvLrQY6Ylwuz2FaR+suXHZ0n3cZ4=",
-      "ArdaManager.Domain.dll": "sha256-8FPPXopYvnQzRRcjk7QATnTVyneirdNcivn6pVUj+5s=",
-      "ArdaManager.Shared.dll": "sha256-A74mcHj95esd5edGm3zu9tISSRAkY7tE68VATmca\/PQ=",
+      "ArdaManager.Application.dll": "sha256-ecp6y8k3SxGCSgilV1Ou3AgFqtwUEt5L1p1WcbMR7Cw=",
+      "ArdaManager.Client.dll": "sha256-85Q7cPeZIRfZ+zXWTBczyS1I6tk4WycIIajx8JzcIYA=",
+      "ArdaManager.Client.Infrastructure.dll": "sha256-MUY90MzqAQmtYcK5mRvniYHCk4MGcPHs67QqtGx4HIc=",
+      "ArdaManager.Domain.dll": "sha256-tdqLy5HOP19Y75JfbgNJqwDtIpTaylLTI4GsGnqF3QY=",
+      "ArdaManager.Shared.dll": "sha256-8tnR5oo13ILKde2H\/pNaLiezpvgsUG1u8TY9ztm3Jd4=",
       "AutoFilterer.dll": "sha256-fXPIHTSzfjxjbo+mjVFDuPAn+UZt1E94pRnv5A7CEs0=",
       "AutoMapper.dll": "sha256-LTWmKNU9i6fBHVW+MD0Y4saF9Xz7sunXXY69kMlHXNs=",
       "AutoMapper.Extensions.Microsoft.DependencyInjection.dll": "sha256-EgxNMqkSDuvW0qfJ51BwzzHNyFgz66BQsDHK1XnhZUc=",
@@ -241,14 +241,14 @@
     },
     "satelliteResources": {
       "en": {
-        "en\/ArdaManager.Application.resources.dll": "sha256-qn4AD4gUt5+CU6\/az7qwwcKkc\/Vy0MKg+Bgdt99WzKY=",
-        "en\/ArdaManager.Client.Infrastructure.resources.dll": "sha256-URmf91L4+POFzUIEX3788+B\/P9g8HPOWRk2Qvfum2QQ=",
-        "en\/ArdaManager.Client.resources.dll": "sha256-2+CRzWQXnw\/h5HEmK+x75zCOJ2WAt8EkMFKup7ctC9s="
+        "en\/ArdaManager.Application.resources.dll": "sha256-w52imVIdGsP9PT64Bc5cbwMAXGHRhm845iTsMXDjtCo=",
+        "en\/ArdaManager.Client.Infrastructure.resources.dll": "sha256-HafZD7K8WAL6ag\/boRmTA2oDpFYUKjoRgeEko+zz7Ek=",
+        "en\/ArdaManager.Client.resources.dll": "sha256-kHwOdRojStigYV0uoD5xrKswf59119HZ4VQKp08XhkU="
       },
       "tr": {
-        "tr\/ArdaManager.Application.resources.dll": "sha256-ewJZRdfXFUo7p2A7RZJorOwy8AdKGjo7XNH87ocyqzc=",
-        "tr\/ArdaManager.Client.Infrastructure.resources.dll": "sha256-iF79L1MdKy9n0ZnOM5t\/5IJSxVTlgg\/8UnizEJtTdoE=",
-        "tr\/ArdaManager.Client.resources.dll": "sha256-1\/RS6mzmHcS8jpjydCLGkxc5ussy01Vzv7Bb2SeXdtc="
+        "tr\/ArdaManager.Application.resources.dll": "sha256-4sQNLNsAWSp4veZ+lhlvP2JfRnpXaz9Fqm2K9YFJiZE=",
+        "tr\/ArdaManager.Client.Infrastructure.resources.dll": "sha256-h2CI5i2xlhRmwq+yJDB1p5D1lx4hCYcOIEIbPitXhVo=",
+        "tr\/ArdaManager.Client.resources.dll": "sha256-Y7m4W4sx8gw\/kZVykeeHMpGSHfF5fk2blR\/g0Vr6B7A="
       }
     }
   }

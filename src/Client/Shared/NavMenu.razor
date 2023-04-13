@@ -33,19 +33,20 @@
     </MudNavGroup>
     @if ((_canViewDocuments || _canViewDocumentTypes))
     {
-        <MudListSubheader Class="mt-2 mb-n2">@_localizer["Document Management"]</MudListSubheader>
-        @if (_canViewDocuments)
-        {
-            <MudNavLink Href="/document-store" Icon="@Icons.Material.Outlined.AttachFile">
-                @_localizer["Document Store"]
-            </MudNavLink>
-        }
-        @if (_canViewDocumentTypes)
-        {
-            <MudNavLink Href="/document-types" Icon="@Icons.Material.Outlined.FileCopy">
-                @_localizer["Document Types"]
-            </MudNavLink>
-        }
+        <MudNavGroup Title="@_localizer["Doküman Yönetimi"]" Icon="@Icons.Material.Filled.Newspaper" Expanded="false">
+            @if (_canViewDocuments)
+            {
+                <MudNavLink Href="/document-store" Icon="@Icons.Material.Outlined.AttachFile">
+                    @_localizer["Document Store"]
+                </MudNavLink>
+            }
+            @if (_canViewDocumentTypes)
+            {
+                <MudNavLink Href="/document-types" Icon="@Icons.Material.Outlined.FileCopy">
+                    @_localizer["Document Types"]
+                </MudNavLink>
+            }
+        </MudNavGroup>
     }
 
     
@@ -147,12 +148,15 @@
                 <MudNavLink Href="/catalog/warehouseRequests" Icon="@Icons.Material.Outlined.Receipt">
                     @_localizer["Depo Talep Formu"]
                 </MudNavLink>
+                <MudNavLink Href="/catalog/warehouseTransfers" Icon="@Icons.Material.Outlined.Transform">
+                    @_localizer["Depo Transfer Fişi"]
+                </MudNavLink>
             }
         </MudNavGroup>
     }
     @if (_canViewPurchaseRequests)
     {
-        <MudNavGroup Title="@_localizer["Satın Alma"]" Icon="@Icons.Material.Filled.ShoppingCart" Expanded="true">
+        <MudNavGroup Title="@_localizer["Satın Alma"]" Icon="@Icons.Material.Filled.ShoppingCart" Expanded="false">
             @if (_canViewPurchaseRequests)
             {
                 <MudNavLink Href="/purchase/requests" Icon="@Icons.Material.Outlined.Receipt">

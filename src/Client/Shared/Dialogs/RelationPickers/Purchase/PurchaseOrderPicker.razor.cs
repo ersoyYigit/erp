@@ -34,7 +34,7 @@ namespace ArdaManager.Client.Shared.Dialogs.RelationPickers.Purchase
             var response = await PurchaseOrderManager.GetAllAsync();
             if (response.Succeeded)
             {
-                _purchaseOrderList = response.Data.Where(x => x.DocState == Domain.Enums.Doc.DocState.Approved).ToList();
+                _purchaseOrderList = response.Data/*.Where(x => x.DocState == Domain.Enums.Doc.DocState.Approved)*/.ToList();
             }
             else
             {

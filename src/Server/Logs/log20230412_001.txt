@@ -1,0 +1,286 @@
+2023-04-12 13:58:19.870 +03:00 [ERR] An unhandled exception occurred while processing the request.
+System.InvalidOperationException: Response already started
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.OnStarting(Func`2 callback, Object state)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.Microsoft.AspNetCore.Http.Features.IHttpResponseFeature.OnStarting(Func`2 callback, Object state)
+   at Microsoft.AspNetCore.Http.DefaultHttpResponse.OnStarting(Func`2 callback, Object state)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.EvaluateAndApplyPolicy(HttpContext context, CorsPolicy corsPolicy)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.Invoke(HttpContext context, ICorsPolicyProvider corsPolicyProvider)
+   at lambda_method632(Closure , Object , HttpContext , IServiceProvider )
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.<>c__DisplayClass5_1.<UseMiddleware>b__2(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at ArdaManager.Server.Middlewares.RequestCultureMiddleware.InvokeAsync(HttpContext context) in D:\Dev\ArdaManager\src\Server\Middlewares\RequestCultureMiddleware.cs:line 39
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at ArdaManager.Server.Middlewares.ErrorHandlerMiddleware.Invoke(HttpContext context) in D:\Dev\ArdaManager\src\Server\Middlewares\ErrorHandlerMiddleware.cs:line 29
+2023-04-12 13:58:20.033 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: The response headers cannot be modified because the response has already started.
+   at Microsoft.AspNetCore.HttpSys.Internal.HeaderCollection.ThrowIfReadOnly()
+   at Microsoft.AspNetCore.HttpSys.Internal.HeaderCollection.set_Item(String key, StringValues value)
+   at Microsoft.AspNetCore.Http.IHeaderDictionary.set_ContentType(StringValues value)
+   at Microsoft.AspNetCore.Http.DefaultHttpResponse.set_ContentType(String value)
+   at ArdaManager.Server.Middlewares.ErrorHandlerMiddleware.Invoke(HttpContext context) in D:\Dev\ArdaManager\src\Server\Middlewares\ErrorHandlerMiddleware.cs:line 36
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2023-04-12 13:58:20.038 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: The response headers cannot be modified because the response has already started.
+   at Microsoft.AspNetCore.HttpSys.Internal.HeaderCollection.ThrowIfReadOnly()
+   at Microsoft.AspNetCore.HttpSys.Internal.HeaderCollection.set_Item(String key, StringValues value)
+   at Microsoft.AspNetCore.Http.IHeaderDictionary.set_ContentType(StringValues value)
+   at Microsoft.AspNetCore.Http.DefaultHttpResponse.set_ContentType(String value)
+   at ArdaManager.Server.Middlewares.ErrorHandlerMiddleware.Invoke(HttpContext context) in D:\Dev\ArdaManager\src\Server\Middlewares\ErrorHandlerMiddleware.cs:line 36
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2023-04-12 13:58:20.379 +03:00 [ERR] An unhandled exception occurred while processing the request.
+System.InvalidOperationException: Response already started
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.OnStarting(Func`2 callback, Object state)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.Microsoft.AspNetCore.Http.Features.IHttpResponseFeature.OnStarting(Func`2 callback, Object state)
+   at Microsoft.AspNetCore.Http.DefaultHttpResponse.OnStarting(Func`2 callback, Object state)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.EvaluateAndApplyPolicy(HttpContext context, CorsPolicy corsPolicy)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.Invoke(HttpContext context, ICorsPolicyProvider corsPolicyProvider)
+   at lambda_method632(Closure , Object , HttpContext , IServiceProvider )
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.<>c__DisplayClass5_1.<UseMiddleware>b__2(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at ArdaManager.Server.Middlewares.RequestCultureMiddleware.InvokeAsync(HttpContext context) in D:\Dev\ArdaManager\src\Server\Middlewares\RequestCultureMiddleware.cs:line 39
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at ArdaManager.Server.Middlewares.ErrorHandlerMiddleware.Invoke(HttpContext context) in D:\Dev\ArdaManager\src\Server\Middlewares\ErrorHandlerMiddleware.cs:line 29
+2023-04-12 13:58:20.459 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: The response headers cannot be modified because the response has already started.
+   at Microsoft.AspNetCore.HttpSys.Internal.HeaderCollection.ThrowIfReadOnly()
+   at Microsoft.AspNetCore.HttpSys.Internal.HeaderCollection.set_Item(String key, StringValues value)
+   at Microsoft.AspNetCore.Http.IHeaderDictionary.set_ContentType(StringValues value)
+   at Microsoft.AspNetCore.Http.DefaultHttpResponse.set_ContentType(String value)
+   at ArdaManager.Server.Middlewares.ErrorHandlerMiddleware.Invoke(HttpContext context) in D:\Dev\ArdaManager\src\Server\Middlewares\ErrorHandlerMiddleware.cs:line 36
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2023-04-12 13:58:20.466 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: The response headers cannot be modified because the response has already started.
+   at Microsoft.AspNetCore.HttpSys.Internal.HeaderCollection.ThrowIfReadOnly()
+   at Microsoft.AspNetCore.HttpSys.Internal.HeaderCollection.set_Item(String key, StringValues value)
+   at Microsoft.AspNetCore.Http.IHeaderDictionary.set_ContentType(StringValues value)
+   at Microsoft.AspNetCore.Http.DefaultHttpResponse.set_ContentType(String value)
+   at ArdaManager.Server.Middlewares.ErrorHandlerMiddleware.Invoke(HttpContext context) in D:\Dev\ArdaManager\src\Server\Middlewares\ErrorHandlerMiddleware.cs:line 36
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2023-04-12 13:58:23.303 +03:00 [ERR] An unhandled exception occurred while processing the request.
+System.ArgumentNullException: Value cannot be null. (Parameter 'user')
+   at Microsoft.AspNetCore.Identity.UserManager`1.IsInRoleAsync(TUser user, String role)
+   at ArdaManager.Infrastructure.Services.Identity.UserService.GetRolesAsync(String userId) in D:\Dev\ArdaManager\src\Infrastructure\Services\Identity\UserService.cs:line 174
+   at ArdaManager.Infrastructure.Services.ChatService.GetChatUsersAsync(String userId) in D:\Dev\ArdaManager\src\Infrastructure\Services\ChatService.cs:line 75
+   at ArdaManager.Server.Controllers.Communication.ChatsController.GetChatUsersAsync() in D:\Dev\ArdaManager\src\Server\Controllers\Communication\ChatsController.cs:line 46
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at ArdaManager.Server.Middlewares.RequestCultureMiddleware.InvokeAsync(HttpContext context) in D:\Dev\ArdaManager\src\Server\Middlewares\RequestCultureMiddleware.cs:line 39
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at ArdaManager.Server.Middlewares.ErrorHandlerMiddleware.Invoke(HttpContext context) in D:\Dev\ArdaManager\src\Server\Middlewares\ErrorHandlerMiddleware.cs:line 29
+2023-04-12 13:58:23.369 +03:00 [ERR] Unhandled exception occurred.
+System.ArgumentNullException: Value cannot be null. (Parameter 'user')
+   at Microsoft.AspNetCore.Identity.UserManager`1.IsInRoleAsync(TUser user, String role)
+   at ArdaManager.Infrastructure.Services.Identity.UserService.GetRolesAsync(String userId) in D:\Dev\ArdaManager\src\Infrastructure\Services\Identity\UserService.cs:line 174
+   at ArdaManager.Infrastructure.Services.ChatService.GetChatUsersAsync(String userId) in D:\Dev\ArdaManager\src\Infrastructure\Services\ChatService.cs:line 75
+   at ArdaManager.Server.Controllers.Communication.ChatsController.GetChatUsersAsync() in D:\Dev\ArdaManager\src\Server\Controllers\Communication\ChatsController.cs:line 46
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at ArdaManager.Server.Middlewares.RequestCultureMiddleware.InvokeAsync(HttpContext context) in D:\Dev\ArdaManager\src\Server\Middlewares\RequestCultureMiddleware.cs:line 39
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at ArdaManager.Server.Middlewares.ErrorHandlerMiddleware.Invoke(HttpContext context) in D:\Dev\ArdaManager\src\Server\Middlewares\ErrorHandlerMiddleware.cs:line 29
+2023-04-12 14:00:00.255 +03:00 [ERR] Failed executing DbCommand (125ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [b].[DocNo], [b].[DocDate], [b].[DocType], [b].[Id], [b].[Description], [t].[Id], [t].[Name], [t0].[Id], [t0].[Name], [b].[DocState], [b].[NextDocId], [b].[PrevDocId], [w].[RequesterDepartment], [w].[RequesterId], [w].[RequesterName], [b].[CreatedBy], [t1].[Id], [t1].[ProductId], [t1].[ProductName], [t1].[ProductCode], [t1].[Quantity], [t1].[MeasurementUnitCode], [t1].[MeasurementUnitId], [t1].[MeasurementUnitName], [t1].[MeasurementUnitSystem], [t1].[RackCode], [t1].[RackId], [t1].[RackName], [t1].[RowNo], [t1].[WarehouseRequestId], [t1].[Description], [t1].[Id0], [t1].[Id1]
+FROM [BaseDocs] AS [b]
+INNER JOIN [WarehouseRequests] AS [w] ON [b].[Id] = [w].[Id]
+INNER JOIN (
+    SELECT [b0].[Id], [b0].[Name]
+    FROM [BaseEntities] AS [b0]
+    INNER JOIN [Warehouses] AS [w0] ON [b0].[Id] = [w0].[Id]
+) AS [t] ON [w].[WarehouseId] = [t].[Id]
+INNER JOIN (
+    SELECT [b1].[Id], [b1].[Name]
+    FROM [BaseEntities] AS [b1]
+    INNER JOIN [Warehouses] AS [w1] ON [b1].[Id] = [w1].[Id]
+) AS [t0] ON [w].[RelatedWarehouseId] = [t0].[Id]
+OUTER APPLY (
+    SELECT [w2].[Id], [w2].[ProductId], [t2].[Name] AS [ProductName], [t2].[Code] AS [ProductCode], [w2].[Quantity], [m0].[Code] AS [MeasurementUnitCode], [m0].[Id] AS [MeasurementUnitId], [m0].[Name] AS [MeasurementUnitName], [m0].[System] AS [MeasurementUnitSystem], [r].[Code] AS [RackCode], CASE
+        WHEN [w2].[RackId] IS NOT NULL THEN [w2].[RackId]
+        ELSE 0
+    END AS [RackId], [r].[Name] AS [RackName], [w2].[RowNo], [w2].[WarehouseRequestId], [b].[Description], [t2].[Id] AS [Id0], [r].[Id] AS [Id1]
+    FROM [WarehouseRequestRows] AS [w2]
+    INNER JOIN (
+        SELECT [b2].[Id], [b2].[Code], [b2].[Name]
+        FROM [BaseEntities] AS [b2]
+        INNER JOIN [Products] AS [p] ON [b2].[Id] = [p].[Id]
+    ) AS [t2] ON [w2].[ProductId] = [t2].[Id]
+    INNER JOIN [MeasurementUnits] AS [m0] ON [w2].[MeasurementUnitId] = [m0].[Id]
+    LEFT JOIN [Racks] AS [r] ON [w2].[RackId] = [r].[Id]
+    WHERE [b].[Id] = [w2].[WarehouseRequestId]
+) AS [t1]
+ORDER BY [b].[Id], [t].[Id], [t0].[Id], [t1].[Id], [t1].[Id0], [t1].[MeasurementUnitId]
+2023-04-12 14:00:00.289 +03:00 [ERR] An exception occurred while iterating over the results of a query for context type 'ArdaManager.Infrastructure.Contexts.VappContext'.
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid object name 'WarehouseRequests'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__209_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__272_0(Object obj)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:2a42a003-3656-49cf-ac54-8d95426055b3
+Error Number:208,State:1,Class:16
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid object name 'WarehouseRequests'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__209_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__272_0(Object obj)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:2a42a003-3656-49cf-ac54-8d95426055b3
+Error Number:208,State:1,Class:16
+2023-04-12 14:00:01.415 +03:00 [ERR] An unhandled exception occurred while processing the request.
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid object name 'WarehouseRequests'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__209_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__272_0(Object obj)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at LazyCache.CachingService.GetOrAddAsync[T](String key, Func`2 addItemFactory, MemoryCacheEntryOptions policy)
+   at ArdaManager.Application.Features.Docs.WarehouseRequests.Queries.GetAllWarehouseRequestsCachedQueryHandler.Handle(GetAllWarehouseRequestsQuery request, CancellationToken cancellationToken) in D:\Dev\ArdaManager\src\Application\Features\Docs\WarehouseRequests\Queries\GetAllWarehouseRequestsQuery.cs:line 90
+   at MediatR.Pipeline.RequestExceptionProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at MediatR.Pipeline.RequestExceptionProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at MediatR.Pipeline.RequestExceptionActionProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at MediatR.Pipeline.RequestExceptionActionProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at MediatR.Pipeline.RequestPostProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at MediatR.Pipeline.RequestPreProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at ArdaManager.Server.Controllers.v1.Transactions.WarehouseRequestsController.GetAll() in D:\Dev\ArdaManager\src\Server\Controllers\v1\Transactions\WarehouseRequestsController.cs:line 17
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at ArdaManager.Server.Middlewares.RequestCultureMiddleware.InvokeAsync(HttpContext context) in D:\Dev\ArdaManager\src\Server\Middlewares\RequestCultureMiddleware.cs:line 39
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at ArdaManager.Server.Middlewares.ErrorHandlerMiddleware.Invoke(HttpContext context) in D:\Dev\ArdaManager\src\Server\Middlewares\ErrorHandlerMiddleware.cs:line 29
+ClientConnectionId:2a42a003-3656-49cf-ac54-8d95426055b3
+Error Number:208,State:1,Class:16
+2023-04-12 14:00:01.497 +03:00 [ERR] Unhandled exception occurred.
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid object name 'WarehouseRequests'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__209_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__272_0(Object obj)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at LazyCache.CachingService.GetOrAddAsync[T](String key, Func`2 addItemFactory, MemoryCacheEntryOptions policy)
+   at ArdaManager.Application.Features.Docs.WarehouseRequests.Queries.GetAllWarehouseRequestsCachedQueryHandler.Handle(GetAllWarehouseRequestsQuery request, CancellationToken cancellationToken) in D:\Dev\ArdaManager\src\Application\Features\Docs\WarehouseRequests\Queries\GetAllWarehouseRequestsQuery.cs:line 90
+   at MediatR.Pipeline.RequestExceptionProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at MediatR.Pipeline.RequestExceptionProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at MediatR.Pipeline.RequestExceptionActionProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at MediatR.Pipeline.RequestExceptionActionProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at MediatR.Pipeline.RequestPostProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at MediatR.Pipeline.RequestPreProcessorBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at ArdaManager.Server.Controllers.v1.Transactions.WarehouseRequestsController.GetAll() in D:\Dev\ArdaManager\src\Server\Controllers\v1\Transactions\WarehouseRequestsController.cs:line 17
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at ArdaManager.Server.Middlewares.RequestCultureMiddleware.InvokeAsync(HttpContext context) in D:\Dev\ArdaManager\src\Server\Middlewares\RequestCultureMiddleware.cs:line 39
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at ArdaManager.Server.Middlewares.ErrorHandlerMiddleware.Invoke(HttpContext context) in D:\Dev\ArdaManager\src\Server\Middlewares\ErrorHandlerMiddleware.cs:line 29
+ClientConnectionId:2a42a003-3656-49cf-ac54-8d95426055b3
+Error Number:208,State:1,Class:16
+2023-04-12 14:09:52.763 +03:00 [ERR] Failed executing DbCommand (79ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [WarehouseRequests] (
+    [Id] int NOT NULL,
+    [WarehouseId] int NOT NULL,
+    [RelatedWarehouseId] int NOT NULL,
+    [WarehouseOfficerId] nvarchar(max) NULL,
+    [WarehouseOfficerName] nvarchar(max) NULL,
+    [RequesterId] nvarchar(max) NULL,
+    [RequesterName] nvarchar(max) NULL,
+    [RequesterDepartment] nvarchar(max) NULL,
+    [WarehouseReceiptType] int NOT NULL,
+    CONSTRAINT [PK_WarehouseRequests] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_WarehouseRequests_BaseDocs_Id] FOREIGN KEY ([Id]) REFERENCES [BaseDocs] ([Id]),
+    CONSTRAINT [FK_WarehouseRequests_Warehouses_RelatedWarehouseId] FOREIGN KEY ([RelatedWarehouseId]) REFERENCES [Warehouses] ([Id]) ON DELETE CASCADE,
+    CONSTRAINT [FK_WarehouseRequests_Warehouses_WarehouseId] FOREIGN KEY ([WarehouseId]) REFERENCES [Warehouses] ([Id]) ON DELETE CASCADE
+);
+2023-04-12 14:15:42.855 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-04-12 14:15:42.964 +03:00 [INF] Hosting environment: Development
+2023-04-12 14:15:43.031 +03:00 [INF] Content root path: D:\Dev\ArdaManager\src\Server\

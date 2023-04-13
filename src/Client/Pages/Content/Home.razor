@@ -27,16 +27,17 @@
                     <MudCardContent>
                         <MudDataGrid Items="@_amirStatuses" T="DocumentApprovalStatusResponse"
                                      Bordered="true" ColumnResizeMode="ResizeMode.Column" Dense="true">
-                            <ColGroup>
-                                <col span="1" style="width: 5%;">
-                                <col span="1" style="width: 40%;">
-                                <col span="1" style="width: 20%;">
-                                <col span="1" style="width: 35%;">
+                        <ColGroup>
+                            <col span="1" style="width: 5%;">
+                            <col span="1" style="width: 20%;">
+                            <col span="1" style="width: 33%;">
+                            <col span="1" style="width: 20%;">
+                            <col span="1" style="width: 22%;">
                             </ColGroup>
                             <Columns>
                                 <PropertyColumn Property="x => x.StepNumber" Title="Sıra" />
-
                                 <PropertyColumn Property="x => x.DocNo" Title="Doküman No" />
+                                <PropertyColumn Property="x => x.UserRoleName" Title="Rol" />
                                 <TemplateColumn Title="Durumu">
                                     <CellTemplate Context="detail">
                                         @if (detail.Item.IsApproved)
@@ -74,12 +75,14 @@
                              Bordered="true" ColumnResizeMode="ResizeMode.Column" Dense="true">
                         <ColGroup>
                             <col span="1" style="width: 5%;">
-                            <col span="1" style="width: 40%;">
                             <col span="1" style="width: 20%;">
-                            <col span="1" style="width: 35%;">
+                            <col span="1" style="width: 33%;">
+                            <col span="1" style="width: 20%;">
+                            <col span="1" style="width: 22%;">
                         </ColGroup>
                         <Columns>
                             <PropertyColumn Property="x => x.StepNumber" Title="Sıra" />
+                            <PropertyColumn Property="x => x.DocNo" Title="Doküman No" />
 
                             <PropertyColumn Property="x => x.UserRoleName" Title="Rol" />
                             <TemplateColumn Title="Durumu">

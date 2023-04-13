@@ -33,7 +33,7 @@ namespace ArdaManager.Application.Mappings.Docs
 
             CreateMap<GetAllWarehouseReceiptsResponse, AddEditWarehouseReceiptCommand>()
                 .ForMember(dest => dest.PrevDocNo, opt => opt.MapFrom(src => src.PrevDoc.DocNo))
-                .ForMember(dest => dest.NextDocNo, opt => opt.MapFrom(src => src.NextDoc.DocNo));
+                .ForMember(dest => dest.NextDocNo, opt => opt.MapFrom(src => src.NextDoc.DocNo)).ReverseMap();
 
 
 

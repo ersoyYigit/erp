@@ -48,6 +48,7 @@ namespace ArdaManager.Application.Features.Docs.WarehouseReceipts.Commands.AddEd
         public int WarehouseId { get; set; }
         public string WarehouseName { get; set; }
         public int? RelatedWarehouseId { get; set; }
+        public string RelatedWarehouseName { get; set; }
         public string WarehouseOfficerId { get; set; }
         public string WarehouseOfficerName { get; set; }
         public int? RelatedCompanyId { get; set; }
@@ -88,7 +89,18 @@ namespace ArdaManager.Application.Features.Docs.WarehouseReceipts.Commands.AddEd
                     var warehouseReceipt = _mapper.Map<WarehouseReceipt>(command);
                     warehouseReceipt.WarehouseReceiptRows = _mapper.Map<ICollection<WarehouseReceiptRow>>(command.WarehouseReceiptRowsDto);
 
-
+                    foreach (var item in warehouseReceipt.WarehouseReceiptRows)
+                    {
+                        // Eğer CurrencyId geçersizse, değeri 1 olarak ayarla
+                        if (item.CurrencyId == null )
+                        {
+                            item.CurrencyId = 1;
+                        }
+                        if (item.TaxId == null)
+                        {
+                            item.CurrencyId = 1;
+                        }
+                    }
                     await _unitOfWork.Repository<WarehouseReceipt>().AddAsync(warehouseReceipt);
                     await _unitOfWork.CommitAndRemoveCache(cancellationToken, ApplicationConstants.Cache.GetAllWarehouseReceiptsCacheKey + warehouseReceipt.WarehouseReceiptType.ToString());
                     return await Result<int>.SuccessAsync(warehouseReceipt.Id, _localizer["Depo Fişi Kaydedildi"]);
@@ -125,7 +137,7 @@ namespace ArdaManager.Application.Features.Docs.WarehouseReceipts.Commands.AddEd
 
 
 
-                        warehouseReceipt.WarehouseReceiptType = command.WarehouseReceiptType;
+                        warehouseReceipt.WarehouseReceiptType = (WarehouseReceiptType)command.DocType;
                         warehouseReceipt.WayBillNo = command.WayBillNo;
                         warehouseReceipt.WayBillDate = command.WayBillDate;
 

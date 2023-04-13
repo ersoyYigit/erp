@@ -30,3 +30,5 @@ D:\Dev\ArdaManager\src\Client.Infrastructure\obj\Debug\net6.0\ArdaManager.Client
 D:\Dev\ArdaManager\src\Client.Infrastructure\obj\Debug\net6.0\refint\ArdaManager.Client.Infrastructure.dll
 D:\Dev\ArdaManager\src\Client.Infrastructure\obj\Debug\net6.0\ArdaManager.Client.Infrastructure.pdb
 D:\Dev\ArdaManager\src\Client.Infrastructure\obj\Debug\net6.0\ref\ArdaManager.Client.Infrastructure.dll
+D:\Dev\ArdaManager\src\Client.Infrastructure\obj\Debug\net6.0\en\ArdaManager.Client.Infrastructure.resources.cs
+D:\Dev\ArdaManager\src\Client.Infrastructure\obj\Debug\net6.0\tr\ArdaManager.Client.Infrastructure.resources.cs

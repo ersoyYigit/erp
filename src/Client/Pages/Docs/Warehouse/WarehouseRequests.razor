@@ -47,7 +47,15 @@ else
                     }
                 </CellTemplate>
             </TemplateColumn>
-            <PropertyColumn Property="x => x.RelatedWarehouseName" Title="Talep Edilen Depo" />
+            <TemplateColumn Title="Evrak Durumu">
+                <CellTemplate>
+                    <DocStateChip DocState="@context.Item.DocState"></DocStateChip>
+                </CellTemplate>
+            </TemplateColumn>
+            <PropertyColumn Property="x => x.WarehouseName" Title="Çıkış Deposu" />
+            <PropertyColumn Property="x => x.RelatedWarehouseName" Title="Varış Deposu" />
+            <PropertyColumn Property="x => x.RequesterName" Title="Talep Eden" />
+            <PropertyColumn Property="x => x.RequesterDepartment" Title="Talep Eden Departman" />
             <PropertyColumn Property="x => x.Description" Title="Açıklama" />
             <TemplateColumn CellClass="d-flex justify-end">
                 <CellTemplate>

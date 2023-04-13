@@ -123,7 +123,7 @@
                                     </MudSelect>
                                 </MudTd>
                                 <MudTd DataLabel="RackCode" Style="reset-padding-bt">
-                                    <MudAutocomplete T="int" For="@(() => ctx.RackId)" @bind-Value="ctx.RackId"
+                                    <MudAutocomplete T="int?" For="@(() => ctx.RackId)" @bind-Value="ctx.RackId"
                                                  ResetValueOnEmptyText="true" SearchFunc="@SearchRacks" ToStringFunc="@(id => _rackList.FirstOrDefault(c => c.Id == id)?.Name ?? string.Empty)"
                                                  OffsetY="true" AdornmentIcon="@Icons.Material.Filled.Search" AdornmentColor="Color.Primary"
                                                  Validation="@(new Func<string, IEnumerable<string>>(ValidateRacks))" />

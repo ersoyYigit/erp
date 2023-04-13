@@ -129,3 +129,13 @@
 .width-40-percent {
     max-width:30%;
 }
+
+
+.positive-stock {
+    background-color: #8CED8C;
+    color: #000000 !important;
+}
+.negative-stock {
+    background-color: #FF6347;
+    color: #FFFFFF !important;
+}

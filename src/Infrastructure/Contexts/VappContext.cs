@@ -100,6 +100,9 @@ namespace ArdaManager.Infrastructure.Contexts
         /*REPORTING*/
         public DbSet<WarehouseReport> WarehouseReports { get; set; }
         public DbSet<ProductSearchResultDto> ProductSearchResultDtos { get; set; }
+        public DbSet<PurchaseProcessResult> PurchaseProcessResults { get; set; }
+        public DbSet<PurchaseProcessRowResult> PurchaseProcessRowResults { get; set; }
+        
 
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())
@@ -138,6 +141,7 @@ namespace ArdaManager.Infrastructure.Contexts
             builder.ApplyConfiguration(new RecipeItemConfiguration());
             builder.ApplyConfiguration(new CategoryConfiguration());
             builder.ApplyConfiguration(new WarehouseReceiptRowConfiguration());
+            builder.ApplyConfiguration(new WarehouseRequestConfiguration());
             builder.ApplyConfiguration(new WarehouseRequestRowConfiguration());
             builder.ApplyConfiguration(new PurchaseRequestRowConfiguration());
             builder.ApplyConfiguration(new PurchaseOfferRowConfiguration());

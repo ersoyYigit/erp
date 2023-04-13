@@ -29,4 +29,19 @@ namespace ArdaManager.Infrastructure.Configurations
 
         }
     }
+
+    public class WarehouseRequestConfiguration : IEntityTypeConfiguration<WarehouseRequest>
+    {
+        public void Configure(EntityTypeBuilder<WarehouseRequest> builder)
+        {
+
+            builder
+            .HasOne(c => c.Warehouse)
+                .WithMany()
+                .OnDelete(DeleteBehavior.NoAction);
+
+
+
+        }
+    }
 }

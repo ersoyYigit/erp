@@ -39,7 +39,7 @@ namespace ArdaManager.Application.Features.Docs.WarehouseRequests.Queries
 
         public async Task<Result<List<WarehouseRequestResponse>>> Handle(GetAllWarehouseRequestsQuery request, CancellationToken cancellationToken)
         {
-
+            _cache.Remove(ApplicationConstants.Cache.GetAllWarehouseRequestsCacheKey);
             Expression<Func<WarehouseRequest, WarehouseRequestResponse>> expression = e => new WarehouseRequestResponse
             {
                 DocNo = e.DocNo,

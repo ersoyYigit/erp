@@ -17,6 +17,7 @@ using ArdaManager.Client.Infrastructure.Managers.Inventory.Rack;
 using ArdaManager.Client.Shared.Components;
 using ArdaManager.Client.Shared.Dialogs;
 using ArdaManager.Shared.Constants.Application;
+using Azure;
 using Blazored.FluentValidation;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
@@ -87,19 +88,20 @@ namespace ArdaManager.Client.Pages.Docs.Warehouse
         {
             await LoadDataAsync();
 
-            if (UpsertWarehouseRequestModel.WarehouseRequestRowsResponse == null || UpsertWarehouseRequestModel.WarehouseRequestRowsResponse.Count == 0)
-                AddRow();
         }
         private async Task LoadDataAsync()
         {
-            var tasks = new List<Task>
-            {
-                LoadMeasurementUnitsAsync(),
-                SetCurrentUser(),
-                GetRacksAsync()
-            };
+            //var tasks = new List<Task>
+            //{
+            await LoadMeasurementUnitsAsync();
+            await LoadUsers();
+            await SetCurrentUser();
+            await GetRacksAsync();
+            if (UpsertWarehouseRequestModel.WarehouseRequestRowsResponse == null || UpsertWarehouseRequestModel.WarehouseRequestRowsResponse.Count == 0)
+                AddRow();
+            //};
 
-            await Task.WhenAll(tasks);
+            //await Task.WhenAll(tasks);
         }
         private async Task GetRacksAsync()
         {
@@ -124,6 +126,13 @@ namespace ArdaManager.Client.Pages.Docs.Warehouse
             if (response.Succeeded)
             {
                 _userList = response.Data.ToList();
+            }
+            else
+            {
+                foreach (var message in response.Messages)
+                {
+                    _snackBar.Add(message, Severity.Error);
+                }
             }
         }
         private async Task LoadRoles()
@@ -164,11 +173,18 @@ namespace ArdaManager.Client.Pages.Docs.Warehouse
             {
                 _measurementUnits = data.Data;
             }
+            else
+            {
+                foreach (var message in data.Messages)
+                {
+                    _snackBar.Add(message, Severity.Error);
+                }
+            }
 
         }
 
 
-        private void AddRow()
+        private async void AddRow()
         {
             UpsertWarehouseRequestModel.WarehouseRequestRowsResponse ??= new List<WarehouseRequestRowResponse>();
             UpsertWarehouseRequestModel.WarehouseRequestRowsResponse.Add(new WarehouseRequestRowResponse()
@@ -315,17 +331,17 @@ namespace ArdaManager.Client.Pages.Docs.Warehouse
         }
 
 
-        private async Task<IEnumerable<int>> SearchRacks(string value)
+        private async Task<IEnumerable<int?>> SearchRacks(string value)
         {
             // In real life use an asynchronous function for fetching data from an api.
             await Task.Delay(5);
 
             // if text is null or empty, show complete list
             if (string.IsNullOrEmpty(value))
-                return _rackListAll.Select(x => x.Id);
+                return _rackListAll.Select(x => (int?)x.Id);
 
             return _rackListAll.Where(x => x.Code.Contains(value, StringComparison.InvariantCultureIgnoreCase) && x.WarehouseId == UpsertWarehouseRequestModel.WarehouseId)
-                .Select(x => x.Id);
+                .Select(x => (int?)x.Id);
         }
         private IEnumerable<string> ValidateRacks(string value)
         {
@@ -377,6 +393,50 @@ namespace ArdaManager.Client.Pages.Docs.Warehouse
                 var selectedWarehouse = result.Data as GetAllWarehousesResponse;
                 context.WarehouseId = selectedWarehouse.Id;
                 context.WarehouseName = selectedWarehouse.Name;
+
+            }
+        }
+
+        private async Task OpenWarehouseRelatedDialogOnF4Code(KeyboardEventArgs e, UpsertWarehouseRequestCommand context)
+        {
+            if (e.Code == "F4")
+            {
+                await OpenWarehouseRelatedSearchDialog(context.RelatedWarehouseName, context);
+            }
+        }
+
+        private async Task OpenWarehouseRelatedSearchDialog(string searchStr, UpsertWarehouseRequestCommand context)
+        {
+            var parameters = new DialogParameters();
+
+            parameters.Add("SearchTerm", searchStr);
+
+            //parameters.Add("QrCodeText", $"/catalog/warehouseEntryReceipts/{25}");
+
+            var optionsEx = new DialogOptionsEx
+            {
+                CloseButton = true,
+                MaximizeButton = true,
+                MaxWidth = MaxWidth.Large,
+                FullWidth = false,
+                FullScreen = false,
+                DisableBackdropClick = true,
+                FullHeight = false,
+                DragMode = MudDialogDragMode.WithoutBounds,
+                Animations = new[] { AnimationType.Pulse },
+                Position = MudBlazor.DialogPosition.Center,
+                Resizeable = true
+            };
+            var options = new MudBlazor.DialogOptions() { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall };
+
+            var dialog = await _dialogService.ShowEx<WarehouseSearchDialog>("Ara", parameters, optionsEx);
+            //var dialog = await _dialogService.ShowAsync<Barcode>("QR Kod", parameters, options);
+            var result = await dialog.Result;
+            if (!result.Cancelled)
+            {
+                var selectedWarehouse = result.Data as GetAllWarehousesResponse;
+                context.RelatedWarehouseId = selectedWarehouse.Id;
+                context.RelatedWarehouseName = selectedWarehouse.Name;
 
             }
         }

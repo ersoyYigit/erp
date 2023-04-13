@@ -35,7 +35,7 @@ namespace ArdaManager.Client.Shared.Dialogs.RelationPickers.Warehouse
             var response = await WarehouseRequestManager.GetAllAsync();
             if (response.Succeeded)
             {
-                _warehouseRequestList = response.Data.Where(x => x.DocState == Domain.Enums.Doc.DocState.Approved).ToList();
+                _warehouseRequestList = response.Data.Where(x=>x.DocState != Domain.Enums.Doc.DocState.Finished).ToList();
             }
             else
             {
@@ -58,7 +58,7 @@ namespace ArdaManager.Client.Shared.Dialogs.RelationPickers.Warehouse
             // İstediğiniz eylemleri burada gerçekleştirebilirsiniz.
             // Örneğin, seçilen öğelerin sayısını yazdırabilirsiniz:
             var item = items.LastOrDefault();
-            if (item != null && item.DocState == Domain.Enums.Doc.DocState.Approved)
+            if (item != null /*&& item.DocState == Domain.Enums.Doc.DocState.Approved*/)
             {
                 _isRowSelected = true;
                 _warehouseRequest = item;
@@ -80,7 +80,7 @@ namespace ArdaManager.Client.Shared.Dialogs.RelationPickers.Warehouse
             // İstediğiniz eylemleri burada gerçekleştirebilirsiniz.
             // Örneğin, seçilen öğelerin sayısını yazdırabilirsiniz:
             //var item = items.LastOrDefault();
-            if (item != null && item.DocState == Domain.Enums.Doc.DocState.Approved)
+            if (item != null /*&& item.DocState == Domain.Enums.Doc.DocState.Approved*/)
             {
                 _isRowSelected = true;
                 _warehouseRequest = item;

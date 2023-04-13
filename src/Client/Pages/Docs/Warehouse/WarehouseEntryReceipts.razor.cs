@@ -67,7 +67,7 @@ namespace ArdaManager.Client.Pages.Docs.Warehouse
 
         private async Task GetWarehouseReceiptsAsync()
         {
-            var response = await WarehouseReceiptManager.GetAllAsync();
+            var response = await WarehouseReceiptManager.GetAllByType(WarehouseReceiptType.Entrance);
             if (response.Succeeded)
             {
                 _warehouseReceiptList = response.Data.ToList();
@@ -147,6 +147,7 @@ namespace ArdaManager.Client.Pages.Docs.Warehouse
                     Id = 0,
                     DocDate = DateTime.UtcNow,
                     DocType = Domain.Enums.Doc.DocType.WarehouseEntrance,
+                    WarehouseReceiptType = WarehouseReceiptType.Entrance,
                     DocNo = newStr
                 });
             }

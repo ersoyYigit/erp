@@ -98,7 +98,7 @@ namespace ArdaManager.Application.Features.Docs.WarehouseReceipts.Queries.GetAll
         public virtual Tax Tax { get; set; }
         /* PRICE PROPERTIES*/
 
-        public int RackId { get; set; }
+        public int? RackId { get; set; }
         public string RackCode { get; set; }
         public string RackName { get; set; }
 

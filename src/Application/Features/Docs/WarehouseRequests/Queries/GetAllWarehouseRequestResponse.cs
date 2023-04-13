@@ -60,7 +60,7 @@ namespace ArdaManager.Application.Features.Docs.WarehouseRequests.Queries
 
 
 
-        public int RackId { get; set; }
+        public int? RackId { get; set; }
         public string RackCode { get; set; }
         public string RackName { get; set; }
 

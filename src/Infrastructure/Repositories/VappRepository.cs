@@ -693,5 +693,11 @@ namespace ArdaManager.Infrastructure.Repositories
             return await context.Set<T>().FromSqlRaw($"EXECUTE {storedProcedureName} {string.Join(", ", parameters.Select(p => p.ParameterName))}", parameters).ToListAsync();
         }
 
+
+        public async Task<List<T>> ExecuteViewAsync<T>(string viewName) where T : class, new()
+        {
+            return await context.Set<T>().FromSqlRaw($"SELECT * FROM {viewName}").ToListAsync();
+        }
+
     }
 }

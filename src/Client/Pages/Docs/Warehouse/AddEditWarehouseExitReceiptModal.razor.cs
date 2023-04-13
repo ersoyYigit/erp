@@ -585,17 +585,18 @@ namespace ArdaManager.Client.Pages.Docs.Warehouse
             }
         }
 
-        private async Task<IEnumerable<int>> SearchRacks(string value)
+
+        private async Task<IEnumerable<int?>> SearchRacks(string value)
         {
             // In real life use an asynchronous function for fetching data from an api.
             await Task.Delay(5);
 
             // if text is null or empty, show complete list
             if (string.IsNullOrEmpty(value))
-                return _rackListAll.Select(x => x.Id);
+                return _rackListAll.Select(x => (int?)x.Id);
 
             return _rackListAll.Where(x => x.Code.Contains(value, StringComparison.InvariantCultureIgnoreCase) && x.WarehouseId == AddEditWarehouseExitReceiptModel.WarehouseId)
-                .Select(x => x.Id);
+                .Select(x => (int?)x.Id);
         }
         private IEnumerable<string> ValidateRacks(string value)
         {

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "2S6bYxwPkOgb4T6X1PUTLJzK42g8SJa0xdvuQw6sQkk=",
+  "Hash": "5gG5XoRpO0zAnzKlCYlTHoJZOxaPp1VZKzzjOp+ql08=",
   "Source": "ArdaManager.Client",
   "BasePath": "/",
   "Mode": "Root",
@@ -765,23 +765,6 @@
       "OriginalItemSpec": "C:\\Users\\Yigit\\.nuget\\packages\\psc.blazor.components.browserdetect\\1.0.6\\staticwebassets\\PSC.Blazor.Components.BrowserDetect.bundle.scp.css"
     },
     {
-      "Identity": "C:\\Users\\Yigit\\.nuget\\packages\\radzen.blazor\\4.7.2\\staticwebassets\\css\\dark.css",
-      "SourceId": "Radzen.Blazor",
-      "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\Yigit\\.nuget\\packages\\radzen.blazor\\4.7.2\\staticwebassets\\",
-      "BasePath": "_content/Radzen.Blazor",
-      "RelativePath": "css/dark.css",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\Yigit\\.nuget\\packages\\radzen.blazor\\4.7.2\\staticwebassets\\css\\dark.css"
-    },
-    {
       "Identity": "C:\\Users\\Yigit\\.nuget\\packages\\radzen.blazor\\4.7.2\\staticwebassets\\css\\dark-base.css",
       "SourceId": "Radzen.Blazor",
       "SourceType": "Package",
@@ -799,12 +782,12 @@
       "OriginalItemSpec": "C:\\Users\\Yigit\\.nuget\\packages\\radzen.blazor\\4.7.2\\staticwebassets\\css\\dark-base.css"
     },
     {
-      "Identity": "C:\\Users\\Yigit\\.nuget\\packages\\radzen.blazor\\4.7.2\\staticwebassets\\css\\default.css",
+      "Identity": "C:\\Users\\Yigit\\.nuget\\packages\\radzen.blazor\\4.7.2\\staticwebassets\\css\\dark.css",
       "SourceId": "Radzen.Blazor",
       "SourceType": "Package",
       "ContentRoot": "C:\\Users\\Yigit\\.nuget\\packages\\radzen.blazor\\4.7.2\\staticwebassets\\",
       "BasePath": "_content/Radzen.Blazor",
-      "RelativePath": "css/default.css",
+      "RelativePath": "css/dark.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -813,7 +796,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\Yigit\\.nuget\\packages\\radzen.blazor\\4.7.2\\staticwebassets\\css\\default.css"
+      "OriginalItemSpec": "C:\\Users\\Yigit\\.nuget\\packages\\radzen.blazor\\4.7.2\\staticwebassets\\css\\dark.css"
     },
     {
       "Identity": "C:\\Users\\Yigit\\.nuget\\packages\\radzen.blazor\\4.7.2\\staticwebassets\\css\\default-base.css",
@@ -833,12 +816,12 @@
       "OriginalItemSpec": "C:\\Users\\Yigit\\.nuget\\packages\\radzen.blazor\\4.7.2\\staticwebassets\\css\\default-base.css"
     },
     {
-      "Identity": "C:\\Users\\Yigit\\.nuget\\packages\\radzen.blazor\\4.7.2\\staticwebassets\\css\\humanistic.css",
+      "Identity": "C:\\Users\\Yigit\\.nuget\\packages\\radzen.blazor\\4.7.2\\staticwebassets\\css\\default.css",
       "SourceId": "Radzen.Blazor",
       "SourceType": "Package",
       "ContentRoot": "C:\\Users\\Yigit\\.nuget\\packages\\radzen.blazor\\4.7.2\\staticwebassets\\",
       "BasePath": "_content/Radzen.Blazor",
-      "RelativePath": "css/humanistic.css",
+      "RelativePath": "css/default.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -847,7 +830,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\Yigit\\.nuget\\packages\\radzen.blazor\\4.7.2\\staticwebassets\\css\\humanistic.css"
+      "OriginalItemSpec": "C:\\Users\\Yigit\\.nuget\\packages\\radzen.blazor\\4.7.2\\staticwebassets\\css\\default.css"
     },
     {
       "Identity": "C:\\Users\\Yigit\\.nuget\\packages\\radzen.blazor\\4.7.2\\staticwebassets\\css\\humanistic-base.css",
@@ -867,12 +850,12 @@
       "OriginalItemSpec": "C:\\Users\\Yigit\\.nuget\\packages\\radzen.blazor\\4.7.2\\staticwebassets\\css\\humanistic-base.css"
     },
     {
-      "Identity": "C:\\Users\\Yigit\\.nuget\\packages\\radzen.blazor\\4.7.2\\staticwebassets\\css\\material.css",
+      "Identity": "C:\\Users\\Yigit\\.nuget\\packages\\radzen.blazor\\4.7.2\\staticwebassets\\css\\humanistic.css",
       "SourceId": "Radzen.Blazor",
       "SourceType": "Package",
       "ContentRoot": "C:\\Users\\Yigit\\.nuget\\packages\\radzen.blazor\\4.7.2\\staticwebassets\\",
       "BasePath": "_content/Radzen.Blazor",
-      "RelativePath": "css/material.css",
+      "RelativePath": "css/humanistic.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -881,7 +864,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\Yigit\\.nuget\\packages\\radzen.blazor\\4.7.2\\staticwebassets\\css\\material.css"
+      "OriginalItemSpec": "C:\\Users\\Yigit\\.nuget\\packages\\radzen.blazor\\4.7.2\\staticwebassets\\css\\humanistic.css"
     },
     {
       "Identity": "C:\\Users\\Yigit\\.nuget\\packages\\radzen.blazor\\4.7.2\\staticwebassets\\css\\material-base.css",
@@ -901,12 +884,12 @@
       "OriginalItemSpec": "C:\\Users\\Yigit\\.nuget\\packages\\radzen.blazor\\4.7.2\\staticwebassets\\css\\material-base.css"
     },
     {
-      "Identity": "C:\\Users\\Yigit\\.nuget\\packages\\radzen.blazor\\4.7.2\\staticwebassets\\css\\software.css",
+      "Identity": "C:\\Users\\Yigit\\.nuget\\packages\\radzen.blazor\\4.7.2\\staticwebassets\\css\\material.css",
       "SourceId": "Radzen.Blazor",
       "SourceType": "Package",
       "ContentRoot": "C:\\Users\\Yigit\\.nuget\\packages\\radzen.blazor\\4.7.2\\staticwebassets\\",
       "BasePath": "_content/Radzen.Blazor",
-      "RelativePath": "css/software.css",
+      "RelativePath": "css/material.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -915,7 +898,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\Yigit\\.nuget\\packages\\radzen.blazor\\4.7.2\\staticwebassets\\css\\software.css"
+      "OriginalItemSpec": "C:\\Users\\Yigit\\.nuget\\packages\\radzen.blazor\\4.7.2\\staticwebassets\\css\\material.css"
     },
     {
       "Identity": "C:\\Users\\Yigit\\.nuget\\packages\\radzen.blazor\\4.7.2\\staticwebassets\\css\\software-base.css",
@@ -935,12 +918,12 @@
       "OriginalItemSpec": "C:\\Users\\Yigit\\.nuget\\packages\\radzen.blazor\\4.7.2\\staticwebassets\\css\\software-base.css"
     },
     {
-      "Identity": "C:\\Users\\Yigit\\.nuget\\packages\\radzen.blazor\\4.7.2\\staticwebassets\\css\\standard.css",
+      "Identity": "C:\\Users\\Yigit\\.nuget\\packages\\radzen.blazor\\4.7.2\\staticwebassets\\css\\software.css",
       "SourceId": "Radzen.Blazor",
       "SourceType": "Package",
       "ContentRoot": "C:\\Users\\Yigit\\.nuget\\packages\\radzen.blazor\\4.7.2\\staticwebassets\\",
       "BasePath": "_content/Radzen.Blazor",
-      "RelativePath": "css/standard.css",
+      "RelativePath": "css/software.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -949,7 +932,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\Yigit\\.nuget\\packages\\radzen.blazor\\4.7.2\\staticwebassets\\css\\standard.css"
+      "OriginalItemSpec": "C:\\Users\\Yigit\\.nuget\\packages\\radzen.blazor\\4.7.2\\staticwebassets\\css\\software.css"
     },
     {
       "Identity": "C:\\Users\\Yigit\\.nuget\\packages\\radzen.blazor\\4.7.2\\staticwebassets\\css\\standard-base.css",
@@ -967,6 +950,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\Yigit\\.nuget\\packages\\radzen.blazor\\4.7.2\\staticwebassets\\css\\standard-base.css"
+    },
+    {
+      "Identity": "C:\\Users\\Yigit\\.nuget\\packages\\radzen.blazor\\4.7.2\\staticwebassets\\css\\standard.css",
+      "SourceId": "Radzen.Blazor",
+      "SourceType": "Package",
+      "ContentRoot": "C:\\Users\\Yigit\\.nuget\\packages\\radzen.blazor\\4.7.2\\staticwebassets\\",
+      "BasePath": "_content/Radzen.Blazor",
+      "RelativePath": "css/standard.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\Yigit\\.nuget\\packages\\radzen.blazor\\4.7.2\\staticwebassets\\css\\standard.css"
     },
     {
       "Identity": "C:\\Users\\Yigit\\.nuget\\packages\\radzen.blazor\\4.7.2\\staticwebassets\\fonts\\MaterialIcons-Regular.woff",
@@ -1955,23 +1955,6 @@
       "OriginalItemSpec": "C:\\Users\\Yigit\\.nuget\\packages\\fluentvalidation\\11.4.0\\lib\\net6.0\\FluentValidation.dll"
     },
     {
-      "Identity": "D:\\Dev\\ArdaManager\\src\\Client\\bin\\Debug\\net6.0\\wwwroot\\_framework\\icudt.dat",
-      "SourceId": "ArdaManager.Client",
-      "SourceType": "Computed",
-      "ContentRoot": "D:\\Dev\\ArdaManager\\src\\Client\\bin\\Debug\\net6.0\\wwwroot\\",
-      "BasePath": "/",
-      "RelativePath": "_framework/icudt.dat",
-      "AssetKind": "Build",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "BlazorWebAssemblyResource",
-      "AssetTraitValue": "native",
-      "CopyToOutputDirectory": "PreserveNewest",
-      "CopyToPublishDirectory": "Never",
-      "OriginalItemSpec": "C:\\Program Files\\dotnet\\packs\\Microsoft.NETCore.App.Runtime.Mono.browser-wasm\\6.0.13\\runtimes\\browser-wasm\\native\\icudt.dat"
-    },
-    {
       "Identity": "D:\\Dev\\ArdaManager\\src\\Client\\bin\\Debug\\net6.0\\wwwroot\\_framework\\icudt_CJK.dat",
       "SourceId": "ArdaManager.Client",
       "SourceType": "Computed",
@@ -2021,6 +2004,23 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Program Files\\dotnet\\packs\\Microsoft.NETCore.App.Runtime.Mono.browser-wasm\\6.0.13\\runtimes\\browser-wasm\\native\\icudt_no_CJK.dat"
+    },
+    {
+      "Identity": "D:\\Dev\\ArdaManager\\src\\Client\\bin\\Debug\\net6.0\\wwwroot\\_framework\\icudt.dat",
+      "SourceId": "ArdaManager.Client",
+      "SourceType": "Computed",
+      "ContentRoot": "D:\\Dev\\ArdaManager\\src\\Client\\bin\\Debug\\net6.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/icudt.dat",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "BlazorWebAssemblyResource",
+      "AssetTraitValue": "native",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Program Files\\dotnet\\packs\\Microsoft.NETCore.App.Runtime.Mono.browser-wasm\\6.0.13\\runtimes\\browser-wasm\\native\\icudt.dat"
     },
     {
       "Identity": "D:\\Dev\\ArdaManager\\src\\Client\\bin\\Debug\\net6.0\\wwwroot\\_framework\\LazyCache.dll",

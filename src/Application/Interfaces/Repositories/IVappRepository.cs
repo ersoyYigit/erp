@@ -1663,5 +1663,6 @@ namespace ArdaManager.Application.Interfaces.Repositories
 
 
         Task<List<T>> ExecuteStoredProcedureAsync<T>(string storedProcedureName, params SqlParameter[] parameters) where T : class, new();
+        Task<List<T>> ExecuteViewAsync<T>(string viewName) where T : class, new();
     }
 }

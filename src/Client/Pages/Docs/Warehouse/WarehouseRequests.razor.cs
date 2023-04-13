@@ -138,12 +138,12 @@ namespace ArdaManager.Client.Pages.Docs.Warehouse
                 //string prefix = "KİE";
                 string noStr = max_Id.ToString().PadLeft(7, '0');
                 //string addedZeroToNoStr = noStr.PadLeft(7, '0');
-                string newStr = "DGF" + noStr;
+                string newStr = "DTT" + noStr;
                 parameters.Add(nameof(UpsertWarehouseRequestModal.UpsertWarehouseRequestModel), new UpsertWarehouseRequestCommand
                 {
                     Id = 0,
                     DocDate = DateTime.UtcNow,
-                    DocType = Domain.Enums.Doc.DocType.WarehouseEntrance,
+                    DocType = Domain.Enums.Doc.DocType.WarehouseRequest,
                     DocNo = newStr
                 });
             }

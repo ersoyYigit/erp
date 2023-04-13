@@ -22,6 +22,43 @@ namespace ArdaManager.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("ArdaManager.Application.Features.Products.Queries.Search.ProductSearchResultDto", b =>
+                {
+                    b.Property<int?>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CategoryName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Code")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("MeasurementUnitId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MeasurementUnitName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MeasurementUnitSystem")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Quantity")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("StockUnitCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.ToTable("ProductSearchResultDtos");
+
+                    b.ToSqlQuery("sp_search_products_with_stocks");
+                });
+
             modelBuilder.Entity("ArdaManager.Application.Models.Chat.ChatHistory<ArdaManager.Infrastructure.Models.Identity.VappUser>", b =>
                 {
                     b.Property<long>("Id")
@@ -908,6 +945,137 @@ namespace ArdaManager.Infrastructure.Migrations
                     b.ToTable("Taxes");
                 });
 
+            modelBuilder.Entity("ArdaManager.Domain.Entities.Report.Purchase.PurchaseProcessResult", b =>
+                {
+                    b.Property<string>("PurchaseOfferCompanyName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PurchaseOfferCurrencyCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("PurchaseOfferDocDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PurchaseOfferDocNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("PurchaseOfferId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("PurchaseOfferSum")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("PurchaseOrderCompanyName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PurchaseOrderCurrencyCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("PurchaseOrderDocDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PurchaseOrderDocNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("PurchaseOrderId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("PurchaseOrderSum")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("PurchaseRequestDocDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PurchaseRequestDocNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PurchaseRequestId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("RequesterDepartment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RequesterName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("WarehouseEntryDocDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("WarehouseEntryDocNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("WarehouseEntryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("WarehouseName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.ToTable("PurchaseProcessResults");
+
+                    b.ToSqlQuery("vw_PurchaseProcess");
+                });
+
+            modelBuilder.Entity("ArdaManager.Domain.Entities.Report.Purchase.PurchaseProcessRowResult", b =>
+                {
+                    b.Property<string>("ProductCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ProductMeasurementUnit")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProductName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PurchaseOfferCurrencyCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PurchaseOfferDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("PurchaseOfferExchangeRate")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("PurchaseOfferPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("PurchaseOfferQuantity")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("PurchaseOrderCurrencyCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PurchaseOrderDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("PurchaseOrderExchangeRate")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("PurchaseOrderPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("PurchaseOrderQuantity")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("PurchaseRequestId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("PurchaseRequestQuantity")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("WarehouseEntryDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("WarehouseEntryQuantity")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.ToTable("PurchaseProcessRowResults");
+
+                    b.ToSqlQuery("vw_PurchaseProcessDetail");
+                });
+
             modelBuilder.Entity("ArdaManager.Domain.Entities.Report.Warehouse.WarehouseReport", b =>
                 {
                     b.Property<int?>("CategoryId")
@@ -1252,6 +1420,60 @@ namespace ArdaManager.Infrastructure.Migrations
                     b.HasIndex("WarehouseReceiptId");
 
                     b.ToTable("WarehouseReceiptRows");
+                });
+
+            modelBuilder.Entity("ArdaManager.Domain.Entities.Transactions.WarehouseDocs.WarehouseRequestRow", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LastModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("MeasurementUnitId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Quantity")
+                        .HasColumnType("decimal(18,8)");
+
+                    b.Property<int?>("RackId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RowNo")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WarehouseRequestId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MeasurementUnitId");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("RackId");
+
+                    b.HasIndex("WarehouseRequestId");
+
+                    b.ToTable("WarehouseRequestRows");
                 });
 
             modelBuilder.Entity("ArdaManager.Infrastructure.Models.Audit.Audit", b =>
@@ -2065,6 +2287,41 @@ namespace ArdaManager.Infrastructure.Migrations
                     b.ToTable("WarehouseReceipts");
                 });
 
+            modelBuilder.Entity("ArdaManager.Domain.Entities.Transactions.WarehouseDocs.WarehouseRequest", b =>
+                {
+                    b.HasBaseType("ArdaManager.Domain.Entities.BaseDoc");
+
+                    b.Property<int>("RelatedWarehouseId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("RequesterDepartment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RequesterId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RequesterName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("WarehouseId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("WarehouseOfficerId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("WarehouseOfficerName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("WarehouseReceiptType")
+                        .HasColumnType("int");
+
+                    b.HasIndex("RelatedWarehouseId");
+
+                    b.HasIndex("WarehouseId");
+
+                    b.ToTable("WarehouseRequests");
+                });
+
             modelBuilder.Entity("ArdaManager.Domain.Entities.Catalog.Mold", b =>
                 {
                     b.HasBaseType("ArdaManager.Domain.Entities.Catalog.Product");
@@ -2469,8 +2726,7 @@ namespace ArdaManager.Infrastructure.Migrations
 
                     b.HasOne("ArdaManager.Domain.Entities.Inventory.Rack", "Rack")
                         .WithMany()
-                        .HasForeignKey("RackId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .HasForeignKey("RackId");
 
                     b.HasOne("ArdaManager.Domain.Entities.Misc.Tax", "Tax")
                         .WithMany()
@@ -2496,6 +2752,40 @@ namespace ArdaManager.Infrastructure.Migrations
                     b.Navigation("Tax");
 
                     b.Navigation("WarehouseReceipt");
+                });
+
+            modelBuilder.Entity("ArdaManager.Domain.Entities.Transactions.WarehouseDocs.WarehouseRequestRow", b =>
+                {
+                    b.HasOne("ArdaManager.Domain.Entities.Catalog.MeasurementUnit", "MeasurementUnit")
+                        .WithMany()
+                        .HasForeignKey("MeasurementUnitId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ArdaManager.Domain.Entities.Catalog.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("ArdaManager.Domain.Entities.Inventory.Rack", "Rack")
+                        .WithMany()
+                        .HasForeignKey("RackId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("ArdaManager.Domain.Entities.Transactions.WarehouseDocs.WarehouseRequest", "WarehouseRequest")
+                        .WithMany("WarehouseRequestRows")
+                        .HasForeignKey("WarehouseRequestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("MeasurementUnit");
+
+                    b.Navigation("Product");
+
+                    b.Navigation("Rack");
+
+                    b.Navigation("WarehouseRequest");
                 });
 
             modelBuilder.Entity("ArdaManager.Infrastructure.Models.Identity.VappRoleClaim", b =>
@@ -2799,6 +3089,31 @@ namespace ArdaManager.Infrastructure.Migrations
                     b.Navigation("Warehouse");
                 });
 
+            modelBuilder.Entity("ArdaManager.Domain.Entities.Transactions.WarehouseDocs.WarehouseRequest", b =>
+                {
+                    b.HasOne("ArdaManager.Domain.Entities.BaseDoc", null)
+                        .WithOne()
+                        .HasForeignKey("ArdaManager.Domain.Entities.Transactions.WarehouseDocs.WarehouseRequest", "Id")
+                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .IsRequired();
+
+                    b.HasOne("ArdaManager.Domain.Entities.Inventory.Warehouse", "RelatedWarehouse")
+                        .WithMany()
+                        .HasForeignKey("RelatedWarehouseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ArdaManager.Domain.Entities.Inventory.Warehouse", "Warehouse")
+                        .WithMany()
+                        .HasForeignKey("WarehouseId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("RelatedWarehouse");
+
+                    b.Navigation("Warehouse");
+                });
+
             modelBuilder.Entity("ArdaManager.Domain.Entities.Catalog.Mold", b =>
                 {
                     b.HasOne("ArdaManager.Domain.Entities.Corporation.Company", "Company")
@@ -2902,6 +3217,11 @@ namespace ArdaManager.Infrastructure.Migrations
             modelBuilder.Entity("ArdaManager.Domain.Entities.Transactions.WarehouseDocs.WarehouseReceipt", b =>
                 {
                     b.Navigation("WarehouseReceiptRows");
+                });
+
+            modelBuilder.Entity("ArdaManager.Domain.Entities.Transactions.WarehouseDocs.WarehouseRequest", b =>
+                {
+                    b.Navigation("WarehouseRequestRows");
                 });
 #pragma warning restore 612, 618
         }

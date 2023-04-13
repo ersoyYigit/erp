@@ -9,14 +9,14 @@
                 {
                     <MudText Typo="Typo.h6">
                         <MudIcon Icon="@Icons.Material.Filled.Add" Class="mr-3 mb-n1" />
-                        Yeni Depo Giriş Fişi
+                        Yeni Depo Talep Fişi
                     </MudText>
                 }
                 else
                 {
                     <MudText Typo="Typo.h6">
                         <MudIcon Icon="@Icons.Material.Filled.Update" Class="mr-3 mb-n1" />
-                        Depo Giriş Fişi Güncelle
+                        Depo Giriş Talep Güncelle
                     </MudText>
                 }
             }
@@ -43,7 +43,11 @@
                                 </MudItem>
 
                                 <MudItem xs="12" md="6">
-                                    <MudTextField Label="Talep Sahibi" ReadOnly="true" @bind-Value="@UpsertWarehouseRequestModel.RequesterName" OnKeyDown="@(async (KeyboardEventArgs e) => await OpenUserDialogOnF4Code(e, UpsertWarehouseRequestModel))" AdornmentIcon="@Icons.Material.Outlined.ManageSearch" Adornment="MudBlazor.Adornment.End" OnAdornmentClick="(async () => await OpenUserSearchDialog(UpsertWarehouseRequestModel.RequesterName, UpsertWarehouseRequestModel))" />/>
+                                    <MudTextField @bind-Value="@UpsertWarehouseRequestModel.RelatedWarehouseName" Label="Varış Deposu" Placeholder="Varış Deposu Seçin" OnKeyDown="@(async (KeyboardEventArgs e) => await OpenWarehouseRelatedDialogOnF4Code(e, UpsertWarehouseRequestModel))" AdornmentIcon="@Icons.Material.Outlined.ManageSearch" Adornment="MudBlazor.Adornment.End" OnAdornmentClick="(async () => await OpenWarehouseRelatedSearchDialog(UpsertWarehouseRequestModel.RelatedWarehouseName, UpsertWarehouseRequestModel))" />
+                                </MudItem>
+
+                                <MudItem xs="12" md="6">
+                                    <MudTextField Label="Talep Sahibi" @bind-Value="@UpsertWarehouseRequestModel.RequesterName" OnKeyDown="@(async (KeyboardEventArgs e) => await OpenUserDialogOnF4Code(e, UpsertWarehouseRequestModel))" AdornmentIcon="@Icons.Material.Outlined.ManageSearch" Adornment="MudBlazor.Adornment.End" OnAdornmentClick="(async () => await OpenUserSearchDialog(UpsertWarehouseRequestModel.RequesterName, UpsertWarehouseRequestModel))" />
                                 </MudItem>
                                 <MudItem xs="12" md="6">
                                     <MudTextField Label="Talep Sahibi Departmanı" ReadOnly="true" @bind-Value="@UpsertWarehouseRequestModel.RequesterDepartment" />
@@ -106,7 +110,7 @@
                     </MudTd>
 
                     <MudTd DataLabel="RackCode" Style="reset-padding-bt">
-                        <MudAutocomplete T="int" For="@(() => rowCtx.RackId)" @bind-Value="rowCtx.RackId"
+                        <MudAutocomplete T="int?" For="@(() => rowCtx.RackId)" @bind-Value="rowCtx.RackId"
                                          ResetValueOnEmptyText="true" SearchFunc="@SearchRacks" ToStringFunc="@(id => _rackList.FirstOrDefault(c => c.Id == id)?.Name ?? string.Empty)"
                                          OffsetY="true" AdornmentIcon="@Icons.Material.Filled.Search" AdornmentColor="Color.Primary"
                                          Validation="@(new Func<string, IEnumerable<string>>(ValidateRacks))" />
